@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <ul>
-      <li>ODDS++</li>
+      <li><img src="./../assets/logo.png"/></li>
     </ul>
   </div>
 </template>
@@ -28,8 +28,13 @@ ul {
 li {
   display: block;
   text-align: left;
-  padding: 25px 16px;
+  padding: 0px 16px;
   text-decoration: none;
+}
+img{
+  width:auto;
+  height:70px;
+  margin-top: 4px;
 }
 </style>
 
