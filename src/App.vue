@@ -3,7 +3,6 @@
     <NavBar />
     <add-product />
     <CardList />
-    <Card />
   </div>
 </template>
 
@@ -19,9 +18,7 @@ export default {
   name: 'app',
   components: {
     NavBar,
-
     CardList
-    // AddProduct
   }
 }
 </script>
