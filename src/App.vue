@@ -14,7 +14,7 @@ import NavBar from './components/NavBar.vue'
 import CardList from './components/CardList.vue'
 // import AddProduct from './components/AddProduct.vue'
 
-import Card from './components/Card.vue'
+// import Card from './components/Card.vue'
 export default {
   name: 'app',
   components: {
