@@ -4,7 +4,7 @@
         <div class=" card">
             <div class="grid-container">
                 <div class="item1">
-                    <img class="img-item" :src="item.imgUrl">
+                    <img class="img-item" style="width: 70%" :src="item.imgUrl">
                 </div>
                 <div class="item2" style="text-align:left">
                     <h4>{{ item.title }}</h4>
@@ -13,7 +13,8 @@
                     <h5>Add by: <span style="font-weight: normal;">{{ item.user.name }}</span></h5>
                 </div>
                 <div class="item3" style="margin-top: auto; margin-bottom: auto;">
-                    <button class="button">PLUS 1</button>
+                    <button class="button" @click="count++">PLUS 1</button>
+                    <span style="margin: 20px">{{ count }}</span>
                 </div>
             </div>
         </div>
@@ -26,7 +27,8 @@ export default {
     data() {
         return {
             data: null,
-            item: null
+            item: null,
+            count:0
         }
     },
     mounted: function () {
