@@ -1,30 +1,35 @@
 <template>
   <div class="nav">
     <ul>
-      <li>PLUS+</li>
-      <li style="float: right">
-        <img class="user_img" src="../assets/user_logo_300.png" />
-      </li>
+      <li>ODDS++</li>
     </ul>
   </div>
 </template>
+
 <script>
 export default {};
 </script>
+
 <style scoped>
-.user_img {
-  border-radius: 50%;
-  width: 50px;
+.nav {
+
 }
 ul {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  height: 60px;
-  background-color: #333;
+  overflow: hidden;
+  background-color: #e0e0e0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 li {
-  list-style-type: none;
-  float: left;
+  display: block;
+  text-align: left;
+  padding: 25px 16px;
+  text-decoration: none;
 }
 </style>
 
