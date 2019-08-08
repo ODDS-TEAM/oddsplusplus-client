@@ -13,7 +13,7 @@
               <img class="img-item" :src="item.imgUrl" />
             </div>
             <div class="item2" style="text-align:left">
-              <h4>{{ item.title }}</h4>
+              <h4>{{ item.title }} ({{item.format}})</h4>
               <h5>
                 Author:
                 <span style="font-weight: normal;">{{ item.author }}</span>
@@ -55,11 +55,19 @@
       <div v-if="showResult">
         <img class="show-item" :src="results.imageUrl" />
         <h5>
+          Title:
+          <span style="font-weight: normal;">{{results.title}}</span>
+        </h5>
+        <h5>
           Author:
           <span style="font-weight: normal;">{{results.owner}}</span>
         </h5>
+        <h5>
+          Type:
+          <span style="font-weight: normal;">{{results.format}}</span>
+        </h5>
         <h4 style="color:red;">${{results.price}}</h4>
-        <button class="button">ADD</button>
+        <button class="button" v-on:click="save">ADD</button>
 
       </div>
     </div>
@@ -120,6 +128,9 @@ export default {
       this.showModal = false;
       this.showResult = null;
       this.urlInput = null;
+    },
+    save: function() {
+      
     }
   }
 };
