@@ -46,7 +46,20 @@
         style="position: absolute; top: 7px; right: 15px; color: white;cursor: pointer;"
         v-on:click="showModal = false"
       >X</a>
-      <input type="text" placeholder="Please fill amazon book URL" />
+      <input
+        type="text"
+        v-model="urlInput"
+        placeholder="Please fill amazon book URL"
+        v-on:change="onChange"
+      />
+      <div v-if="showResult">
+        <img class="img-item" :src="results.imageUrl" />
+        <h5>
+          Author:
+          <span style="font-weight: normal;">{{results.owner}}</span>
+        </h5>
+        <h4 style="color:red;">${{results.price}}</h4>
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +70,11 @@ export default {
     return {
       data: null,
       orders: null,
+      showModal: false,
+      orderList: null,
+      urlInput: null,
+      showResult: false,
+      results: null,
       count: 0
     };
   },
@@ -67,12 +85,27 @@ export default {
     });
   },
   methods: {
-    getOrderData(itemId) {
+    getOrderData: function(itemId) {
       this.$http
         .get("http://127.0.0.1:8080/reserve/" + itemId)
         .then(response => {
           this.orders = response.body;
           window.console.log(this.orders);
+        });
+    },
+    onChange: function() {
+      window.console.log(this.urlInput);
+      this.$http
+        .get("http://127.0.0.1:8080/responseScrap", {
+          params: {
+            url: this.urlInput
+          }
+        })
+        .then(response => {
+          window.console.log("Work in");
+          this.results = response.body;
+          window.console.log(this.results);
+          this.showResult = true;
         });
     }
   }
@@ -84,121 +117,120 @@ export default {
     width:80%
 }
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 80%;
-    padding: 10px;
-    margin: 20px auto auto auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 80%;
+  padding: 10px;
+  margin: 20px auto auto auto;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 16% 16% auto auto auto 16%;
-    grid-gap: 10px;
-    padding: 10px;
+  display: grid;
+  grid-template-columns: 16% 16% auto auto auto 16%;
+  grid-gap: 10px;
+  padding: 10px;
 }
 
-.grid-container>div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 20px 0;
-    font-size: 18px;
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
 }
 
 .item1 {
-    grid-column: 1 / 3;
+  grid-column: 1 / 3;
 }
 
 .item2 {
-    grid-column: 3 / 6;
+  grid-column: 3 / 6;
 }
 
 .button {
-    background-color: #f44336;
-    ;
-    /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    -webkit-transition-duration: 0.4s;
-    /* Safari */
-    transition-duration: 0.4s;
-    width: 70%;
-    border-radius: 4px;
+  background-color: #f44336;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  width: 70%;
+  border-radius: 4px;
 }
 
 .button:hover {
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .fab-wrapper {
-    position: fixed;
-    right: 40px;
-    top: 100px;
-    z-index: 5;
-    display: flex;
-    flex-direction: center;
-    align-items: center;
-
+  position: fixed;
+  right: 40px;
+  top: 100px;
+  z-index: 5;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
 }
 
 .fab-button {
-    width: 70px;
-    height: 70px;
-    background-color: #fea735;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.1s ease-in-out;
+  width: 70px;
+  height: 70px;
+  background-color: #fea735;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease-in-out;
 }
 
 .fab-button:hover {
-    transform: scale(1.25);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1.25);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .fab-button p {
-    font-size: 30px;
-    color: #ffffff;
-    text-align: center;
-    line-height: 70px
+  font-size: 30px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 70px;
 }
 
 .modal {
-    border-radius: 4px;
-    box-shadow: 0px 0px 49px 4px rgba(0, 0, 0, 0.75);
-    background-color: #fea735;
-    width: 400px;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    padding: 30px;
-    z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0px 0px 49px 4px rgba(0, 0, 0, 0.75);
+  background-color: #fea735;
+  width: 400px;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 30px;
+  z-index: 1;
 }
 
-input[type=text] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border-radius: 4px;
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 4px;
 }
 </style>
