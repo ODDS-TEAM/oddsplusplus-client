@@ -136,14 +136,36 @@ export default {
       this.showResult = null;
       this.urlInput = null;
     },
-    save: function() {}
+    save: function() {
+      this.$http
+        .post(
+          "http://127.0.0.1:8080/items/" + this.user.id,
+          {
+            title: this.results.title,
+            owner: this.results.owner,
+            imageUrl: this.results.imageUrl,
+            price: this.results.price,
+            format: this.results.format
+          },
+          {
+            params: {
+              url: this.urlInput,
+              date: "dfghj"
+            }
+          }
+        )
+        .then(response => {
+          this.orders = response.body;
+          window.console.log(this.orders);
+        });
+    }
   }
 };
 </script>
 
 <style>
 .img-item {
-  width: 50%;
+  width: 80%;
 }
 
 .card {
