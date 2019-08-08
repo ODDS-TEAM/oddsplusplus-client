@@ -44,7 +44,7 @@
     <div class="modal" v-if="showModal">
       <a
         style="position: absolute; top: 7px; right: 15px; color: white;cursor: pointer;"
-        v-on:click="showModal = false"
+        v-on:click="cancel"
       >X</a>
       <input
         type="text"
@@ -107,6 +107,11 @@ export default {
           window.console.log(this.results);
           this.showResult = true;
         });
+    },
+    cancel: function() {
+      this.showModal = false;
+      this.showResult = null;
+      this.urlInput = null;
     }
   }
 };
