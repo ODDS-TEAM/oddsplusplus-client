@@ -34,7 +34,8 @@
               >Order ({{item.count}})</button>
             </div>
             <div class="item3" style="margin-top: auto; margin-bottom: auto;">
-              <button class="button">PLUS 1</button>
+              <button class="button" @click="count++">PLUS 1</button>
+              <span style="margin: 20px">{{ count }}</span>
             </div>
           </div>
         </div>
@@ -79,6 +80,9 @@ export default {
 </script>
 
 <style>
+.img-item{
+    width:80%
+}
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
