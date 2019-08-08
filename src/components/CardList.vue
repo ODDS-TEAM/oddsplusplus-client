@@ -33,7 +33,7 @@
                 type="button"
               >Order ({{item.count}})</button>
             </div>
-            <div class="item3" style="margin-top: auto; margin-bottom: auto;">
+            <div class="item3" style="margin-top: auto; margin-bottom: auto; ">
               <button class="button" @click="count++">PLUS 1</button>
               <span style="margin: 20px">{{ count }}</span>
             </div>
@@ -43,32 +43,40 @@
     </ul>
     <div class="modal" v-if="showModal">
       <a
-        style="position: absolute; top: 7px; right: 15px; color: white;cursor: pointer;"
+        style="position: absolute; top: 7px; right: 15px; color: red;cursor: pointer;"
         v-on:click="cancel"
       >X</a>
-      <input
-        type="text"
-        v-model="urlInput"
-        placeholder="Please fill amazon book URL"
-        v-on:change="onChange"
-      />
+      <div class="input-group">
+        <input
+          type="text"
+          v-model="urlInput"
+          placeholder="Please fill amazon book URL"
+          v-on:change="onChange"
+        />
+        <label>URL</label>
+      </div>
       <div v-if="showResult">
-        <img class="show-item" :src="results.imageUrl" />
-        <h5>
-          Title:
-          <span style="font-weight: normal;">{{results.title}}</span>
-        </h5>
-        <h5>
-          Author:
-          <span style="font-weight: normal;">{{results.owner}}</span>
-        </h5>
-        <h5>
-          Type:
-          <span style="font-weight: normal;">{{results.format}}</span>
-        </h5>
-        <h4 style="color:red;">${{results.price}}</h4>
-        <button class="button" v-on:click="save">ADD</button>
-
+        <div class="grid-modal">
+          <div class="g1">
+            <img class="show-item" :src="results.imageUrl" />
+          </div>
+          <div class="g2" style="text-align:left;">
+            <h5>
+              Title:
+              <span style="font-weight: normal;">{{results.title}}</span>
+            </h5>
+            <h5>
+              Author:
+              <span style="font-weight: normal;">{{results.owner}}</span>
+            </h5>
+            <h5>
+              Type:
+              <span style="font-weight: normal;">{{results.format}}</span>
+            </h5>
+            <h4 style="color:red;">${{results.price}}</h4>
+          </div>
+        </div>
+        <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
     </div>
   </div>
@@ -90,20 +98,19 @@ export default {
     };
   },
   mounted: function() {
-    this.$http.get("http://127.0.0.1:8080/items").then(response => {
+    this.$http.get("http://34.87.39.159:8080/items").then(response => {
       this.data = response.body;
       window.console.log(this.data);
     });
-    this.$http.get("http://127.0.0.1:8080/user/Cheese").then(response => {
+    this.$http.get("http://34.87.39.159:8080/user/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
-    
   },
   methods: {
     getOrderData: function(itemId) {
       this.$http
-        .get("http://127.0.0.1:8080/reserve/" + itemId)
+        .get("http://34.87.39.159:8080/reserve/" + itemId)
         .then(response => {
           this.orders = response.body;
           window.console.log(this.orders);
@@ -112,7 +119,7 @@ export default {
     onChange: function() {
       window.console.log(this.urlInput);
       this.$http
-        .get("http://127.0.0.1:8080/responseScrap", {
+        .get("http://34.87.39.159:8080/responseScrap", {
           params: {
             url: this.urlInput
           }
@@ -129,17 +136,16 @@ export default {
       this.showResult = null;
       this.urlInput = null;
     },
-    save: function() {
-      
-    }
+    save: function() {}
   }
 };
 </script>
 
 <style>
-.img-item{
-    width:80%
+.img-item {
+  width: 50%;
 }
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -154,8 +160,7 @@ export default {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 16% 16% auto auto auto 16%;
-  grid-gap: 10px;
+  grid-template-columns: 36% auto 16%;
   padding: 10px;
 }
 
@@ -167,11 +172,32 @@ export default {
 }
 
 .item1 {
-  grid-column: 1 / 3;
+  grid-column: 1;
 }
 
 .item2 {
-  grid-column: 3 / 6;
+  grid-column: 2;
+}
+
+.grid-modal {
+  display: grid;
+  grid-template-columns: 40% auto;
+  padding: 10px;
+}
+
+.grid-modal > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+}
+
+.g1 {
+  grid-column: 1;
+}
+
+.g2 {
+  grid-column: 2;
 }
 
 .button {
@@ -215,7 +241,7 @@ li {
 .fab-button {
   width: 70px;
   height: 70px;
-  background-color: #fea735;
+  background-color: #f44336;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -239,9 +265,9 @@ li {
 
 .modal {
   border-radius: 4px;
-  box-shadow: 0px 0px 49px 4px rgba(0, 0, 0, 0.75);
-  background-color: #fea735;
-  width: 400px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+  width: 40%;
   position: fixed;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -250,15 +276,41 @@ li {
   z-index: 1;
 }
 
-input[type="text"] {
+.input-group {
+  position: relative;
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border-radius: 4px;
+  overflow: hidden;
 }
+
+.input-group input {
+  position: relative;
+  height: 45px;
+  border-radius: 30px;
+  min-width: 400px;
+  box-shadow: none;
+  border: 1px solid #eaeaea;
+  padding-left: 160px;
+  outline: none;
+}
+
+.input-group label {
+  position: absolute;
+  left: 0;
+  height: 48px;
+  background: #f44336;
+  padding: 0px 25px;
+  border-radius: 30px;
+  line-height: 48px;
+  font-size: 18px;
+  color: #fff;
+  top: 0;
+  width: 100px;
+  font-weight: 100;
+  text-align: center;
+}
+
 .show-item {
-  width: 30%;
+  width: 50%;
   height: auto;
 }
 </style>
