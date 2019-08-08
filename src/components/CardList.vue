@@ -75,6 +75,7 @@ export default {
       urlInput: null,
       showResult: false,
       results: null,
+      user: null,
       count: 0
     };
   },
@@ -83,6 +84,11 @@ export default {
       this.data = response.body;
       window.console.log(this.data);
     });
+    this.$http.get("http://127.0.0.1:8080/user/Cheese").then(response => {
+      this.user = response.body;
+      window.console.log(this.user);
+    });
+    
   },
   methods: {
     getOrderData: function(itemId) {
