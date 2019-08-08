@@ -53,12 +53,14 @@
         v-on:change="onChange"
       />
       <div v-if="showResult">
-        <img class="img-item" :src="results.imageUrl" />
+        <img class="show-item" :src="results.imageUrl" />
         <h5>
           Author:
           <span style="font-weight: normal;">{{results.owner}}</span>
         </h5>
         <h4 style="color:red;">${{results.price}}</h4>
+        <button class="button">ADD</button>
+
       </div>
     </div>
   </div>
@@ -243,5 +245,9 @@ input[type="text"] {
   margin: 8px 0;
   box-sizing: border-box;
   border-radius: 4px;
+}
+.show-item {
+  width: 30%;
+  height: auto;
 }
 </style>
