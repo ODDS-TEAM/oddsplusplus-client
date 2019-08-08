@@ -79,6 +79,17 @@
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
     </div>
+    <div class="modal" v-if="orderModal">
+      <a
+        style="position: absolute; top: 7px; right: 15px; color: red;cursor: pointer;"
+        v-on:click="exitOrderModal"
+      >X</a>
+      <h1>Order List</h1>
+      <li v-for="item in orderList" v-bind:key="item.id">
+        <span style="font-weight: normal;">{{item.user.name}}</span>
+
+      </li>
+    </div>
   </div>
 </template>
 
@@ -94,15 +105,16 @@ export default {
       showResult: false,
       results: null,
       user: null,
+      orderModal: false,
       count: 0
     };
   },
   mounted: function() {
-    this.$http.get("http://34.87.39.159:8080/items").then(response => {
+    this.$http.get("http://127.0.0.1:8080/items").then(response => {
       this.data = response.body;
       window.console.log(this.data);
     });
-    this.$http.get("http://34.87.39.159:8080/user/Cheese").then(response => {
+    this.$http.get("http://127.0.0.1:8080/users/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
@@ -110,16 +122,17 @@ export default {
   methods: {
     getOrderData: function(itemId) {
       this.$http
-        .get("http://34.87.39.159:8080/reserve/" + itemId)
+        .get("http://127.0.0.1:8080/reserves/" + itemId)
         .then(response => {
-          this.orders = response.body;
-          window.console.log(this.orders);
+          this.orderList = response.body;
+          window.console.log(this.orderList);
         });
+      this.orderModal = true;
     },
     onChange: function() {
       window.console.log(this.urlInput);
       this.$http
-        .get("http://34.87.39.159:8080/responseScrap", {
+        .get("http://127.0.0.1:8080/responseScrap", {
           params: {
             url: this.urlInput
           }
@@ -158,6 +171,10 @@ export default {
           this.orders = response.body;
           window.console.log(this.orders);
         });
+    },
+    exitOrderModal: function() {
+      this.orderModal = false;
+      this.orderList = null;
     }
   }
 };
