@@ -34,8 +34,7 @@
               >Order ({{item.count}})</button>
             </div>
             <div class="item3" style="margin-top: auto; margin-bottom: auto; ">
-              <button class="button" @click="count++">PLUS 1</button>
-              <span style="margin: 20px">{{ count }}</span>
+              <button class="button" v-on:click="plus(item.id)">PLUS 1</button>
             </div>
           </div>
         </div>
@@ -87,7 +86,6 @@
       <h1>Order List</h1>
       <li v-for="item in orderList" v-bind:key="item.id">
         <span style="font-weight: normal;">{{item.user.name}}</span>
-
       </li>
     </div>
   </div>
@@ -98,7 +96,7 @@ export default {
   data() {
     return {
       data: null,
-      orders: null,
+      responses: null,
       showModal: false,
       orderList: null,
       urlInput: null,
@@ -110,16 +108,19 @@ export default {
     };
   },
   mounted: function() {
-    this.$http.get("http://127.0.0.1:8080/items").then(response => {
-      this.data = response.body;
-      window.console.log(this.data);
-    });
+    this.getItemData();
     this.$http.get("http://127.0.0.1:8080/users/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
   },
   methods: {
+    getItemData: function() {
+      this.$http.get("http://127.0.0.1:8080/items").then(response => {
+        this.data = response.body;
+        window.console.log(this.data);
+      });
+    },
     getOrderData: function(itemId) {
       this.$http
         .get("http://127.0.0.1:8080/reserves/" + itemId)
@@ -149,6 +150,15 @@ export default {
       this.showResult = null;
       this.urlInput = null;
     },
+    plus: function(itemId) {
+      this.$http
+        .post("http://127.0.0.1:8080/reserves/" + this.user.id + "/" + itemId)
+        .then(response => {
+          this.responses = response.body;
+          window.console.log(this.responses);
+          this.getItemData();
+        });
+    },
     save: function() {
       this.$http
         .post(
@@ -168,9 +178,12 @@ export default {
           }
         )
         .then(response => {
-          this.orders = response.body;
-          window.console.log(this.orders);
+          this.responses = response.body;
+          window.console.log(this.responses);
+          this.getItemData();
         });
+      this.showResult = false;
+      this.showModal = false;
     },
     exitOrderModal: function() {
       this.orderModal = false;
