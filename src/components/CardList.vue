@@ -103,8 +103,7 @@ export default {
       showResult: false,
       results: null,
       user: null,
-      orderModal: false,
-      count: 0
+      orderModal: false
     };
   },
   mounted: function() {
