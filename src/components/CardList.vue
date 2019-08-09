@@ -34,8 +34,7 @@
               >Order ({{item.count}})</button>
             </div>
             <div class="item3" style="margin-top: auto; margin-bottom: auto; ">
-              <button class="button" @click="count++">PLUS 1</button>
-              <span style="margin: 20px">{{ count }}</span>
+              <button class="button" @click="increase(item)">PLUS 1 ({{ item.count }})</button>
             </div>
           </div>
         </div>
@@ -106,7 +105,9 @@ export default {
       results: null,
       user: null,
       orderModal: false,
-      count: 0
+      item: {
+        count: 0
+      }
     };
   },
   mounted: function() {
@@ -175,6 +176,9 @@ export default {
     exitOrderModal: function() {
       this.orderModal = false;
       this.orderList = null;
+    },
+    increase(number) {
+      number.count +=1;
     }
   }
 };
