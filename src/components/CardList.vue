@@ -75,6 +75,7 @@
             <h4 style="color:red;">${{results.price}}</h4>
           </div>
         </div>
+        <datepicker v-model="date" name="uniquename"></datepicker>
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
     </div>
@@ -92,7 +93,11 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
 export default {
+  components: {
+    Datepicker
+  },
   data() {
     return {
       data: null,
@@ -103,7 +108,8 @@ export default {
       showResult: false,
       results: null,
       user: null,
-      orderModal: false
+      orderModal: false,
+      date: null,
     };
   },
   mounted: function() {
@@ -159,6 +165,7 @@ export default {
         });
     },
     save: function() {
+      window.console.log(this.date);
       this.$http
         .post(
           "http://127.0.0.1:8080/items/" + this.user.id,
@@ -172,7 +179,7 @@ export default {
           {
             params: {
               url: this.urlInput,
-              date: "dfghj"
+              date: this.date
             }
           }
         )
@@ -180,6 +187,7 @@ export default {
           this.responses = response.body;
           window.console.log(this.responses);
           this.getItemData();
+          window.console.log(this.date);
         });
       this.showResult = false;
       this.showModal = false;
