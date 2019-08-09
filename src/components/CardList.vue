@@ -194,7 +194,7 @@ export default {
 
 <style>
 .img-item {
-  width: 80%;
+  width: 55%;
 }
 
 .card {
