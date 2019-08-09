@@ -168,7 +168,7 @@ export default {
       window.console.log(this.date);
       this.$http
         .post(
-          "http://127.0.0.1:8080/items/" + this.user.id,
+          "http://127.0.0.1:8080/items/" + this.user.id + "/" + this.date,
           {
             title: this.results.title,
             owner: this.results.owner,
@@ -178,8 +178,7 @@ export default {
           },
           {
             params: {
-              url: this.urlInput,
-              date: this.date
+              url: this.urlInput
             }
           }
         )
