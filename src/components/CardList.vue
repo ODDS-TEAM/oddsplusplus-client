@@ -114,21 +114,21 @@ export default {
   },
   mounted: function() {
     this.getItemData();
-    this.$http.get("http://127.0.0.1:8080/users/Cheese").then(response => {
+    this.$http.get("http://35.197.130.209:8080/users/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
   },
   methods: {
     getItemData: function() {
-      this.$http.get("http://127.0.0.1:8080/items").then(response => {
+      this.$http.get("http://35.197.130.209:8080/items").then(response => {
         this.data = response.body;
         window.console.log(this.data);
       });
     },
     getOrderData: function(itemId) {
       this.$http
-        .get("http://127.0.0.1:8080/reserves/" + itemId)
+        .get("http://35.197.130.209:8080/reserves/" + itemId)
         .then(response => {
           this.orderList = response.body;
           window.console.log(this.orderList);
@@ -138,7 +138,7 @@ export default {
     onChange: function() {
       window.console.log(this.urlInput);
       this.$http
-        .get("http://127.0.0.1:8080/responseScrap", {
+        .get("http://35.197.130.209:8080/responseScrap", {
           params: {
             url: this.urlInput
           }
@@ -157,7 +157,7 @@ export default {
     },
     plus: function(itemId) {
       this.$http
-        .post("http://127.0.0.1:8080/reserves/" + this.user.id + "/" + itemId)
+        .post("http://35.197.130.209:8080/reserves/" + this.user.id + "/" + itemId)
         .then(response => {
           this.responses = response.body;
           window.console.log(this.responses);
@@ -168,7 +168,7 @@ export default {
       window.console.log(this.date);
       this.$http
         .post(
-          "http://127.0.0.1:8080/items/" + this.user.id + "/" + this.date,
+          "http://35.197.130.209:8080/items/" + this.user.id + "/" + this.date,
           {
             title: this.results.title,
             owner: this.results.owner,
