@@ -28,7 +28,7 @@
                 <span style="font-weight: normal;">{{item.orderDate| formatDate}}</span>
               </h5>
               <button
-                class="button"
+                class="button" style="background-color:#F5F5F5; color:#f44336; width: 100%; !important"
                 v-on:click="getOrderData(item.id)"
                 type="button"
               >Order ({{item.count}})</button>
@@ -211,7 +211,7 @@ export default {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 36% auto 16%;
+  grid-template-columns: 36% auto 20%;
   padding: 10px;
 }
 
@@ -228,6 +228,10 @@ export default {
 
 .item2 {
   grid-column: 2;
+}
+
+.item3 {
+  grid-column: 3;
 }
 
 .grid-modal {
@@ -249,6 +253,59 @@ export default {
 
 .g2 {
   grid-column: 2;
+}
+
+@media only screen and (max-width: 760px) {
+  .grid-container {
+    display: grid;
+    grid-template-rows: 400px auto auto;
+    grid-template-areas:
+        "item1 item1 item1"
+        "item2 item2 item2"
+        "item3 item3 item3";
+
+  }
+  .grid-container .item1 {
+    grid-area: item1;
+  }
+
+  .grid-container .item1 .img-item {
+        width: 80%;
+        height: 90%;
+        margin-top: auto;
+        margin-bottom: auto;
+  }
+
+
+  .grid-container .item2 {
+    grid-area: item2;
+    
+  }
+  .grid-container .item3 {
+    grid-area: item3;
+  } 
+
+  .grid-container .item3 .button {
+    width: 100%;
+  } 
+
+  .grid-modal {
+    display: grid;
+    grid-template-rows: 35% auto;
+    grid-template-areas:
+        "g1 g1"
+        "g2 g2";
+
+  }
+  .grid-modal .g1 {
+    grid-area: g1;  
+  }
+  /* .grid-modal .g1 .img-item {
+    height: 80% 
+  } */
+  .grid-modal .g2 {
+    grid-area: g2;
+  } 
 }
 
 .button {
@@ -337,10 +394,11 @@ li {
   position: relative;
   height: 45px;
   border-radius: 30px;
-  min-width: 400px;
+  max-width: 460px;
+  width: 80%;
   box-shadow: none;
   border: 1px solid #eaeaea;
-  padding-left: 160px;
+  padding-left: 100px;
   outline: none;
 }
 
@@ -355,7 +413,8 @@ li {
   font-size: 18px;
   color: #fff;
   top: 0;
-  width: 100px;
+  max-width: 40px;
+  width: 100%;
   font-weight: 100;
   text-align: center;
 }
