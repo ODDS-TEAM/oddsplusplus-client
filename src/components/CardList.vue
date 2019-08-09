@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
+import Datepicker from "vuejs-datepicker";
 export default {
   components: {
     Datepicker
@@ -109,7 +109,7 @@ export default {
       results: null,
       user: null,
       orderModal: false,
-      date: null,
+      date: null
     };
   },
   mounted: function() {
@@ -188,6 +188,8 @@ export default {
           this.getItemData();
           window.console.log(this.date);
         });
+      this.date = null;
+      this.urlInput = null;
       this.showResult = false;
       this.showModal = false;
     },
