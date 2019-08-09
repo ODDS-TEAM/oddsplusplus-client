@@ -75,6 +75,7 @@
             <h4 style="color:red;">${{results.price}}</h4>
           </div>
         </div>
+        <datepicker v-model="date" name="uniquename"></datepicker>
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
     </div>
@@ -92,7 +93,11 @@
 </template>
 
 <script>
+import Datepicker from "vuejs-datepicker";
 export default {
+  components: {
+    Datepicker
+  },
   data() {
     return {
       data: null,
@@ -103,26 +108,27 @@ export default {
       showResult: false,
       results: null,
       user: null,
-      orderModal: false
+      orderModal: false,
+      date: null
     };
   },
   mounted: function() {
     this.getItemData();
-    this.$http.get("http://127.0.0.1:8080/users/Cheese").then(response => {
+    this.$http.get("http://35.197.130.209:8080/users/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
   },
   methods: {
     getItemData: function() {
-      this.$http.get("http://127.0.0.1:8080/items").then(response => {
+      this.$http.get("http://35.197.130.209:8080/items").then(response => {
         this.data = response.body;
         window.console.log(this.data);
       });
     },
     getOrderData: function(itemId) {
       this.$http
-        .get("http://127.0.0.1:8080/reserves/" + itemId)
+        .get("http://35.197.130.209:8080/reserves/" + itemId)
         .then(response => {
           this.orderList = response.body;
           window.console.log(this.orderList);
@@ -132,7 +138,7 @@ export default {
     onChange: function() {
       window.console.log(this.urlInput);
       this.$http
-        .get("http://127.0.0.1:8080/responseScrap", {
+        .get("http://35.197.130.209:8080/responseScrap", {
           params: {
             url: this.urlInput
           }
@@ -151,7 +157,7 @@ export default {
     },
     plus: function(itemId) {
       this.$http
-        .post("http://127.0.0.1:8080/reserves/" + this.user.id + "/" + itemId)
+        .post("http://35.197.130.209:8080/reserves/" + this.user.id + "/" + itemId)
         .then(response => {
           this.responses = response.body;
           window.console.log(this.responses);
@@ -159,9 +165,10 @@ export default {
         });
     },
     save: function() {
+      window.console.log(this.date);
       this.$http
         .post(
-          "http://127.0.0.1:8080/items/" + this.user.id,
+          "http://35.197.130.209:8080/items/" + this.user.id + "/" + this.date,
           {
             title: this.results.title,
             owner: this.results.owner,
@@ -171,8 +178,7 @@ export default {
           },
           {
             params: {
-              url: this.urlInput,
-              date: "dfghj"
+              url: this.urlInput
             }
           }
         )
@@ -180,7 +186,10 @@ export default {
           this.responses = response.body;
           window.console.log(this.responses);
           this.getItemData();
+          window.console.log(this.date);
         });
+      this.date = null;
+      this.urlInput = null;
       this.showResult = false;
       this.showModal = false;
     },
