@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <ul>
-      <li><img src="./../assets/logo.png"/></li>
+      <li><img src="./../assets/odds_logo.png"/></li>
     </ul>
   </div>
 </template>
