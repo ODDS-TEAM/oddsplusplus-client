@@ -28,7 +28,8 @@
                 <span style="font-weight: normal;">{{item.orderDate| formatDate}}</span>
               </h5>
               <button
-                class="button" style="background-color:#F5F5F5; color:#f44336; width: 100%; !important"
+                class="button"
+                style="background-color:#F5F5F5; color:#f44336; width: 100%; !important"
                 v-on:click="getOrderData(item.id)"
                 type="button"
               >Order ({{item.count}})</button>
@@ -46,13 +47,9 @@
         v-on:click="cancel"
       >X</a>
       <div class="input-group">
-        <input
-          type="text"
-          v-model="urlInput"
-          placeholder="Please fill amazon book URL"
-          v-on:change="onChange"
-        />
+        <input type="text" v-model="urlInput" placeholder="Please fill amazon book URL" />
         <label>URL</label>
+        <button v-on:click="scrap">Fetch</button>
       </div>
       <div v-if="showResult">
         <div class="grid-modal">
@@ -75,6 +72,8 @@
             <h4 style="color:red;">${{results.price}}</h4>
           </div>
         </div>
+        <label>เลือกวันที่สั่งหนังสือ</label>
+        <datepicker v-model="date" name="dateInput"></datepicker>
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
     </div>
@@ -92,7 +91,11 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
 export default {
+  components: {
+    Datepicker
+  },
   data() {
     return {
       data: null,
@@ -103,7 +106,8 @@ export default {
       showResult: false,
       results: null,
       user: null,
-      orderModal: false
+      orderModal: false,
+      date: null
     };
   },
   mounted: function() {
@@ -120,16 +124,7 @@ export default {
         window.console.log(this.data);
       });
     },
-    getOrderData: function(itemId) {
-      this.$http
-        .get("http://127.0.0.1:8080/reserves/" + itemId)
-        .then(response => {
-          this.orderList = response.body;
-          window.console.log(this.orderList);
-        });
-      this.orderModal = true;
-    },
-    onChange: function() {
+    scrap: function() {
       window.console.log(this.urlInput);
       this.$http
         .get("http://127.0.0.1:8080/responseScrap", {
@@ -143,6 +138,15 @@ export default {
           window.console.log(this.results);
           this.showResult = true;
         });
+    },
+    getOrderData: function(itemId) {
+      this.$http
+        .get("http://127.0.0.1:8080/reserves/" + itemId)
+        .then(response => {
+          this.orderList = response.body;
+          window.console.log(this.orderList);
+        });
+      this.orderModal = true;
     },
     cancel: function() {
       this.showModal = false;
@@ -161,7 +165,7 @@ export default {
     save: function() {
       this.$http
         .post(
-          "http://127.0.0.1:8080/items/" + this.user.id,
+          "http://127.0.0.1:8080/items/" + this.user.id + "/" + this.date,
           {
             title: this.results.title,
             owner: this.results.owner,
@@ -171,8 +175,7 @@ export default {
           },
           {
             params: {
-              url: this.urlInput,
-              date: "dfghj"
+              url: this.urlInput
             }
           }
         )
@@ -260,49 +263,45 @@ export default {
     display: grid;
     grid-template-rows: 400px auto auto;
     grid-template-areas:
-        "item1 item1 item1"
-        "item2 item2 item2"
-        "item3 item3 item3";
-
+      "item1 item1 item1"
+      "item2 item2 item2"
+      "item3 item3 item3";
   }
   .grid-container .item1 {
     grid-area: item1;
   }
 
   .grid-container .item1 .img-item {
-        width: 80%;
-        height: 90%;
-        margin-top: auto;
-        margin-bottom: auto;
+    width: 80%;
+    height: 90%;
+    margin-top: auto;
+    margin-bottom: auto;
   }
-
 
   .grid-container .item2 {
     grid-area: item2;
-    
   }
   .grid-container .item3 {
     grid-area: item3;
-  } 
+  }
 
   .grid-container .item3 .button {
     width: 100%;
-  } 
+  }
 
   .grid-modal {
     display: grid;
     grid-template-rows: 35% auto;
     grid-template-areas:
-        "g1 g1"
-        "g2 g2";
-
+      "g1 g1"
+      "g2 g2";
   }
   .grid-modal .g1 {
-    grid-area: g1;  
+    grid-area: g1;
   }
   .grid-modal .g2 {
     grid-area: g2;
-  } 
+  }
 }
 
 .button {
@@ -397,6 +396,23 @@ li {
   border: 1px solid #eaeaea;
   padding-left: 100px;
   outline: none;
+}
+
+.input-group button {
+  position: absolute;
+  right: 0;
+  height: 48px;
+  background: #f44336;
+  padding: 0px 25px;
+  border-radius: 30px;
+  line-height: 48px;
+  font-size: 18px;
+  color: #fff;
+  top: 0;
+  max-width: 100px;
+  width: 100%;
+  font-weight: 100;
+  text-align: center;
 }
 
 .input-group label {
