@@ -58,7 +58,7 @@
           </div>
           <div class="g2" style="text-align:left;">
             <label>Order date</label>
-            <input type="date" class="datepicker" />
+            <datepicker v-model="date" placeholder="Choose date" calendar-button="true"></datepicker>
             <h5>
               Title:
               <span style="font-weight: normal;">{{results.title}}</span>
@@ -91,7 +91,12 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
+
 export default {
+  components: {
+    Datepicker
+  },
   data() {
     return {
       data: null,
@@ -160,6 +165,7 @@ export default {
         });
     },
     save: function() {
+      window.console.log(this.date);
       this.$http
         .post(
           "http://127.0.0.1:8080/items/" + this.user.id + "/" + this.date,
@@ -196,15 +202,6 @@ export default {
 <style scoped>
 h5 {
   margin: 20px 0;
-}
-.datepicker {
-  margin-left: 20px;
-  border-radius: 25px;
-  width: 150px;
-  height: 27px;
-  border: 0.5px solid #bfbfbf;
-  box-shadow: 0 0 2.5px 0 #adadad;
-  padding: 0 10px;
 }
 [type="date"] {
   background: #fff
