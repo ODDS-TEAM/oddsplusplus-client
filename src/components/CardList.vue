@@ -261,52 +261,6 @@ export default {
   grid-column: 2;
 }
 
-@media only screen and (max-width: 760px) {
-  .grid-container {
-    display: grid;
-    grid-template-rows: 400px auto auto;
-    grid-template-areas:
-      "item1 item1 item1"
-      "item2 item2 item2"
-      "item3 item3 item3";
-  }
-  .grid-container .item1 {
-    grid-area: item1;
-  }
-
-  .grid-container .item1 .img-item {
-    width: 80%;
-    height: 90%;
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  .grid-container .item2 {
-    grid-area: item2;
-  }
-  .grid-container .item3 {
-    grid-area: item3;
-  }
-
-  .grid-container .item3 .button {
-    width: 100%;
-  }
-
-  .grid-modal {
-    display: grid;
-    grid-template-rows: 35% auto;
-    grid-template-areas:
-      "g1 g1"
-      "g2 g2";
-  }
-  .grid-modal .g1 {
-    grid-area: g1;
-  }
-  .grid-modal .g2 {
-    grid-area: g2;
-  }
-}
-
 .button {
   background-color: #0e98d5;
   /* Green */
@@ -442,5 +396,75 @@ li {
 .waiting {
   display: block;
   text-align: center;
+}
+
+@media only screen and (max-width: 760px) {
+  .grid-container {
+    display: grid;
+    grid-template-rows: 400px auto auto;
+    grid-template-areas:
+      "item1 item1 item1"
+      "item2 item2 item2"
+      "item3 item3 item3";
+  }
+  .grid-container .item1 {
+    grid-area: item1;
+  }
+
+  .grid-container .item1 .img-item {
+    width: 80%;
+    height: 90%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .grid-container .item2 {
+    grid-area: item2;
+  }
+  .grid-container .item3 {
+    grid-area: item3;
+  }
+
+  .grid-container .item3 .button {
+    width: 100%;
+  }
+
+  .grid-modal {
+    display: grid;
+    grid-template-rows: 35% auto;
+    grid-template-areas:
+      "g1 g1"
+      "g2 g2";
+  }
+  .grid-modal .g1 {
+    grid-area: g1;
+  }
+  .grid-modal .g2 {
+    grid-area: g2;
+  }
+
+  .modal {
+    width: 85%;
+    padding: 20px;
+  }
+
+  .input-group label {
+    font-size: 16px;
+    max-width: 25px;
+    width: 100%;
+  }
+
+  .input-group input {
+    padding-left: 25%;
+    width: 65%;
+    font-size: 12px;
+  }
+
+  .input-group button {
+    font-size: 16px;
+    max-width: 75px;
+    width: 100%;
+    padding: 0px;
+  }
 }
 </style>
