@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh "docker push sivaroot/frontend:sprint1 ."
+                sh "docker push sivaroot/frontend:sprint1"
             }
         }
         stage('Deploy') {
