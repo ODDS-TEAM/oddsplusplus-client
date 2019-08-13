@@ -14,20 +14,21 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-             try{
-                sh 'docker kill frontend'
-
-
-             } catch (e){
-                echo "frontend is not running"
-             }
-             try{
-                sh 'docker rm frontend'
-            } catch (e){
-                echo "Not found frontend container"
-            }
-              sh 'docker run -d -p 8080:8080 --name frontend sivaroot/frontend:sprint1'
+                script {
+                    try{
+                        sh 'docker kill frontend'
+                     } catch (Exception e){
+                        echo "frontend is not running"
+                     }
+                     try{
+                        sh 'docker rm frontend'
+                    } catch (Exception e){
+                        echo "Not found frontend container"
+                    }
+                    sh 'docker run -d -p 80:80 --name frontend sivaroot/backend:sprint1'
+                }
             }
         }
+
     }
 }
