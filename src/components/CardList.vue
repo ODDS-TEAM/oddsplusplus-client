@@ -58,8 +58,8 @@
             <img class="show-item" :src="results.imageUrl" />
           </div>
           <div class="g2" style="text-align:left;">
-            <label>เลือกวันที่สั่งหนังสือ</label>
-            <datepicker v-model="date" name="dateInput"></datepicker>
+            <label>Order date</label>
+            <input type="date" class="datepicker" />
             <h5>
               Title:
               <span style="font-weight: normal;">{{results.title}}</span>
@@ -92,11 +92,7 @@
 </template>
 
 <script>
-import Datepicker from "vuejs-datepicker";
 export default {
-  components: {
-    Datepicker
-  },
   data() {
     return {
       data: null,
@@ -198,7 +194,31 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+h5 {
+  margin: 20px 0;
+}
+.datepicker {
+  margin-left: 20px;
+  border-radius: 25px;
+  width: 150px;
+  height: 27px;
+  border: 0.5px solid #BFBFBF;
+  box-shadow: 0 0 2.5px 0 #adadad;
+  padding: 0 10px;
+
+}
+[type="date"] {
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
 .img-item {
   width: 55%;
 }
