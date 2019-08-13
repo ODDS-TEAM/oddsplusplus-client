@@ -29,10 +29,10 @@
               </h5>
               <button
                 class="button"
-                style="background-color:#F5F5F5; color:#f44336; width: 100%; !important"
+                style="background-color:#D8D8D8; color:#0e98d5; width: 50%; !important"
                 v-on:click="getOrderData(item.id)"
                 type="button"
-              >Order ({{item.count}})</button>
+              >Show Order ({{item.count}})</button>
             </div>
             <div class="item3" style="margin-top: auto; margin-bottom: auto; ">
               <button class="button" v-on:click="plus(item.id)">PLUS 1</button>

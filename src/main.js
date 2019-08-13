@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+// import Login from './components/Login'
 import VueResource from 'vue-resource'
 import moment from 'moment'
 Vue.config.productionTip = false
