@@ -48,7 +48,6 @@
       >X</a>
       <div class="input-group">
         <input type="text" v-model="urlInput" placeholder="Please fill amazon book URL" />
-        <label>URL</label>
         <button v-on:click="scrap">Fetch</button>
       </div>
       <label class="waiting" v-if="waiting">Please wait ...</label>
@@ -203,10 +202,9 @@ h5 {
   border-radius: 25px;
   width: 150px;
   height: 27px;
-  border: 0.5px solid #BFBFBF;
+  border: 0.5px solid #bfbfbf;
   box-shadow: 0 0 2.5px 0 #adadad;
   padding: 0 10px;
-
 }
 [type="date"] {
   background: #fff
@@ -358,39 +356,32 @@ li {
 }
 
 .input-group {
-  position: relative;
+  flex-direction:row;
+  display: flex;
   width: 100%;
-  overflow: hidden;
 }
 
 .input-group input {
-  position: relative;
-  height: 45px;
+
+  height: 25px;
   border-radius: 30px;
   max-width: 500px;
   width: 100%;
   box-shadow: none;
   border: 1px solid #eaeaea;
-  padding-left: 100px;
-  outline: none;
+  padding-left: 20px;
 }
 
 .input-group button {
-  position: fixed;
-  right: 0;
-  height: 48px;
+    height: 29px;
   background: #0e98d5;
-  padding: 0px 25px;
+  padding: 0px 20px;
   border-radius: 30px;
-  line-height: 48px;
   font-size: 18px;
   color: #fff;
-  top: 0;
   max-width: 100px;
   width: 100%;
-  font-weight: 100;
   text-align: center;
-  margin: 30px 30px 0 0;
 }
 
 .input-group label {
@@ -408,8 +399,7 @@ li {
   width: 100%;
   font-weight: 100;
   text-align: center;
-    margin: 30px 0 0 30px;
-
+  margin: 30px 0 0 30px;
 }
 
 .show-item {
