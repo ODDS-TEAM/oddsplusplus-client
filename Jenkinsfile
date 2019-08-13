@@ -25,7 +25,7 @@ pipeline {
                     } catch (Exception e){
                         echo "Not found frontend container"
                     }
-                    sh 'docker run -d -p 80:80 --name frontend sivaroot/backend:sprint1'
+                    sh 'docker run -d -p 80:80 --name frontend sivaroot/frontend:sprint1'
                 }
             }
         }
