@@ -51,6 +51,7 @@
         <label>URL</label>
         <button v-on:click="scrap">Fetch</button>
       </div>
+      <label class="waiting" v-if="waiting">Please wait ...</label>
       <div v-if="showResult">
         <div class="grid-modal">
           <div class="g1">
@@ -91,7 +92,7 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
+import Datepicker from "vuejs-datepicker";
 export default {
   components: {
     Datepicker
@@ -107,7 +108,8 @@ export default {
       results: null,
       user: null,
       orderModal: false,
-      date: null
+      date: null,
+      waiting: false
     };
   },
   mounted: function() {
@@ -125,7 +127,7 @@ export default {
       });
     },
     scrap: function() {
-      window.console.log(this.urlInput);
+      this.waiting = true;
       this.$http
         .get("http://127.0.0.1:8080/responseScrap", {
           params: {
@@ -133,7 +135,7 @@ export default {
           }
         })
         .then(response => {
-          window.console.log("Work in");
+          this.waiting = false;
           this.results = response.body;
           window.console.log(this.results);
           this.showResult = true;
@@ -186,6 +188,7 @@ export default {
         });
       this.showResult = false;
       this.showModal = false;
+      this.urlInput = null;
     },
     exitOrderModal: function() {
       this.orderModal = false;
@@ -305,7 +308,7 @@ export default {
 }
 
 .button {
-  background-color: #f44336;
+  background-color: #0e98d5;
   /* Green */
   border: none;
   color: white;
@@ -345,7 +348,7 @@ li {
 .fab-button {
   width: 70px;
   height: 70px;
-  background-color: #f44336;
+  background-color: #0e98d5;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -402,7 +405,7 @@ li {
   position: absolute;
   right: 0;
   height: 48px;
-  background: #f44336;
+  background: #0e98d5;
   padding: 0px 25px;
   border-radius: 30px;
   line-height: 48px;
@@ -419,7 +422,7 @@ li {
   position: absolute;
   left: 0;
   height: 48px;
-  background: #f44336;
+  background: #0e98d5;
   padding: 0px 25px;
   border-radius: 30px;
   line-height: 48px;
@@ -435,5 +438,9 @@ li {
 .show-item {
   width: 50%;
   height: auto;
+}
+.waiting {
+  display: block;
+  text-align: center;
 }
 </style>
