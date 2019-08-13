@@ -58,6 +58,8 @@
             <img class="show-item" :src="results.imageUrl" />
           </div>
           <div class="g2" style="text-align:left;">
+            <label>เลือกวันที่สั่งหนังสือ</label>
+            <datepicker v-model="date" name="dateInput"></datepicker>
             <h5>
               Title:
               <span style="font-weight: normal;">{{results.title}}</span>
@@ -73,8 +75,6 @@
             <h4 style="color:red;">${{results.price}}</h4>
           </div>
         </div>
-        <label>เลือกวันที่สั่งหนังสือ</label>
-        <datepicker v-model="date" name="dateInput"></datepicker>
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
     </div>
@@ -374,7 +374,7 @@ li {
   border-radius: 4px;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   background-color: #ffffff;
-  width: 40%;
+  width: 65%;
   position: fixed;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -393,8 +393,8 @@ li {
   position: relative;
   height: 45px;
   border-radius: 30px;
-  max-width: 460px;
-  width: 80%;
+  max-width: 780px;
+  width: 100%;
   box-shadow: none;
   border: 1px solid #eaeaea;
   padding-left: 100px;
