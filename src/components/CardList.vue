@@ -348,7 +348,7 @@ li {
   border-radius: 4px;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   background-color: #ffffff;
-  width: 65%;
+  width: 45%;
   position: fixed;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -367,7 +367,7 @@ li {
   position: relative;
   height: 45px;
   border-radius: 30px;
-  max-width: 780px;
+  max-width: 500px;
   width: 100%;
   box-shadow: none;
   border: 1px solid #eaeaea;
@@ -376,7 +376,7 @@ li {
 }
 
 .input-group button {
-  position: absolute;
+  position: fixed;
   right: 0;
   height: 48px;
   background: #0e98d5;
@@ -390,10 +390,11 @@ li {
   width: 100%;
   font-weight: 100;
   text-align: center;
+  margin: 30px 30px 0 0;
 }
 
 .input-group label {
-  position: absolute;
+  position: fixed;
   left: 0;
   height: 48px;
   background: #0e98d5;
@@ -407,6 +408,8 @@ li {
   width: 100%;
   font-weight: 100;
   text-align: center;
+    margin: 30px 0 0 30px;
+
 }
 
 .show-item {
@@ -472,6 +475,7 @@ li {
     font-size: 16px;
     max-width: 25px;
     width: 100%;
+    margin: 20px 0 0 20px;
   }
 
   .input-group input {
@@ -485,6 +489,7 @@ li {
     max-width: 75px;
     width: 100%;
     padding: 0px;
+    margin: 20px 20px 0 0;
   }
 }
 </style>
