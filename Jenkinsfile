@@ -4,17 +4,29 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'building'
+                sh "docker build -t sivaroot/frontend:sprint1 ."
             }
         }
-        stage('Test') {
+        stage('Push') {
             steps {
-                echo 'testing'
+                sh "docker push sivaroot/frontend:sprint1 ."
             }
         }
         stage('Deploy') {
             steps {
-                echo 'deploying'
+             try{
+                sh 'docker kill frontend'
+
+
+             } catch (e){
+                echo "frontend is not running"
+             }
+             try{
+                sh 'docker rm frontend'
+            } catch (e){
+                echo "Not found frontend container"
+            }
+              sh 'docker run -d -p 8080:8080 --name frontend sivaroot/frontend:sprint1'
             }
         }
     }
