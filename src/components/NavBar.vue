@@ -6,7 +6,28 @@
       </span>
       <div class="main-color add-btn" v-on:click="showModal = true">+</div>
     </div>
-    <div class="modal" v-if="showModal">
+    <div class="card">
+      <nav><input
+          type="text"
+          v-model="urlInput"
+          class="urlInput"
+          placeholder="Please fill amazon book URL"
+        /></nav>
+      <div class="photo">
+        <img class="imgBook"
+          src="https://images-na.ssl-images-amazon.com/images/I/512oz7h5oZL._SX302_BO1,204,203,200_.jpg"
+        />
+      </div>
+      <div class="description">
+        <h2>Classic Peace Lily</h2>
+        <h4>Popular House Plant</h4>
+        <h1>$18</h1>
+        <p>Classic Peace Lily is a spathiphyllum floor plant arranged in a bamboo planter with a blue & red ribbom and butterfly pick.</p>
+        <button>Add to Cart</button>
+        <button>Wishlist</button>
+      </div>
+    </div>
+    <!-- <div class="modal" v-if="showModal">
       <a
         style="position: absolute; top: 7px; right: 15px; color: red;cursor: pointer;"
         v-on:click="showModal = false"
@@ -48,7 +69,7 @@
         <h4 style="color:red;">${{results.price}}</h4>
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -125,6 +146,92 @@ export default {
 * {
   box-sizing: border-box;
 }
+
+.card {
+  width: 650px;
+  height: 375px;
+  position: absolute;
+  background: white;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: all 0.3s;
+}
+.card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+nav {
+  width: 100%;
+  color: #727272;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-bottom: 2px solid #efefef;
+  font-size: 12px;
+}
+.photo {
+  padding: 30px;
+  width: 45%;
+  text-align: center;
+  float: left;
+}
+.imgBook {
+  height: 240px;
+}
+.description {
+  padding: 30px;
+  float: left;
+  width: 55%;
+  border-left: 2px solid #efefef;
+}
+h1 {
+  color: #515151;
+  font-weight: 300;
+  padding-top: 15px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+h2 {
+  color: #515151;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+h4 {
+  margin: 0;
+  color: #727272;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+p {
+  font-size: 12px;
+  line-height: 20px;
+  color: #727272;
+  padding: 20px 0;
+  margin: 0;
+}
+
+button {
+  outline: 0;
+  border: 0;
+  background: none;
+  border: 1px solid #d9d9d9;
+  padding: 8px 0px;
+  margin-bottom: 30px;
+  color: #515151;
+  text-transform: uppercase;
+  width: 125px;
+  font-family: inherit;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
 .rs-img {
   clear: both;
   width: 50%;
@@ -142,10 +249,11 @@ export default {
 }
 .urlInput {
   width: 100%;
-  padding: 8px 20px;
-  margin: 8px 0;
+  height: 30px;
+  /* padding: 8px 20px; */
+  /* margin: 8px 0; */
   box-sizing: border-box;
-  border: 1px solid #4e4e4e;
+  border: 0;
   border-radius: 4px;
 }
 .nav {
@@ -169,7 +277,7 @@ img {
   color: white;
   font-weight: 900;
 }
-h5{
+h5 {
   margin: 0;
 }
 
@@ -198,15 +306,21 @@ h5{
   opacity: 0;
 }
 
-/* @media only screen and (min-width: 600px) {
-  ul {
-    height: 64px;
-  }
-}
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 600px) {
   .nav {
     height: 64px;
   }
-} */
+  img {
+    margin: 7px 0;
+    height: 40px;
+  }
+  .add-btn {
+    width: 90px;
+    height: 50px;
+    font-size: 35px;
+  }
+}
+@media only screen and (min-width: 768px) {
+}
 </style>
 
