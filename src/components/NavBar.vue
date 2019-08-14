@@ -1,8 +1,9 @@
 <template>
   <div class="nav">
-    <ul>
-      <li><img src="./../assets/odds_logo.png"/></li>
-    </ul>
+    <span>
+      <img class src="./../assets/odds_logo.png" />
+    </span>
+    <div class="main-color add-btn">+</div>
   </div>
 </template>
 
@@ -11,30 +12,39 @@ export default {};
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
 .nav {
-
-}
-ul {
-  list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 6px 10px;
   overflow: hidden;
-  background-color: #e0e0e0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: #f2f2f2;
+  height: 43px;
 }
-li {
-  display: block;
-  text-align: left;
-  padding: 0px 16px;
-  text-decoration: none;
+img {
+  margin: 2px 0;
+  height: 27px;
 }
-img{
-  width:auto;
-  height:70px;
-  margin-top: 4px;
+.add-btn {
+  float: right;
+  text-align: center;
+  width: 40px;
+  height: 31px;
+  font-size: 23px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 900;
 }
+/* @media only screen and (min-width: 600px) {
+  ul {
+    height: 64px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .nav {
+    height: 64px;
+  }
+} */
 </style>
 
