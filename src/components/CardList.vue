@@ -409,6 +409,11 @@ li {
 }
 
 @media only screen and (max-width: 760px) {
+  .grid-modal > div {
+    padding: 20px 0;
+    margin: 0 0 -60px 0;
+  }
+
   .grid-container {
     display: grid;
     grid-template-rows: 400px auto auto;
