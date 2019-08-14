@@ -9,7 +9,7 @@ export default {
   name: "login"
 };
 </script>
-<style>
+<style scoped>
 .login-content {
   position: absolute;
   width: 40%;
