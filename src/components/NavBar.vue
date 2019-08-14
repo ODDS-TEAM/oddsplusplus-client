@@ -7,24 +7,28 @@
       <div class="main-color add-btn" v-on:click="showModal = true">+</div>
     </div>
     <div class="card">
-      <nav><input
+      <nav>
+        <input
           type="text"
           v-model="urlInput"
           class="urlInput"
           placeholder="Please fill amazon book URL"
-        /></nav>
+        />
+      </nav>
       <div class="photo">
-        <img class="imgBook"
+        <img
+          class="imgBook"
           src="https://images-na.ssl-images-amazon.com/images/I/512oz7h5oZL._SX302_BO1,204,203,200_.jpg"
         />
       </div>
       <div class="description">
-        <h2>Classic Peace Lily</h2>
-        <h4>Popular House Plant</h4>
-        <h1>$18</h1>
-        <p>Classic Peace Lily is a spathiphyllum floor plant arranged in a bamboo planter with a blue & red ribbom and butterfly pick.</p>
+        <h2>Animal Farm</h2>
+        <h4>By George Orwell</h4>
+        <h1>$16.14</h1>
+        <!-- <datepicker v-model="date" placeholder="Choose date"></datepicker>
+
         <button>Add to Cart</button>
-        <button>Wishlist</button>
+        <button>Wishlist</button>-->
       </div>
     </div>
     <!-- <div class="modal" v-if="showModal">
@@ -148,7 +152,7 @@ export default {
 }
 
 .card {
-  width: 650px;
+  width: 90%;
   height: 375px;
   position: absolute;
   background: white;
@@ -171,17 +175,20 @@ nav {
   font-size: 12px;
 }
 .photo {
-  padding: 30px;
-  width: 45%;
+  padding: 30px auto;
+  width: 100%;
   text-align: center;
-  float: left;
+  /* float: left; */
 }
 .imgBook {
-  height: 240px;
+  position: absolute;
+  margin: 10px auto;
+  height: 200px;
+  border-radius: 10px;
 }
 .description {
   padding: 30px;
-  float: left;
+  /* float: left; */
   width: 55%;
   border-left: 2px solid #efefef;
 }
@@ -318,6 +325,23 @@ h5 {
     width: 90px;
     height: 50px;
     font-size: 35px;
+  }
+  .photo {
+    width: 40%;
+    padding: 30px;
+    float: left;
+  }
+  .description {
+    float: left;
+  }
+  .card {
+    width: 600px;
+  }
+  .imgBook {
+    position: static;
+    margin: auto auto;
+    height: 240px;
+    border-radius: 10px;
   }
 }
 @media only screen and (min-width: 768px) {
