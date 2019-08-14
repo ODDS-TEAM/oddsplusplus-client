@@ -5,7 +5,7 @@
         <h1 style="color: white;">+</h1>
       </a>
     </div>
-    <ul style="margin-top: 140px;">
+    <ul style="margin-top: 140px; padding: 0px">
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
           <div class="grid-container">
@@ -29,7 +29,7 @@
               </h5>
               <button
                 class="button"
-                style="background-color:#D8D8D8; color:#0e98d5; width: 50%; !important"
+                style="background-color:#D8D8D8; color:#0e98d5; !important;"
                 v-on:click="getOrderData(item.id)"
                 type="button"
               >Show Order ({{item.count}})</button>
@@ -476,6 +476,14 @@ li {
     width: 100%;
     padding: 0px;
     margin: 0 20px 0 0;
+  }
+
+  .button {
+    width: 100%
+  }
+
+  .grid-container > div {
+    padding: 0;
   }
 }
 </style>
