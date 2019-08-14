@@ -466,9 +466,8 @@ li {
   }
 
   .input-group input {
-    padding-left: 25%;
     width: 65%;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .input-group button {
@@ -476,7 +475,7 @@ li {
     max-width: 75px;
     width: 100%;
     padding: 0px;
-    margin: 20px 20px 0 0;
+    margin: 0 20px 0 0;
   }
 }
 </style>
