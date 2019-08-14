@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="fab-wrapper">
-      <a class="fab-button" v-on:click="showModal = true">
+    <!-- <div class="fab-wrapper">
+      <a class="fab-button">
         <h1 style="color: white;">+</h1>
       </a>
-    </div>
+    </div> -->
     <ul style="margin-top: 140px; padding: 0px">
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
@@ -41,7 +41,7 @@
         </div>
       </li>
     </ul>
-    <div class="modal" v-if="showModal">
+    <!-- <div class="modal" v-if="showModal">
       <a
         style="position: absolute; top: 7px; right: 15px; color: red;cursor: pointer;"
         v-on:click="cancel"
@@ -76,7 +76,7 @@
         </div>
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
-    </div>
+    </div> -->
     <div class="modal" v-if="orderModal">
       <a
         style="position: absolute; top: 7px; right: 15px; color: red;cursor: pointer;"
@@ -91,12 +91,9 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
 
 export default {
-  components: {
-    Datepicker
-  },
+ 
   data() {
     return {
       data: null,
@@ -126,21 +123,7 @@ export default {
         window.console.log(this.data);
       });
     },
-    scrap: function() {
-      this.waiting = true;
-      this.$http
-        .get("http://35.208.105.247:8080/responseScrap", {
-          params: {
-            url: this.urlInput
-          }
-        })
-        .then(response => {
-          this.waiting = false;
-          this.results = response.body;
-          window.console.log(this.results);
-          this.showResult = true;
-        });
-    },
+    
     getOrderData: function(itemId) {
       this.$http
         .get("http://35.208.105.247:8080/reserves/" + itemId)
@@ -157,7 +140,9 @@ export default {
     },
     plus: function(itemId) {
       this.$http
-        .post("http://35.208.105.247:8080/reserves/" + this.user.id + "/" + itemId)
+        .post(
+          "http://35.208.105.247:8080/reserves/" + this.user.id + "/" + itemId
+        )
         .then(response => {
           this.responses = response.body;
           window.console.log(this.responses);
@@ -353,13 +338,12 @@ li {
 }
 
 .input-group {
-  flex-direction:row;
+  flex-direction: row;
   display: flex;
   width: 100%;
 }
 
 .input-group input {
-
   height: 25px;
   border-radius: 30px;
   max-width: 500px;
@@ -370,7 +354,7 @@ li {
 }
 
 .input-group button {
-    height: 29px;
+  height: 29px;
   background: #0e98d5;
   padding: 0px 20px;
   border-radius: 30px;
@@ -458,10 +442,10 @@ li {
     grid-area: g2;
   }
 
-  .modal {
+  /* .modal {
     width: 85%;
     padding: 20px;
-  }
+  } */
 
   .input-group label {
     font-size: 16px;
@@ -484,7 +468,7 @@ li {
   }
 
   .button {
-    width: 100%
+    width: 100%;
   }
 
   .grid-container > div {
