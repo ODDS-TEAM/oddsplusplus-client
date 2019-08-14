@@ -6,84 +6,47 @@
       </span>
       <div class="main-color add-btn" v-on:click="showModal = true">+</div>
     </div>
-    <div class="card">
+    <div class="card" v-if="showModal">
       <nav>
-        <input
-          type="text"
-          v-model="urlInput"
-          class="urlInput"
-          placeholder="Please fill amazon book URL"
-        />
+        <span>
+          <input
+            type="text"
+            v-model="urlInput"
+            class="urlInput"
+            placeholder="Please fill amazon book URL"
+          />
+        </span>
+        <span style="width:30%">
+          <button class="main-color fetchBtn" v-on:click="scrap">Fetch</button>
+        </span>
       </nav>
-      <div class="photo">
-        <img
-          class="imgBook"
-          src="https://images-na.ssl-images-amazon.com/images/I/512oz7h5oZL._SX302_BO1,204,203,200_.jpg"
-        />
-      </div>
-      <div class="description">
-        <h2>Animal Farm</h2>
-        <h4>By George Orwell</h4>
-        <h1>$16.14</h1>
-        <!-- <datepicker v-model="date" placeholder="Choose date"></datepicker>
+      <div v-if="showResult">
+        <div class="photo">
+          <img class="imgBook" :src="results.imageUrl" />
+        </div>
+        <div class="description">
+          <h3>{{results.title}}</h3>
+          <h4>By {{results.owner}}</h4>
+          <h1>${{results.price}}</h1>
+          <p>{{results.format}}</p>
+          <input type="date"  v-model="date" />
+          <br>
+          <button class="button-add" v-on:click="save">Add</button>
+
+          <!-- 
 
         <button>Add to Cart</button>
-        <button>Wishlist</button>-->
+          <button>Wishlist</button>-->
+        </div>
       </div>
     </div>
-    <!-- <div class="modal" v-if="showModal">
-      <a
-        style="position: absolute; top: 7px; right: 15px; color: red;cursor: pointer;"
-        v-on:click="showModal = false"
-      >X</a>
-      <div>
-        <input
-          type="text"
-          v-model="urlInput"
-          class="urlInput"
-          placeholder="Please fill amazon book URL"
-        />
-        <label class="waiting" v-if="waiting">Please wait ...</label>
-
-        <button class="fetchBtn main-color" v-on:click="scrap">Fetch</button>
-      </div>
-      <div v-if="showResult" style="clear:both; margin-top: 25px;">
-        <img class="rs-img" :src="results.imageUrl" />
-        <div style="clear:both; margin-top: 25px;">
-          <div style="clear:both;">
-            Order date
-            <datepicker v-model="date" placeholder="Choose date"></datepicker>
-          </div>
-
-          <div style="clear:both;">
-            Title:
-            <span style="font-weight: normal;">{{results.title}}</span>
-          </div>
-          <div style="clear:both;">
-            Author:
-            <span style="font-weight: normal;">{{results.owner}}</span>
-          </div>
-
-          <div style="clear:both;">
-            Type:
-            <span style="font-weight: normal;">{{results.format}}</span>
-          </div>
-        </div>
-
-        <h4 style="color:red;">${{results.price}}</h4>
-        <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
-      </div>
-    </div>-->
   </div>
 </template>
 
 <script>
-import Datepicker from "vuejs-datepicker";
 
 export default {
-  components: {
-    Datepicker
-  },
+ 
   data() {
     return {
       data: null,
@@ -98,6 +61,15 @@ export default {
       date: null,
       waiting: false
     };
+  },
+  mounted: function() {
+    // this.getItemData();
+    window.console.log();
+
+    this.$http.get("http://35.208.105.247:8080/users/Cheese").then(response => {
+      this.user = response.body;
+      window.console.log(this.user);
+    });
   },
   methods: {
     scrap: function() {
@@ -119,7 +91,7 @@ export default {
       window.console.log(this.date);
       this.$http
         .post(
-          "http://35.208.105.247:8080/items/" + this.user.id + "/" + this.date,
+          "http://35.208.105.247:8080/items/" + this.user.id + "/" + new Date(this.date),
           {
             title: this.results.title,
             owner: this.results.owner,
@@ -150,11 +122,30 @@ export default {
 * {
   box-sizing: border-box;
 }
-
+[type="date"] {
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(83, 83, 83, 0.2);
+  width: 125px;
+  margin: 5px 0px 15px;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
 .card {
   width: 90%;
-  height: 375px;
-  position: absolute;
+  /* height: 375px; */
+  position: fixed;
+  transform: translate(-50%, -50%);
+  z-index: 1;
   background: white;
   margin: 0 auto;
   top: 50%;
@@ -175,20 +166,20 @@ nav {
   font-size: 12px;
 }
 .photo {
-  padding: 30px auto;
-  width: 100%;
+  padding: 1%;
+  width: 45%;
   text-align: center;
-  /* float: left; */
+  float: left;
 }
 .imgBook {
-  position: absolute;
+  /* position: absolute; */
   margin: 10px auto;
   height: 200px;
   border-radius: 10px;
 }
 .description {
-  padding: 30px;
-  /* float: left; */
+  padding: 5% 3% 5% 5%;
+  float: left;
   width: 55%;
   border-left: 2px solid #efefef;
 }
@@ -201,17 +192,17 @@ h1 {
   font-weight: 300;
 }
 
-h2 {
+h3 {
   color: #515151;
   margin: 0;
-  text-transform: uppercase;
-  font-weight: 500;
+  /* text-transform: uppercase; */
+  /* font-weight: 500; */
 }
 
 h4 {
   margin: 0;
   color: #727272;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 500;
   font-size: 12px;
 }
@@ -220,11 +211,11 @@ p {
   font-size: 12px;
   line-height: 20px;
   color: #727272;
-  padding: 20px 0;
+  padding: 10px 0;
   margin: 0;
 }
 
-button {
+.button-add {
   outline: 0;
   border: 0;
   background: none;
@@ -248,14 +239,14 @@ button {
 }
 .fetchBtn {
   border: 0px;
-
+  color: white;
   float: right;
-  width: 70px;
+  width: 20%;
   height: 30px;
   border-radius: 5px;
 }
 .urlInput {
-  width: 100%;
+  width: 80%;
   height: 30px;
   /* padding: 8px 20px; */
   /* margin: 8px 0; */
@@ -342,6 +333,13 @@ h5 {
     margin: auto auto;
     height: 240px;
     border-radius: 10px;
+  }
+  p {
+    font-size: 12px;
+    line-height: 20px;
+    color: #727272;
+    padding: 20px 0;
+    margin: 0;
   }
 }
 @media only screen and (min-width: 768px) {
