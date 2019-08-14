@@ -12,33 +12,40 @@
         v-on:click="showModal = false"
       >X</a>
       <div>
-          <input type="text" v-model="urlInput" class="urlInput" placeholder="Please fill amazon book URL" />
-          <button class="fetchBtn" v-on:click="scrap">Fetch</button>
+        <input
+          type="text"
+          v-model="urlInput"
+          class="urlInput"
+          placeholder="Please fill amazon book URL"
+        />
+        <label class="waiting" v-if="waiting">Please wait ...</label>
+
+        <button class="fetchBtn main-color" v-on:click="scrap">Fetch</button>
       </div>
-      <label class="waiting" v-if="waiting">Please wait ...</label>
-      <div v-if="showResult">
-        <div class="grid-modal">
-          <div class="g1">
-            <img class="show-item" :src="results.imageUrl" />
-          </div>
-          <div class="g2" style="text-align:left;">
-            <label>Order date</label>
+      <div v-if="showResult" style="clear:both; margin-top: 25px;">
+        <img class="rs-img" :src="results.imageUrl" />
+        <div style="clear:both; margin-top: 25px;">
+          <div style="clear:both;">
+            Order date
             <datepicker v-model="date" placeholder="Choose date"></datepicker>
-            <h5>
-              Title:
-              <span style="font-weight: normal;">{{results.title}}</span>
-            </h5>
-            <h5>
-              Author:
-              <span style="font-weight: normal;">{{results.owner}}</span>
-            </h5>
-            <h5>
-              Type:
-              <span style="font-weight: normal;">{{results.format}}</span>
-            </h5>
-            <h4 style="color:red;">${{results.price}}</h4>
+          </div>
+
+          <div style="clear:both;">
+            Title:
+            <span style="font-weight: normal;">{{results.title}}</span>
+          </div>
+          <div style="clear:both;">
+            Author:
+            <span style="font-weight: normal;">{{results.owner}}</span>
+          </div>
+
+          <div style="clear:both;">
+            Type:
+            <span style="font-weight: normal;">{{results.format}}</span>
           </div>
         </div>
+
+        <h4 style="color:red;">${{results.price}}</h4>
         <button class="button" style="width: 100%; !important" v-on:click="save">ADD</button>
       </div>
     </div>
@@ -118,7 +125,22 @@ export default {
 * {
   box-sizing: border-box;
 }
-.urlInput{
+.rs-img {
+  clear: both;
+  width: 50%;
+  height: auto;
+  transform: translateX(50%);
+  left: 50%;
+}
+.fetchBtn {
+  border: 0px;
+
+  float: right;
+  width: 70px;
+  height: 30px;
+  border-radius: 5px;
+}
+.urlInput {
   width: 100%;
   padding: 8px 20px;
   margin: 8px 0;
@@ -147,6 +169,9 @@ img {
   color: white;
   font-weight: 900;
 }
+h5{
+  margin: 0;
+}
 
 .modal {
   width: 90%;
@@ -158,7 +183,7 @@ img {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  padding: 30px;
+  padding: 25px;
   z-index: 1;
 }
 [type="date"] {
