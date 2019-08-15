@@ -7,11 +7,7 @@
       <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">+</div>
     </div>
     <div class="card" v-if="showModal">
-      <a
-        style="position: absolute; top: 5px; right: 7px; color: #9d9d9d;;cursor: pointer;"
-        v-on:click="showModal = false"
-        id="modal-cancel"
-      >X</a>
+      <a class="modal-cancel" v-on:click="showModal = false" id="modal-cancel">X</a>
       <nav>
         <span>
           <input
@@ -42,7 +38,7 @@
           <h4 id="modal-book-author">By {{results.owner}}</h4>
           <h1 id="modal-book-price" style="color:red;">${{results.price}}</h1>
           <p id="modal-book-format">{{results.format}}</p>
-          <input id="modal-book-date" type="date"  v-model="date" />
+          <input id="modal-book-date" type="date" v-model="date" />
           <br />
           <button id="modal-save-button" class="button-add" v-on:click="save">Add</button>
 
@@ -171,7 +167,6 @@ export default {
   box-shadow: 0 2px 5px 10000px rgba(0, 0, 0, 0.5);
   transition: all 0.3s;
 }
-
 
 nav {
   width: 100%;
@@ -363,6 +358,18 @@ h5 {
   }
 }
 @media only screen and (min-width: 768px) {
+}
+.modal-cancel {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  right: -10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #FF0000;
+  text-align: center;
 }
 </style>
 
