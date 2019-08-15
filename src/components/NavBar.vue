@@ -40,7 +40,7 @@
           <h4>By {{results.owner}}</h4>
           <h1 style="color:red;">${{results.price}}</h1>
           <p>{{results.format}}</p>
-          <input type="date" v-model="date" />
+          <input type="date" style="cursor: pointer;" v-model="date" />
           <br />
           <button class="button-add" v-on:click="save">Add</button>
 
@@ -242,6 +242,7 @@ p {
   margin-right: 5px;
   transition: all 0.3s ease;
   font-weight: 500;
+  cursor: pointer;
 }
 .rs-img {
   clear: both;
@@ -257,6 +258,7 @@ p {
   width: 20%;
   height: 30px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .urlInput {
   width: 78%;
@@ -289,6 +291,7 @@ img {
   border-radius: 5px;
   color: white;
   font-weight: 900;
+  cursor: pointer;
 }
 h5 {
   margin: 0;
@@ -334,7 +337,7 @@ h5 {
   }
   .photo {
     width: 40%;
-    padding: 30px;
+    padding: 15px;
     float: left;
   }
   .description {
@@ -348,6 +351,7 @@ h5 {
     margin: auto auto;
     width: auto;
     height: 240px;
+    max-width: 180px;
     border-radius: 10px;
   }
   p {
