@@ -155,6 +155,7 @@ p {
 h3 {
   color: #515151;
   margin-bottom: 5px;
+  font-size: 18px;
 }
 h4 {
   margin: 0;
@@ -192,7 +193,7 @@ h5 {
   cursor: pointer;
 }
 .btn-plus {
-  background-color: #515151;
+  background-color: #1498d5;
   color: white;
   width: 70px;
 }
