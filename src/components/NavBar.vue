@@ -2,14 +2,15 @@
   <div>
     <div class="nav">
       <span>
-        <img class src="./../assets/odds_logo.png" />
+        <img class src="./../assets/odds_logo.png" id="navbar-logo"/>
       </span>
-      <div class="main-color add-btn" v-on:click="showModal = true">+</div>
+      <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">+</div>
     </div>
     <div class="card" v-if="showModal">
       <a
         style="position: absolute; top: 5px; right: 7px; color: #9d9d9d;;cursor: pointer;"
         v-on:click="showModal = false"
+        id="modal-cancel"
       >X</a>
       <nav>
         <span>
@@ -18,10 +19,11 @@
             v-model="urlInput"
             class="urlInput"
             placeholder="Please fill amazon book URL"
+            id="modal-url-input"
           />
         </span>
         <span style="width:30%">
-          <button class="main-color fetchBtn" v-on:click="scrap">Fetch</button>
+          <button class="main-color fetchBtn" v-on:click="scrap" id="modal-fetch-button">Fetch</button>
         </span>
       </nav>
       <div v-if="waiting">
@@ -33,16 +35,16 @@
       <div v-if="showResult">
         <div style="  border-bottom: 2px solid #efefef;"></div>
         <div class="photo">
-          <img class="imgBook" :src="results.imageUrl" />
+          <img class="imgBook" :src="results.imageUrl" id="modal-book-image"/>
         </div>
         <div class="description">
-          <h3>{{results.title}}</h3>
-          <h4>By {{results.owner}}</h4>
-          <h1 style="color:red;">${{results.price}}</h1>
-          <p>{{results.format}}</p>
-          <input type="date" style="cursor: pointer;" v-model="date" />
+          <h3 id="modal-book-title">{{results.title}}</h3>
+          <h4 id="modal-book-author">By {{results.owner}}</h4>
+          <h1 id="modal-book-price" style="color:red;">${{results.price}}</h1>
+          <p id="modal-book-format">{{results.format}}</p>
+          <input id="modal-book-date" type="date" style="cursor: pointer;" v-model="date" />
           <br />
-          <button class="button-add" v-on:click="save">Add</button>
+          <button id="modal-save-button" class="button-add" v-on:click="save">Add</button>
 
           <!-- 
 
