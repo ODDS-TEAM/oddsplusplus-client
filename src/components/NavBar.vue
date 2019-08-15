@@ -7,6 +7,10 @@
       <div class="main-color add-btn" v-on:click="showModal = true">+</div>
     </div>
     <div class="card" v-if="showModal">
+      <a
+        style="position: absolute; top: 5px; right: 7px; color: #9d9d9d;;cursor: pointer;"
+        v-on:click="showModal = false"
+      >X</a>
       <nav>
         <span>
           <input
@@ -20,17 +24,24 @@
           <button class="main-color fetchBtn" v-on:click="scrap">Fetch</button>
         </span>
       </nav>
+      <div v-if="waiting">
+        <img
+          src="https://cdn.dribbble.com/users/597558/screenshots/1998465/comp-2.gif"
+          style="width:100%;height:auto;"
+        />
+      </div>
       <div v-if="showResult">
+        <div style="  border-bottom: 2px solid #efefef;"></div>
         <div class="photo">
           <img class="imgBook" :src="results.imageUrl" />
         </div>
         <div class="description">
           <h3>{{results.title}}</h3>
           <h4>By {{results.owner}}</h4>
-          <h1>${{results.price}}</h1>
+          <h1 style="color:red;">${{results.price}}</h1>
           <p>{{results.format}}</p>
-          <input type="date"  v-model="date" />
-          <br>
+          <input type="date" v-model="date" />
+          <br />
           <button class="button-add" v-on:click="save">Add</button>
 
           <!-- 
@@ -44,9 +55,7 @@
 </template>
 
 <script>
-
 export default {
- 
   data() {
     return {
       data: null,
@@ -66,16 +75,19 @@ export default {
     // this.getItemData();
     window.console.log();
 
-    this.$http.get("http://35.208.105.247:8080/users/Cheese").then(response => {
+    this.$http.get("http://35.209.202.150:8080/users/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
   },
   methods: {
     scrap: function() {
+      this.results = null;
+      this.showResult = false;
+
       this.waiting = true;
       this.$http
-        .get("http://35.208.105.247:8080/responseScrap", {
+        .get("http://35.209.202.150:8080/responseScrap", {
           params: {
             url: this.urlInput
           }
@@ -91,7 +103,10 @@ export default {
       window.console.log(this.date);
       this.$http
         .post(
-          "http://35.208.105.247:8080/items/" + this.user.id + "/" + new Date(this.date),
+          "http://35.209.202.150:8080/items/" +
+            this.user.id +
+            "/" +
+            new Date(this.date),
           {
             title: this.results.title,
             owner: this.results.owner,
@@ -142,7 +157,7 @@ export default {
 }
 .card {
   width: 90%;
-  /* height: 375px; */
+  border-radius: 10px;
   position: fixed;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -162,7 +177,7 @@ nav {
   color: #727272;
   text-transform: uppercase;
   padding: 10px 20px;
-  border-bottom: 2px solid #efefef;
+  border-bottom: 0;
   font-size: 12px;
 }
 .photo {
@@ -170,18 +185,18 @@ nav {
   width: 45%;
   text-align: center;
   float: left;
+  border-right: 2px solid #efefef;
 }
 .imgBook {
-  /* position: absolute; */
   margin: 10px auto;
-  height: 200px;
-  border-radius: 10px;
+  width: 125px;
+  height: auto;
+  border-radius: 15px;
 }
 .description {
-  padding: 5% 3% 5% 5%;
+  padding: 5% 3% 0 5%;
   float: left;
   width: 55%;
-  border-left: 2px solid #efefef;
 }
 h1 {
   color: #515151;
@@ -195,14 +210,12 @@ h1 {
 h3 {
   color: #515151;
   margin: 0;
-  /* text-transform: uppercase; */
-  /* font-weight: 500; */
+
 }
 
 h4 {
   margin: 0;
   color: #727272;
-  /* text-transform: uppercase; */
   font-weight: 500;
   font-size: 12px;
 }
@@ -246,7 +259,7 @@ p {
   border-radius: 5px;
 }
 .urlInput {
-  width: 80%;
+  width: 78%;
   height: 30px;
   /* padding: 8px 20px; */
   /* margin: 8px 0; */
@@ -258,8 +271,10 @@ p {
   margin: 0;
   padding: 6px 10px;
   overflow: hidden;
-  background-color: #f2f2f2;
+  background-color: white;
   height: 43px;
+  border-bottom: 2px solid #efefef;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.5);
 }
 img {
   margin: 2px 0;
@@ -313,7 +328,7 @@ h5 {
     height: 40px;
   }
   .add-btn {
-    width: 90px;
+    width: 53px;
     height: 50px;
     font-size: 35px;
   }
@@ -326,11 +341,12 @@ h5 {
     float: left;
   }
   .card {
-    width: 600px;
+    width: 550px;
   }
   .imgBook {
     position: static;
     margin: auto auto;
+    width: auto;
     height: 240px;
     border-radius: 10px;
   }
