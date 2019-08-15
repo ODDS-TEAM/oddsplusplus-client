@@ -128,7 +128,7 @@ export default {
 <style scoped>
 ul {
   margin-top: 80px;
-  padding: 0px
+  padding: 0px;
 }
 li {
   list-style-type: none;
@@ -140,7 +140,8 @@ p {
 .img-item {
   position: relative;
   margin: auto auto;
-  height: 240px;
+  max-width: 230px;
+  max-height: 240px;
 }
 .card {
   border-radius: 10px;
@@ -225,6 +226,12 @@ h5 {
   }
   .modal {
     width: 300px;
+  }
+  .img-item {
+    position: relative;
+    margin: auto auto;
+    max-width: 200px;
+    max-height: 240px;
   }
 }
 </style>
