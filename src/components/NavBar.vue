@@ -2,7 +2,7 @@
   <div>
     <div class="nav">
       <span>
-        <img class src="./../assets/odds_logo.png" id="navbar-logo"/>
+        <img class src="./../assets/odds_logo.png" id="navbar-logo" />
       </span>
       <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">+</div>
     </div>
@@ -35,7 +35,7 @@
       <div v-if="showResult">
         <div style="  border-bottom: 2px solid #efefef;"></div>
         <div class="photo">
-          <img class="imgBook" :src="results.imageUrl" id="modal-book-image"/>
+          <img class="imgBook" :src="results.imageUrl" id="modal-book-image" />
         </div>
         <div class="description">
           <h3 id="modal-book-title">{{results.title}}</h3>
@@ -125,7 +125,7 @@ export default {
         .then(response => {
           this.responses = response.body;
           window.console.log(this.responses);
-          this.getItemData();
+          this.$emit("addEvent");
         });
       this.showResult = false;
       this.showModal = false;
@@ -212,7 +212,6 @@ h1 {
 h3 {
   color: #515151;
   margin: 0;
-
 }
 
 h4 {
