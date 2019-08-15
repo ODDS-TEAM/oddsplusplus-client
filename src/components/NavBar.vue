@@ -42,7 +42,7 @@
           <h4 id="modal-book-author">By {{results.owner}}</h4>
           <h1 id="modal-book-price" style="color:red;">${{results.price}}</h1>
           <p id="modal-book-format">{{results.format}}</p>
-          <input id="modal-book-date" type="date" style="cursor: pointer;" v-model="date" />
+          <input id="modal-book-date" type="date"  v-model="date" />
           <br />
           <button id="modal-save-button" class="button-add" v-on:click="save">Add</button>
 
@@ -168,12 +168,11 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 10000px rgba(0, 0, 0, 0.5);
   transition: all 0.3s;
 }
-.card:hover {
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+
+
 nav {
   width: 100%;
   color: #727272;
