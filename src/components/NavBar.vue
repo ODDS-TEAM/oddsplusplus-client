@@ -123,15 +123,14 @@ export default {
           window.console.log(this.responses);
           this.$emit("addEvent");
         });
-      this.showResult = false;
-      this.showModal = false;
-      this.urlInput = null;
+      this.clearModalData();
     },
     clearModalData: function() {
       this.showModal = false;
       this.urlInput = null;
       this.showResult = false;
       this.results = null;
+      this.date = null;
     }
   }
 };
