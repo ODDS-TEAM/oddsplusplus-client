@@ -7,7 +7,7 @@
       <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">+</div>
     </div>
     <div class="card" v-if="showModal">
-      <a class="modal-cancel" v-on:click="showModal = false" id="modal-cancel">X</a>
+      <a class="modal-cancel" v-on:click="clearModalData" id="modal-cancel">X</a>
       <nav>
         <span>
           <input
@@ -126,6 +126,12 @@ export default {
       this.showResult = false;
       this.showModal = false;
       this.urlInput = null;
+    },
+    clearModalData: function() {
+      this.showModal = false;
+      this.urlInput = null;
+      this.showResult = false;
+      this.results = null;
     }
   }
 };
@@ -358,8 +364,6 @@ h5 {
     margin: 0;
   }
 }
-@media only screen and (min-width: 768px) {
-}
 .modal-cancel {
   position: absolute;
   width: 20px;
@@ -369,7 +373,7 @@ h5 {
   color: white;
   cursor: pointer;
   border-radius: 50%;
-  background-color: #FF0000;
+  background-color: #ff0000;
   text-align: center;
 }
 </style>
