@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul style="margin-top: 30px; padding: 0px">
+    <ul>
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
           <div class="row">
@@ -16,11 +16,17 @@
 
               <h5>
                 Add by:
-                <span id="card-book-order-name" style="font-weight: normal;">{{ item.user.name }}</span>
+                <span
+                  id="card-book-order-name"
+                  style="font-weight: normal;"
+                >{{ item.user.name }}</span>
               </h5>
               <h5>
                 Order Date:
-                <span id="card-boot-order-date" style="font-weight: normal;">{{item.orderDate| formatDate}}</span>
+                <span
+                  id="card-boot-order-date"
+                  style="font-weight: normal;"
+                >{{item.orderDate| formatDate}}</span>
               </h5>
               <button
                 class="button-add"
@@ -28,7 +34,11 @@
                 type="button"
                 id="card-show-list-button"
               >Show Order ({{item.count}})</button>
-              <button id="card-plus-button" class="button-add btn-plus" v-on:click="plus(item.id)">PLUS 1</button>
+              <button
+                id="card-plus-button"
+                class="button-add btn-plus"
+                v-on:click="plus(item.id)"
+              >PLUS 1</button>
             </div>
           </div>
         </div>
@@ -36,11 +46,11 @@
     </ul>
 
     <div class="modal" v-if="orderModal">
-       <a
+      <a
         style="position: absolute; top: 7px; right: 15px; color: #9d9d9d;;cursor: pointer;"
         v-on:click="exitOrderModal"
         id="modal-cancel-2"
-      >X</a> 
+      >X</a>
       <h3>Order List</h3>
       <div style="  border-bottom: 2px solid #efefef; margin-bottom:10px;"></div>
       <li v-for="item in orderList" v-bind:key="item.id">
@@ -116,6 +126,10 @@ export default {
 </script>
 
 <style scoped>
+ul {
+  margin-top: 80px;
+  padding: 0px
+}
 li {
   list-style-type: none;
 }
@@ -141,6 +155,7 @@ p {
 h3 {
   color: #515151;
   margin-bottom: 5px;
+  font-size: 18px;
 }
 h4 {
   margin: 0;
@@ -177,8 +192,8 @@ h5 {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
-.btn-plus{
-  background-color: #515151;
+.btn-plus {
+  background-color: #1498d5;
   color: white;
   width: 70px;
 }
@@ -202,10 +217,13 @@ h5 {
 }
 
 @media only screen and (min-width: 768px) {
+  ul {
+    margin-top: 94px;
+  }
   .card {
     width: 700px;
   }
-  .modal{
+  .modal {
     width: 300px;
   }
 }

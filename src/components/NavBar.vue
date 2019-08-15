@@ -272,6 +272,9 @@ p {
   border-radius: 4px;
 }
 .nav {
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
   margin: 0;
   padding: 6px 10px;
   overflow: hidden;
@@ -279,6 +282,7 @@ p {
   height: 43px;
   border-bottom: 2px solid #efefef;
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }
 img {
   margin: 2px 0;
