@@ -6,28 +6,29 @@
           <div class="row">
             <div class="col-4 col-s-4">
               <p>
-                <img class="img-item" :src="item.imgUrl" />
+                <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
               </p>
             </div>
             <div class="col-8 col-s-8">
-              <h3>{{ item.title }} ({{item.format}})</h3>
-              <h4>By {{ item.author }}</h4>
-              <h1 style="color:red;">${{item.price}}</h1>
+              <h3 id="card-book-title">{{ item.title }} ({{item.format}})</h3>
+              <h4 id="card-book-author">By {{ item.author }}</h4>
+              <h1 id="card-book-price" style="color:red;">${{item.price}}</h1>
 
               <h5>
                 Add by:
-                <span style="font-weight: normal;">{{ item.user.name }}</span>
+                <span id="card-book-order-name" style="font-weight: normal;">{{ item.user.name }}</span>
               </h5>
               <h5>
                 Order Date:
-                <span style="font-weight: normal;">{{item.orderDate| formatDate}}</span>
+                <span id="card-boot-order-date" style="font-weight: normal;">{{item.orderDate| formatDate}}</span>
               </h5>
               <button
                 class="button-add"
                 v-on:click="getOrderData(item.id)"
                 type="button"
+                id="card-show-list-button"
               >Show Order ({{item.count}})</button>
-              <button class="button-add btn-plus" v-on:click="plus(item.id)">PLUS 1</button>
+              <button id="card-plus-button" class="button-add btn-plus" v-on:click="plus(item.id)">PLUS 1</button>
             </div>
           </div>
         </div>
@@ -38,6 +39,7 @@
        <a
         style="position: absolute; top: 7px; right: 15px; color: #9d9d9d;;cursor: pointer;"
         v-on:click="exitOrderModal"
+        id="modal-cancel-2"
       >X</a> 
       <h3>Order List</h3>
       <div style="  border-bottom: 2px solid #efefef; margin-bottom:10px;"></div>
