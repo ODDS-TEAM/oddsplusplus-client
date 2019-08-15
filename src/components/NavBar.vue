@@ -254,6 +254,7 @@ p {
   height: 30px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 15px;
 }
 .urlInput {
   width: 78%;
