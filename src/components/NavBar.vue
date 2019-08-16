@@ -22,6 +22,9 @@
           <button class="main-color fetchBtn" v-on:click="scrap" id="modal-fetch-button">Fetch</button>
         </span>
       </nav>
+      <div class="alert-bar" v-if="excepMsg">
+        <h4 style="  color: white !important;">Error : {{excepMsg}}</h4>
+      </div>
       <div v-if="waiting">
         <img
           src="https://cdn.dribbble.com/users/597558/screenshots/1998465/comp-2.gif"
@@ -56,6 +59,7 @@
 export default {
   data() {
     return {
+      excepMsg: null,
       data: null,
       responses: null,
       showModal: false,
@@ -82,7 +86,7 @@ export default {
     scrap: function() {
       this.results = null;
       this.showResult = false;
-
+      this.excepMsg = null;
       this.waiting = true;
       this.$http
         .get("http://35.209.202.150:8080/responseScrap", {
@@ -90,12 +94,19 @@ export default {
             url: this.urlInput
           }
         })
-        .then(response => {
-          this.waiting = false;
-          this.results = response.body;
-          window.console.log(this.results);
-          this.showResult = true;
-        });
+        .then(
+          response => {
+            this.excepMsg = null;
+            this.waiting = false;
+            this.results = response.body;
+            window.console.log(this.results);
+            this.showResult = true;
+          },
+          error => {
+            this.excepMsg = error.body.message;
+            this.waiting = false;
+          }
+        );
     },
     save: function() {
       window.console.log(this.date);
@@ -125,12 +136,14 @@ export default {
         });
       this.clearModalData();
     },
-    clearModalData: function() {
+    clearModalData(mode = 0) {
+      this.excepMsg = null;
       this.showModal = false;
-      this.urlInput = null;
       this.showResult = false;
       this.results = null;
       this.date = null;
+      if (mode == 1) return;
+      this.urlInput = null;
     }
   }
 };
@@ -139,6 +152,11 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
+}
+.alert-bar {
+  width: 100%;
+  background-color: #b13636;
+  text-align: center;
 }
 [type="date"] {
   background: #fff
