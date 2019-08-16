@@ -54,7 +54,7 @@
       <h3>Order List</h3>
       <div style="  border-bottom: 2px solid #efefef; margin-bottom:10px;"></div>
       <li v-for="item in orderList" v-bind:key="item.id">
-        <h4>{{item.user.name}}</h4>
+        <h4>{{item.user.name}} ({{item.count}})</h4>
       </li>
     </div>
   </div>
