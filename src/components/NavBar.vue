@@ -86,7 +86,7 @@ export default {
     scrap: function() {
       this.results = null;
       this.showResult = false;
-
+      this.excepMsg = null;
       this.waiting = true;
       this.$http
         .get("http://35.209.202.150:8080/responseScrap", {
