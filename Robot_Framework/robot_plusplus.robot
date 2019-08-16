@@ -77,7 +77,7 @@ Check Books Fail URL
 
 *** Variables ***
 ${Browser}               Chrome
-${URL}                   http://localhost:8080/
+${URL}                   http://odds-plusplus.odds.team/
 ${Logo}                  xpath://img[contains(@src, "/img/odds_logo.a074357a.png")]
 
 ${Button_Add}            id=navbar-add-button
