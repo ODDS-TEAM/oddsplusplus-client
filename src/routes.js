@@ -8,7 +8,8 @@ const routes = [
     { path: '/home', component: CardList },
     { path: '/login', component: Login },
     { path: '/summary', component: Summary },
-    { path: '/myitem', component: MyItem }
+    { path: '/myitem', component: MyItem },
+    { path: '*', redirect: '/home' }, 
 ];
 
 export default routes;
