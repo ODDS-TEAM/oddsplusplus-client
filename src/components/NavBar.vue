@@ -9,7 +9,7 @@
       </div>
 
       <router-link to=/myitem>
-        <div class="main-color manage-btn" v-on:click="showModal = true" id="navbar-add-button">
+        <div class="main-color manage-btn" id="navbar-add-button">
           <p>My item</p>
         </div>
       </router-link>
