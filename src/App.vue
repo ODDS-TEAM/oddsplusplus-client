@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <NavBar @addEvent="refreshCard" />
-
     <router-view />
   </div>
 </template>
