@@ -35,16 +35,7 @@ export default {
   data() {
     return {
       data: null,
-      responses: null,
-      orderList: null,
-      urlInput: null,
-      showResult: false,
-      orderdate: true,
-      results: null,
-      user: null,
-      orderModal: false,
-      date: null,
-      waiting: false
+      user: null
     };
   },
   mounted: function() {
@@ -60,32 +51,6 @@ export default {
         this.data = response.body;
         window.console.log(this.data);
       });
-    },
-
-    getOrderData: function(itemId) {
-      this.$http
-        .get("http://35.209.202.150:8080/reserves/" + itemId)
-        .then(response => {
-          this.orderList = response.body;
-          window.console.log(this.orderList);
-        });
-      this.orderModal = true;
-    },
-    cancel: function() {
-      this.showModal = false;
-      this.showResult = null;
-      this.urlInput = null;
-    },
-    plus: function(itemId) {
-      this.$http
-        .post(
-          "http://35.209.202.150:8080/reserves/" + this.user.id + "/" + itemId
-        )
-        .then(response => {
-          this.responses = response.body;
-          window.console.log(this.responses);
-          this.getItemData();
-        });
     }
   }
 };
