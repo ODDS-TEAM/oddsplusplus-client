@@ -2,7 +2,7 @@
   <div>
     <div class="nav">
       <span>
-        <img class src="./../assets/odds_logo.png" id="navbar-logo" />
+       <router-link to=/home> <img class src="./../assets/odds_logo.png" id="navbar-logo" /></router-link>
       </span>
       <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
         <p>+</p>
