@@ -20,7 +20,7 @@
                 <button class="button-summary">Summary</button>
               </div>
               <div v-if="orderdate = true">
-                <button class="button-delete myButton:hover" v-on:click="deleteitem">Delete</button>
+                <button class="button-delete myButton:hover" v-on:click="deleteItem">Delete</button>
               </div>
             </div>
           </div>
@@ -39,27 +39,32 @@ export default {
     };
   },
   mounted: function() {
+    this.getUserData();
     this.getItemData();
-    this.$http.get("http://35.209.202.150:8080/users/Cheese").then(response => {
-      this.user = response.body;
-      window.console.log(this.user);
-    });
   },
   methods: {
     getItemData: function() {
-      this.$http.get("http://35.209.202.150:8080/items").then(response => {
+      this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
         this.data = response.body;
         window.console.log(this.data);
       });
+    },
+    getUserData: function() {
+      this.$http
+        .get(process.env.VUE_APP_API + "/users/Cheese")
+        .then(response => {
+          this.user = response.body;
+          window.console.log(this.user);
+        });
+    },
+    deleteItem: function() {
+
     }
   }
 };
 </script>
 
 <style scoped>
-.title {
-  padding-top: 15px;
-}
 ul {
   margin-top: 80px;
   padding: 0px;
@@ -90,23 +95,7 @@ h3 {
   /* margin-top: 30px; */
   font-size: 18px;
 }
-h4 {
-  margin: 0;
-  color: #727272;
-  font-weight: 500;
-  font-size: 12px;
-}
-h1 {
-  color: #515151;
-  font-weight: 300;
-  padding-top: 15px;
-  margin: 0;
-  font-size: 30px;
-  font-weight: 300;
-}
-h5 {
-  margin: 15px 0;
-}
+
 .button-summary {
   -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
   -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
