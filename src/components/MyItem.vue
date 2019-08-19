@@ -20,7 +20,7 @@
                 <button class="button-summary">Summary</button>
               </div>
               <div v-if="orderdate = true">
-                <button class="button-delete myButton:hover" v-on:click="deleteItem">Delete</button>
+                <button class="button-delete myButton:hover" v-on:click="deleteItem(item.id)">Delete</button>
               </div>
             </div>
           </div>
@@ -57,8 +57,18 @@ export default {
           window.console.log(this.user);
         });
     },
-    deleteItem: function() {
-
+    deleteItem: function(itemId) {
+      this.$http
+        .delete(
+          process.env.VUE_APP_API +
+            "/items/users/" +
+            itemId +
+            "/" +
+            this.user.id
+        )
+        .then(response => {
+          window.console.log(response.data);
+        });
     }
   }
 };
