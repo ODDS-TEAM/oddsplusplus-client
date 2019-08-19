@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <NavBar @addEvent="refreshCard" />
-    <CardList v-if="renderComponent" />
+
+    <router-view />
   </div>
 </template>
 
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import CardList from "./components/CardList.vue";
 export default {
   name: "app",
   components: {
-    NavBar,
-    CardList
+    NavBar
+    // CardList
   },
   data() {
     return {
