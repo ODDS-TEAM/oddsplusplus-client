@@ -2,7 +2,7 @@
   <div id="app">
     <NavBar @addEvent="refreshCard" />
 
-    <router-view v-if="renderComponent"/>
+    <router-view @refreshMyItem="refreshCard" v-if="renderComponent"/>
   </div>
 </template>
 

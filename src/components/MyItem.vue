@@ -40,14 +40,15 @@ export default {
   },
   mounted: function() {
     this.getUserData();
-    this.getItemData();
   },
   methods: {
     getItemData: function() {
-      this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
-        this.data = response.body;
-        window.console.log(this.data);
-      });
+      this.$http
+        .get(process.env.VUE_APP_API + "/items/users/" + this.user.id)
+        .then(response => {
+          this.data = response.body;
+          window.console.log(this.data);
+        });
     },
     getUserData: function() {
       this.$http
@@ -55,6 +56,7 @@ export default {
         .then(response => {
           this.user = response.body;
           window.console.log(this.user);
+          this.getItemData();
         });
     },
     deleteItem: function(itemId) {
@@ -67,7 +69,7 @@ export default {
             this.user.id
         )
         .then(response => {
-          window.console.log(response.data);
+          this.$emit("refreshMyItem");
         });
     }
   }
