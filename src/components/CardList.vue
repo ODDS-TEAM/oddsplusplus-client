@@ -79,14 +79,14 @@ export default {
   },
   mounted: function() {
     this.getItemData();
-    this.$http.get(process.env.URL_API + "/users/Cheese").then(response => {
+    this.$http.get(process.env.VUE_APP_API + "/users/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
   },
   methods: {
     getItemData: function() {
-      this.$http.get(process.env.URL_API + "/items").then(response => {
+      this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
         this.data = response.body;
         window.console.log(this.data);
       });
@@ -94,7 +94,7 @@ export default {
 
     getOrderData: function(itemId) {
       this.$http
-        .get(process.env.URL_API +"/reserves/" + itemId)
+        .get(process.env.VUE_APP_API +"/reserves/" + itemId)
         .then(response => {
           this.orderList = response.body;
           window.console.log(this.orderList);
@@ -109,7 +109,7 @@ export default {
     plus: function(itemId) {
       this.$http
         .post(
-          process.env.URL_API + "/reserves/" + this.user.id + "/" + itemId
+          process.env.VUE_APP_API + "/reserves/" + this.user.id + "/" + itemId
         )
         .then(response => {
           this.responses = response.body;

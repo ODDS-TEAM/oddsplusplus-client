@@ -77,7 +77,7 @@ export default {
     // this.getItemData();
     window.console.log();
 
-    this.$http.get(process.env.URL_API + "/users/Cheese").then(response => {
+    this.$http.get(process.env.VUE_APP_API + "/users/Cheese").then(response => {
       this.user = response.body;
       window.console.log(this.user);
     });
@@ -89,7 +89,7 @@ export default {
       this.excepMsg = null;
       this.waiting = true;
       this.$http
-        .get(process.env.URL_API + "/responseScrap", {
+        .get(process.env.VUE_APP_API + "/responseScrap", {
           params: {
             url: this.urlInput
           }
@@ -112,7 +112,7 @@ export default {
       window.console.log(this.date);
       this.$http
         .post(
-          process.env.URL_API + "/items/" +
+          process.env.VUE_APP_API + "/items/" +
             this.user.id +
             "/" +
             new Date(this.date),
