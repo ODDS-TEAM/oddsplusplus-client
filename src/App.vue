@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <NavBar @addEvent="refreshCard" />
-    <router-view />
+
+    <router-view v-if="renderComponent"/>
   </div>
 </template>
 
@@ -12,7 +13,9 @@ export default {
   name: "app",
   components: {
     NavBar
-    // CardList
+  },
+  mounted: function() {
+    window.console.log(process.env)
   },
   data() {
     return {
