@@ -4,7 +4,15 @@
       <span>
         <img class src="./../assets/odds_logo.png" id="navbar-logo" />
       </span>
-      <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">+</div>
+      <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
+        <p>+</p>
+      </div>
+
+      <router-link to=/myitem>
+        <div class="main-color manage-btn" v-on:click="showModal = true" id="navbar-add-button">
+          <p>My item</p>
+        </div>
+      </router-link>
     </div>
     <div class="card" v-if="showModal">
       <a class="modal-cancel" v-on:click="clearModalData" id="modal-cancel">X</a>
@@ -112,7 +120,8 @@ export default {
       window.console.log(this.date);
       this.$http
         .post(
-          process.env.VUE_APP_API + "/items/" +
+          process.env.VUE_APP_API +
+            "/items/" +
             this.user.id +
             "/" +
             new Date(this.date),
@@ -305,16 +314,38 @@ img {
   margin: 2px 0;
   height: 27px;
 }
-.add-btn {
+.manage-btn {
   float: right;
   text-align: center;
+  width: 100px;
+  height: 31px;
+  border-radius: 5px;
+}
+.manage-btn > p {
+  color: white;
+  font-size: 17px;
+  padding: 5px 0;
+  text-align: center;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+}
+.add-btn {
+  float: right;
   width: 40px;
   height: 31px;
   font-size: 23px;
   border-radius: 5px;
-  color: white;
-  font-weight: 900;
   cursor: pointer;
+  margin-left: 10px;
+  padding: 0;
+}
+.add-btn > p {
+  text-align: center;
+  padding: 7px 0;
+  font-size: 35px;
+  color: white;
+  font-weight: 800;
+  font-family: "Roboto", sans-serif;
 }
 h5 {
   margin: 0;
@@ -358,6 +389,9 @@ h5 {
     height: 50px;
     font-size: 35px;
   }
+  .add-btn > p {
+    padding: 15px 0;
+  }
   .photo {
     width: 40%;
     padding: 15px;
@@ -383,6 +417,13 @@ h5 {
     color: #727272;
     padding: 20px 0;
     margin: 0;
+  }
+  .manage-btn {
+    padding: 9px 0;
+    height: 50px;
+  }
+  .manage-btn > p {
+    font-size: 20px;
   }
 }
 .modal-cancel {

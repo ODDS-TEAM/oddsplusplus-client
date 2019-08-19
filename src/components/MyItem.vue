@@ -36,7 +36,6 @@ export default {
     return {
       data: null,
       responses: null,
-      showModal: false,
       orderList: null,
       urlInput: null,
       showResult: false,
