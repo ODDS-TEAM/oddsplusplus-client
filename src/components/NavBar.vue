@@ -9,7 +9,7 @@
       </div>
 
       <router-link to=/myitem>
-        <div class="main-color manage-btn" id="navbar-add-button">
+        <div class="main-color manage-btn" v-on:click="showModal = false" id="navbar-add-button">
           <p>My item</p>
         </div>
       </router-link>
@@ -49,7 +49,7 @@
           <h4 id="modal-book-author">By {{results.owner}}</h4>
           <h1 id="modal-book-price" style="color:red;">${{results.price}}</h1>
           <p id="modal-book-format">{{results.format}}</p>
-          <input id="modal-book-date" type="date" v-model="date" />
+          <input id="modal-book-date" :min="minDateToday" type="date" v-model="date" />
           <br />
           <button id="modal-save-button" class="button-add" v-on:click="save">Add</button>
 
@@ -67,6 +67,7 @@
 export default {
   data() {
     return {
+      minDateToday: new Date().toISOString().split("T")[0],
       excepMsg: null,
       data: null,
       responses: null,
