@@ -74,7 +74,9 @@ export default {
       user: null,
       orderModal: false,
       date: null,
-      waiting: false
+      waiting: false,
+      count: 1,
+      plusModal: false
     };
   },
   mounted: function() {
@@ -109,7 +111,7 @@ export default {
     plus: function(itemId) {
       this.$http
         .post(
-          process.env.VUE_APP_API + "/reserves/" + this.user.id + "/" + itemId
+          process.env.VUE_APP_API + "/reserves/" + this.user.id + "/" + itemId + "/" + this.count
         )
         .then(response => {
           this.responses = response.body;
@@ -190,7 +192,43 @@ p {
 .plus-modal {
   border-radius: 10px;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-  width: 50%;
+  width: 325px;
+  z-index: 1;
+  padding: 0px 16px 0px 16px;
+  margin: 0 auto;
+}
+
+.confirm-btn {
+  border-radius: 5px;
+  border: 1px solid #d9d9d9;
+  padding: 8px 0px;
+  margin: 5px;
+  color: white;
+  text-transform: uppercase;
+  width: 90px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 0 15px 0 0;
+  margin-left: 105px;
+}
+
+.cancel-btn {
+  border-radius: 5px;
+  border: 1px solid #d9d9d9;
+  padding: 8px 0px;
+  background-color: #fa1d12;
+  color: white;
+  text-transform: uppercase;
+  width: 90px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 0 15px 0 0;
+}
+
+.input {
+  margin: 10px;
 }
 
 @media only screen and (min-width: 768px) {
