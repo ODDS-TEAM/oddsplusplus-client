@@ -9,7 +9,6 @@
                 <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
               </p>
             </div>
-
             <div class="col-6 col-s-8 title">
               <h3>Name : {{ item.title }}</h3>
               <h3>Type : {{item.format}}</h3>
@@ -68,7 +67,7 @@ export default {
             "/" +
             this.user.id
         )
-        .then(response => {
+        .then(() => {
           this.$emit("refreshMyItem");
         });
     }
