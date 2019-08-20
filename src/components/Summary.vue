@@ -3,23 +3,25 @@
     <div class="row">
       <div class="col-3 col-s-3 menu">
         <ul align="middle">
-          <img class="img-item" src="https://images-na.ssl-images-amazon.com/images/I/51RS76qnkEL._SX385_BO1,204,203,200_.jpg"/>
+          <img id="card-boot-image" class="img-item" :src="detail.imgUrl" />
           <div style="padding-left: 10px" align="left">
-          <h4>{{this.$route.params.id}}</h4>
-          <h4>by George Orwell</h4>
-          <h1 style="color: red">$ 10.76</h1>
-          <h5>Order date: 10/10/2019</h5>
+            <h4>{{detail.title}} ({{detail.format}})</h4>
+            <h4>{{detail.author}}</h4>
+            <h1 style="color: red">$ {{detail.price}}</h1>
+            <h5>Order date: {{detail.orderDate| formatDate}}</h5>
           </div>
         </ul>
       </div>
 
       <div class="col-6 col-s-9">
-        <h3>Total item:
-          <span style="color: blue"> 5ea</span>
+        <h3>
+          Total item:
+          <span style="color: blue">{{detail.count}}</span>
         </h3>
-        <h3>Total price:
-          <span style="color: blue">  53.8 USD</span>
-        </h3> 
+        <h3>
+          Total price:
+          <span style="color: blue">{{detail.cost}} USD </span>
+        </h3>
       </div>
     </div>
   </div>
@@ -30,22 +32,53 @@ export default {
   props: ["itemid"],
   data() {
     return {
-      itemId: null
+      itemId: null,
+      detail: {},
+      user: {},
+      orderList: {}
     }
   },
   mounted: function() {
     if(typeof this.$route.params.id === 'undefined'){
       this.$router.push('/myitem')
     }
-    
+    this.getUserData();
+    this.getItemData();
+    this.getItemOrder();
+  },
+  methods: {
+    getUserData: function() {
+      this.$http
+        .get(process.env.VUE_APP_API + "/users/Cheese")
+        .then(response => {
+          this.user = response.body;
+          window.console.log("User Data=====>",this.user);
+        });
+    },
+    getItemData: function() {
+      this.$http
+        .get(process.env.VUE_APP_API + "/items/" + this.$route.params.id)
+        .then(response => {
+          this.detail = response.body;
+          window.console.log("Item Data=====>",this.detail);
+        });
+    },
+    getItemOrder: function() {
+      this.$http
+        .get(process.env.VUE_APP_API + "/reserves/items/" + this.$route.params.id)
+        .then(response => {
+          this.orderList = response.body;
+          window.console.log("Item Order=====>",this.orderList);
+        });
+    }
   }
 };
 </script>
 
 <style scoped>
 ul {
-    padding: 5px;
-    margin: 0;
+  padding: 5px;
+  margin: 0;
 }
 
 .card {
@@ -80,11 +113,11 @@ ul {
 
 @media only screen and (min-width: 600px) {
   .img-item {
-  position: relative;
-  margin: 0 5% 0 5%;
-  max-width: 230px;
-  max-height: 240px;
-  display: initial;
+    position: relative;
+    margin: 0 5% 0 5%;
+    max-width: 230px;
+    max-height: 240px;
+    display: initial;
   }
   /* For tablets: */
   .col-s-1 {
@@ -126,11 +159,11 @@ ul {
 }
 @media only screen and (min-width: 768px) {
   .img-item {
-  position: relative;
-  margin: 0 5% 0 5%;
-  max-width: 230px;
-  max-height: 240px;
-  display: initial;
+    position: relative;
+    margin: 0 5% 0 5%;
+    max-width: 230px;
+    max-height: 240px;
+    display: initial;
   }
   /* For desktop: */
   .col-1 {
