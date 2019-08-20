@@ -4,26 +4,35 @@
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
           <div class="row">
-            <div class="col-2 col-s-4">
+            <div class="col-3 col-s-4">
               <p>
                 <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
               </p>
             </div>
-            <div class="col-6 col-s-8 title">
-              <h3>{{ item.title }}</h3>
-              <h4>{{item.format}}</h4>
+            <div class="col-9 col-s-8 title">
+              <table>
+                <tr>
+                  <h3>{{ item.title }}</h3>
+                </tr>
+                <tr>
+                  <h4>{{item.format}}</h4>
+                </tr>
+              </table>
             </div>
-            <div class="col-2 col-s-8">
-              <div v-if="!orderdate">
-                <button
-                  class="button-summary"
-                  v-on:click="goToSummary(item.id)"
-                >Summary</button>
-              </div>
-              <div class="button-after" v-if="orderdate">
-                <button class="button-summary">Summary</button>
-                <button class="button-delete myButton:hover" v-on:click="deleteItem(item.id)">Delete</button>
-              </div>
+            <div class="col-9">
+              <table>
+                <tr>
+                  <div v-if="!orderdate" class="button-before">
+                    <button class="button-summary-before" v-on:click="goToSummary(item.id)">Summary</button>
+                  </div>
+                </tr>
+                <tr>
+                  <div class="button-after" v-if="orderdate">
+                    <button class="button-summary">Summary</button>
+                    <button class="button-delete" v-on:click="deleteItem(item.id)">Delete</button>
+                  </div>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -38,7 +47,7 @@ export default {
     return {
       data: null,
       user: null,
-      orderdate: true,
+      orderdate: true
     };
   },
   mounted: function() {
@@ -76,8 +85,12 @@ export default {
         });
     },
     goToSummary(id) {
-      window.console.log(id)
-      this.$router.push({ path: 'summary', name:'summary',params: { id: id } });
+      window.console.log(id);
+      this.$router.push({
+        path: "summary",
+        name: "summary",
+        params: { id: id }
+      });
     }
   }
 };
@@ -98,7 +111,6 @@ ul {
 p {
   text-align: center;
   margin: 20px 0px 0px 0px;
-
 }
 .img-item {
   position: relative;
@@ -111,6 +123,7 @@ p {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 70%;
+  height: 350px;
   margin: 25px auto;
 }
 .card:hover {
@@ -122,15 +135,23 @@ h3 {
   /* margin-top: 30px; */
   font-size: 18px;
 }
-.title{
+.title {
   padding: 0px 25px;
 }
-.button-after{
+.button-after {
   margin: 20px 0px;
   text-align: center;
 }
 .button-before {
- margin: 0px 10px;
+  text-align: center;
+  margin: 30px 0px;
+}
+.button-summary:hover {
+  background-color: #5d92e3;
+}
+.button-summary:active {
+  position: relative;
+  top: 1px;
 }
 .button-summary {
   -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
@@ -147,16 +168,35 @@ h3 {
   font-family: Arial;
   font-size: 15px;
   /* margin-top: 20px; */
-  padding: 6px 15px;
+  padding: 6px 12px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #0066ff;
 }
-.button-summary:hover {
+.button-summary-before:hover {
   background-color: #5d92e3;
 }
-.button-summary:active {
+.button-summary-before:active {
   position: relative;
   top: 1px;
+}
+.button-summary-before {
+  -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
+  -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
+  box-shadow: inset 0px 39px 0px -24px #4883db;
+  background-color: #5d92e3;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  /* margin-top: 20px; */
+  padding: 10px 30px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #0066ff;
 }
 
 .button-delete:hover {
@@ -183,7 +223,7 @@ h3 {
   font-size: 15px;
   margin: 0px 5px;
   margin-top: 5px;
-  padding: 6px 25px;
+  padding: 6px 23px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #b23e35;
 }
@@ -196,11 +236,16 @@ h3 {
 }
 
 @media only screen and (min-width: 768px) {
+  p {
+    text-align: center;
+    margin: 0px 0px 0px 0px;
+  }
   ul {
     margin-top: 94px;
   }
   .card {
-    width: 650px;
+    width: 550px;
+    height: 150px;
   }
   .modal {
     width: 300px;
@@ -208,8 +253,95 @@ h3 {
   .img-item {
     position: relative;
     margin: auto auto;
-    max-width: 100px;
-    max-height: 120px;
+    max-width: 120px;
+    max-height: 150px;
+  }
+  .button-before {
+    margin: 23px 10px;
+    text-align: center;
+  }
+  .button-after {
+    margin: 23px 10px;
+    text-align: center;
+  }
+  .button-delete:hover {
+    background-color: #fa1d12;
+  }
+  .button-delete:active {
+    position: relative;
+    top: 1px;
+  }
+
+  .button-delete {
+    -moz-box-shadow: inset 0px 39px 0px -24px #f76159;
+    -webkit-box-shadow: inset 0px 39px 0px -24px #f76159;
+    box-shadow: inset 0px 39px 0px -24px #f76159;
+    background-color: #fa3628;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ffffff;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 5px 5px;
+    padding: 6px 30px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #b23e35;
+  }
+  .button-summary-before:hover {
+    background-color: #5d92e3;
+  }
+  .button-summary-before:active {
+    position: relative;
+    top: 1px;
+  }
+  .button-summary-before {
+    -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
+    -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
+    box-shadow: inset 0px 39px 0px -24px #4883db;
+    background-color: #5d92e3;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ffffff;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    /* margin-top: 20px; */
+    padding: 6px 40px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #0066ff;
+  }
+  .button-summary:hover {
+    background-color: #5d92e3;
+  }
+  .button-summary:active {
+    position: relative;
+    top: 1px;
+  }
+  .button-summary {
+    -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
+    -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
+    box-shadow: inset 0px 39px 0px -24px #4883db;
+    background-color: #5d92e3;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #ffffff;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    /* margin-top: 20px; */
+    padding: 6px 20px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #0066ff;
   }
 }
 </style>
