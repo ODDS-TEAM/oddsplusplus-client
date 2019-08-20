@@ -2,17 +2,24 @@
   <div class="card">
     <div class="row">
       <div class="col-3 col-s-3 menu">
-        <ul>
-          <img class="img-item" src="https://images-na.ssl-images-amazon.com/images/I/51RS76qnkEL._SX385_BO1,204,203,200_.jpg" />
+        <ul align="middle">
+          <img class="img-item" src="https://images-na.ssl-images-amazon.com/images/I/51RS76qnkEL._SX385_BO1,204,203,200_.jpg"/>
+          <div style="padding-left: 10px" align="left">
           <h4>The Road to Wigan Pier: Large Print (Paperback)</h4>
           <h4>by George Orwell</h4>
-          <h4>$ 10.76</h4>
+          <h1 style="color: red">$ 10.76</h1>
+          <h5>Order date: 10/10/2019</h5>
+          </div>
         </ul>
       </div>
 
       <div class="col-6 col-s-9">
-        <h3>Total item: 5 ea</h3>
-        <h3>Total price: 53.8 USD</h3> 
+        <h3>Total item:
+          <span style="color: blue"> 5ea</span>
+        </h3>
+        <h3>Total price:
+          <span style="color: blue">  53.8 USD</span>
+        </h3> 
       </div>
     </div>
   </div>
@@ -25,6 +32,7 @@ export default {};
 <style scoped>
 ul {
     padding: 5px;
+    margin: 0;
 }
 
 .card {
@@ -42,7 +50,7 @@ ul {
 
 [class*="col-"] {
   float: left;
-  padding: 15px;
+  padding: 0 15px 0 15px;
 }
 /* For mobile phones: */
 [class*="col-"] {
@@ -51,12 +59,20 @@ ul {
 
 .img-item {
   position: relative;
-  margin: auto auto;
+  margin: 0 5% 0 5%;
   max-width: 230px;
   max-height: 240px;
+  display: contents;
 }
 
 @media only screen and (min-width: 600px) {
+  .img-item {
+  position: relative;
+  margin: 0 5% 0 5%;
+  max-width: 230px;
+  max-height: 240px;
+  display: initial;
+  }
   /* For tablets: */
   .col-s-1 {
     width: 8.33%;
@@ -96,6 +112,13 @@ ul {
   }
 }
 @media only screen and (min-width: 768px) {
+  .img-item {
+  position: relative;
+  margin: 0 5% 0 5%;
+  max-width: 230px;
+  max-height: 240px;
+  display: initial;
+  }
   /* For desktop: */
   .col-1 {
     width: 8.33%;
@@ -104,7 +127,8 @@ ul {
     width: 16.66%;
   }
   .col-3 {
-    width: 25%;
+    width: 40%;
+    border-right: inset;
   }
   .col-4 {
     width: 33.33%;
@@ -113,6 +137,7 @@ ul {
     width: 41.66%;
   }
   .col-6 {
+    padding-top: 5%;
     width: 50%;
   }
   .col-7 {
