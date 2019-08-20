@@ -22,6 +22,39 @@
           Total price:
           <span style="color: blue">{{detail.cost}} USD </span>
         </h3>
+        <h3>
+          List order:
+        </h3>
+        <table >
+          <tr>
+            <td>
+              <img src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg" style="max-width: 20px">
+            </td>
+            <th style="color: blue; text-align:left">  
+              Pornpavit
+            </th>
+            <th style="color: blue; text-align:left">  
+              Sanusit
+            </th>
+            <th style="color: red; text-align:left">  
+              (1)
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <img src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg" style="max-width: 20px">
+            </td>
+            <th style="color: blue; text-align:left">  
+              Kittikarn
+            </th>
+            <th style="color: blue; text-align:left">  
+              Chaichana
+            </th>
+            <th style="color: red; text-align:left">  
+              (1)
+            </th>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
