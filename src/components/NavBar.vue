@@ -200,8 +200,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 2px 5px 10000px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s;
+  box-shadow: 0 2px 5px 10000px rgba(0, 0, 0, 0.5) !important;
+  transition:  0.3s;
 }
 
 nav {
