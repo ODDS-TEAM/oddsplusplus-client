@@ -100,7 +100,7 @@ export default {
 
     getOrderData: function(itemId) {
       this.$http
-        .get(process.env.VUE_APP_API +"/reserves/" + itemId)
+        .get(process.env.VUE_APP_API + "/reserves/" + itemId)
         .then(response => {
           this.orderList = response.body;
           window.console.log(this.orderList);
@@ -136,9 +136,7 @@ ul {
   margin-top: 80px;
   padding: 0px;
 }
-li {
-  list-style-type: none;
-}
+
 p {
   text-align: center;
 }
@@ -149,38 +147,7 @@ p {
   max-width: 230px;
   max-height: 240px;
 }
-.card {
-  border-radius: 10px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 80%;
-  margin: 25px auto;
-}
-.card:hover {
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
-}
-h3 {
-  color: #515151;
-  margin-bottom: 5px;
-  font-size: 18px;
-}
-h4 {
-  margin: 0;
-  color: #727272;
-  font-weight: 500;
-  font-size: 12px;
-}
-h1 {
-  color: #515151;
-  font-weight: 300;
-  padding-top: 15px;
-  margin: 0;
-  font-size: 30px;
-  font-weight: 300;
-}
-h5 {
-  margin: 15px 0;
-}
+
 .button-add {
   border-radius: 5px;
   border: 1px solid #d9d9d9;
