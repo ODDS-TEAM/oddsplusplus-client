@@ -74,7 +74,8 @@ export default {
       user: null,
       orderModal: false,
       date: null,
-      waiting: false
+      waiting: false,
+      count: 1
     };
   },
   mounted: function() {
@@ -109,7 +110,7 @@ export default {
     plus: function(itemId) {
       this.$http
         .post(
-          process.env.VUE_APP_API + "/reserves/" + this.user.id + "/" + itemId
+          process.env.VUE_APP_API + "/reserves/" + this.user.id + "/" + itemId + "/" + this.count
         )
         .then(response => {
           this.responses = response.body;
