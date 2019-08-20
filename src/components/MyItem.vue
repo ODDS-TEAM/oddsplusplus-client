@@ -4,7 +4,7 @@
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
           <div class="row">
-            <div class="col-3 col-s-4">
+            <div class="col-2 col-s-4">
               <p>
                 <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
               </p>
@@ -13,15 +13,15 @@
               <h3>{{ item.title }}</h3>
               <h4>{{item.format}}</h4>
             </div>
-
             <div class="col-2 col-s-8">
-              <div>
+              <div v-if="!orderdate">
                 <button
                   class="button-summary"
                   v-on:click="goToSummary(item.id)"
                 >Summary</button>
               </div>
-              <div v-if="orderdate = true">
+              <div class="button-after" v-if="orderdate">
+                <button class="button-summary">Summary</button>
                 <button class="button-delete myButton:hover" v-on:click="deleteItem(item.id)">Delete</button>
               </div>
             </div>
@@ -37,7 +37,8 @@ export default {
   data() {
     return {
       data: null,
-      user: null
+      user: null,
+      orderdate: true,
     };
   },
   mounted: function() {
@@ -96,18 +97,20 @@ ul {
 
 p {
   text-align: center;
+  margin: 20px 0px 0px 0px;
+
 }
 .img-item {
   position: relative;
   margin: auto auto;
-  max-width: 100px;
-  max-height: 120px;
+  max-width: 110px;
+  max-height: 168.4px;
 }
 .card {
   border-radius: 10px;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 80%;
+  width: 70%;
   margin: 25px auto;
 }
 .card:hover {
@@ -119,7 +122,16 @@ h3 {
   /* margin-top: 30px; */
   font-size: 18px;
 }
-
+.title{
+  padding: 0px 25px;
+}
+.button-after{
+  margin: 20px 0px;
+  text-align: center;
+}
+.button-before {
+ margin: 0px 10px;
+}
 .button-summary {
   -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
   -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
@@ -134,8 +146,8 @@ h3 {
   color: #ffffff;
   font-family: Arial;
   font-size: 15px;
-  margin-top: 40px;
-  padding: 6px 30px;
+  /* margin-top: 20px; */
+  padding: 6px 15px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #0066ff;
 }
@@ -169,8 +181,9 @@ h3 {
   color: #ffffff;
   font-family: Arial;
   font-size: 15px;
+  margin: 0px 5px;
   margin-top: 5px;
-  padding: 6px 40px;
+  padding: 6px 25px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #b23e35;
 }
