@@ -49,6 +49,7 @@
           <h4 id="modal-book-author">By {{results.owner}}</h4>
           <h1 id="modal-book-price" style="color:red;">${{results.price}}</h1>
           <p id="modal-book-format">{{results.format}}</p>
+          <a>Order Date </a>
           <input id="modal-book-date" :min="minDateToday" type="date" v-model="date" />
           <br />
           <button id="modal-save-button" class="button-add" v-on:click="save">Add</button>
