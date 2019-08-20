@@ -3,27 +3,40 @@
     <ul>
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-2">
-              <p style="margin:0;">
+              <p>
                 <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
               </p>
             </div>
-              <h3 id="card-book-title" style="float:left;">{{ item.title }}</h3>
-              <h4 id="card-book-author">{{item.format}}</h4>
-          </div>-->
-          <table style="height:100px;">
-            <tr>
-              <td>
-                <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
-              </td>
-              <td>
-                <h3 id="card-book-title" style="float:left;">{{ item.title }}</h3>
-                <h4 id="card-book-author">{{item.format}}</h4>
-              </td>
-              <td></td>
-            </tr>
-          </table>
+
+            <div class="col-10">
+              <div class="detail">
+                <table style="height:90px;">
+                  <tr>
+                    <h3>{{ item.title }}</h3>
+                  </tr>
+                  <tr>
+                    <h4>{{item.format}}</h4>
+                  </tr>
+                </table>
+                <table style="height:40px;" class="tb-btn">
+                  <tr>
+                    <td>
+                      <p>
+                        <button class="footer-btn main-color">Summary</button>
+                      </p>
+                    </td>
+                    <td>
+                      <p>
+                        <button class="footer-btn" style="background-color: #f55246;">Delete</button>
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </li>
     </ul>
@@ -34,7 +47,9 @@
 export default {
   data() {
     return {
-      data: null
+      data: null,
+      user: null,
+      orderdate: true
     };
   },
   mounted: function() {
@@ -45,39 +60,78 @@ export default {
   }
 };
 </script>
-
 <style scoped>
-table,
-td {
-  padding: 0 !important;
-  margin: 0;
+.detail {
+  text-align: left;
+  padding: 0 25px;
+}
+table {
   border-spacing: 0;
 }
-td{
-    padding: 5px;
-    vertical-align: top;
+.tb-btn {
+  width: 100%;
+  margin: 10px auto;
 }
-h3{
-    margin-top:0; 
-    margin-left: 5px;
+tr {
+  width: 100px;
 }
-ul {
-  padding: 0;
+p {
+  text-align: center;
+}
+.img-item {
+  position: relative;
+  margin: auto auto;
+  max-width: 110px;
+  max-height: 168.4px;
 }
 .card {
-  width: 90%;
-  height: 100px;
-  padding: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 80%;
+  margin: 25px auto;
+}
+.card:hover {
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
 }
 
-.img-item {
-  height: 100px;
-  border-radius: 10px 0 0 10px;
+.footer-btn {
+  border: 0;
+  color: white;
+  width: 90px;
+  height: 30px;
+  border-radius: 4px;
+  margin: auto 5px;
 }
+
+
 @media only screen and (min-width: 768px) {
+  p {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+  ul {
+    margin-top: 94px;
+  }
   .card {
-    width: 480px;
-    height: 150px;
+    width: 500px;
+    height: 140px;
+  }
+  .footer-btn {
+    margin: auto 15px 10px 0;
+  }
+
+  .img-item {
+    position: relative;
+    margin: auto auto;
+    max-width: 100px;
+    max-height: 140px;
+    border-radius: 10px 0 0 10px;
+  }
+  .tb-btn {
+    width: 50%;
+    margin: 10px 0;
   }
 }
 </style>

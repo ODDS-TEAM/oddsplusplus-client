@@ -39,6 +39,9 @@ export default {
 
 
 <style>
+ul{
+  padding: 0;
+}
 h3 {
   color: #515151;
   margin-bottom: 5px;

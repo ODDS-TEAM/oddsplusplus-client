@@ -57,12 +57,6 @@
         <h4>{{item.user.name}} ({{item.count}})</h4>
       </li>
     </div>
-
-    <!-- <div class="plus-modal">
-      <input />
-      <button class="main-color confirm-btn">confirm</button>
-        <button class="cancel-btn">cancel</button>
-    </div> -->
   </div>
 </template>
 
