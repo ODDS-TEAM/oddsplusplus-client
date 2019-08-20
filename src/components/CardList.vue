@@ -57,6 +57,12 @@
         <h4>{{item.user.name}} ({{item.count}})</h4>
       </li>
     </div>
+
+    <!-- <div class="plus-modal">
+      <input />
+      <button class="main-color confirm-btn">confirm</button>
+        <button class="cancel-btn">cancel</button>
+    </div> -->
   </div>
 </template>
 
@@ -215,6 +221,12 @@ h5 {
 }
 .modal:hover {
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.plus-modal {
+  border-radius: 10px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  width: 50%;
 }
 
 @media only screen and (min-width: 768px) {
