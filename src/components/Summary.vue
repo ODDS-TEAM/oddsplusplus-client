@@ -5,7 +5,7 @@
         <ul align="middle">
           <img class="img-item" src="https://images-na.ssl-images-amazon.com/images/I/51RS76qnkEL._SX385_BO1,204,203,200_.jpg"/>
           <div style="padding-left: 10px" align="left">
-          <h4>The Road to Wigan Pier: Large Print (Paperback)</h4>
+          <h4>{{this.$route.params.id}}</h4>
           <h4>by George Orwell</h4>
           <h1 style="color: red">$ 10.76</h1>
           <h5>Order date: 10/10/2019</h5>
@@ -26,7 +26,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["itemid"],
+  data() {
+    return {
+      itemId: null
+    }
+  },
+  mounted: function() {
+    if(typeof this.$route.params.id === 'undefined'){
+      this.$router.push('/myitem')
+    }
+    
+  }
+};
 </script>
 
 <style scoped>

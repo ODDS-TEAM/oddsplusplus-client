@@ -16,7 +16,10 @@
 
             <div class="col-2 col-s-8">
               <div>
-                <router-link to="/summary" tag="button" class="button-summary">Summary</router-link>
+                <button
+                  class="button-summary"
+                  v-on:click="goToSummary(item.id)"
+                >Summary</button>
               </div>
               <div v-if="orderdate = true">
                 <button class="button-delete myButton:hover" v-on:click="deleteItem(item.id)">Delete</button>
@@ -70,6 +73,10 @@ export default {
         .then(() => {
           this.$emit("refreshMyItem");
         });
+    },
+    goToSummary(id) {
+      window.console.log(id)
+      this.$router.push({ path: 'summary', name:'summary',params: { id: id } });
     }
   }
 };

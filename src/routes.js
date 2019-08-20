@@ -7,7 +7,7 @@ const routes = [
     { path: '/', component: CardList },
     { path: '/home', component: CardList },
     { path: '/login', component: Login },
-    { path: '/summary', component: Summary },
+    { path: '/summary/:id', name: 'summary', component: Summary},
     { path: '/myitem', component: MyItem },
     { path: '*', redirect: '/home' }, 
 ];
