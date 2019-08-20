@@ -8,9 +8,14 @@
         <p>+</p>
       </div>
 
-      <router-link to=/myitem>
+      <router-link to="/myitem">
         <div class="main-color manage-btn" v-on:click="showModal = false" id="navbar-add-button">
           <p>My item</p>
+        </div>
+      </router-link>
+        <router-link to="/myorder">
+        <div class="main-color manage-btn" v-on:click="showModal = false" id="navbar-add-button">
+          <p>My order</p>
         </div>
       </router-link>
     </div>
@@ -52,12 +57,9 @@
           <a>Order Date </a>
           <input id="modal-book-date" :min="minDateToday" type="date" v-model="date" />
           <br />
-          <button id="modal-save-button" class="button-add" v-on:click="save">Add</button>
+          <button id="modal-save-button" class="button-add main-color" v-on:click="save">Add</button>
 
-          <!-- 
-
-        <button>Add to Cart</button>
-          <button>Wishlist</button>-->
+  
         </div>
       </div>
     </div>
@@ -260,11 +262,10 @@ p {
 .button-add {
   outline: 0;
   border: 0;
-  background: none;
   border: 1px solid #d9d9d9;
   padding: 8px 0px;
   margin-bottom: 30px;
-  color: #515151;
+  color: white;
   text-transform: uppercase;
   width: 125px;
   font-family: inherit;
@@ -288,14 +289,16 @@ p {
   height: 30px;
   border-radius: 5px;
   cursor: pointer;
+  margin: 8px 0;
   font-size: 15px;
 }
 .urlInput {
   width: 78%;
   height: 30px;
-  /* padding: 8px 20px; */
-  /* margin: 8px 0; */
+  padding: 0 20px;
+  margin: 8px 0;
   box-sizing: border-box;
+  box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
   border: 0;
   border-radius: 4px;
 }
@@ -322,6 +325,7 @@ img {
   width: 100px;
   height: 31px;
   border-radius: 5px;
+  margin-left: 10px;
 }
 .manage-btn > p {
   color: white;
