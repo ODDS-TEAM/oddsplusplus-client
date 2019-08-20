@@ -10,13 +10,13 @@
               </p>
             </div>
             <div class="col-6 col-s-8 title">
-              <h3>Name : {{ item.title }}</h3>
-              <h3>Type : {{item.format}}</h3>
+              <h3>{{ item.title }}</h3>
+              <h4>{{item.format}}</h4>
             </div>
 
             <div class="col-2 col-s-8">
               <div>
-                <button class="button-summary">Summary</button>
+                <router-link to="/summary" tag="button" class="button-summary">Summary</router-link>
               </div>
               <div v-if="orderdate = true">
                 <button class="button-delete myButton:hover" v-on:click="deleteItem(item.id)">Delete</button>
@@ -76,6 +76,12 @@ export default {
 </script>
 
 <style scoped>
+h4 {
+  margin: 0;
+  color: #727272;
+  font-weight: 500;
+  font-size: 12px;
+}
 ul {
   margin-top: 80px;
   padding: 0px;
