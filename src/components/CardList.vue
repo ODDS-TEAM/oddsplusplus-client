@@ -132,6 +132,9 @@ export default {
 </script>
 
 <style scoped>
+[class*="col-"] {
+  padding: 0 15px;
+}
 ul {
   margin-top: 80px;
   padding: 0px;
