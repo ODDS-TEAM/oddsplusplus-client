@@ -287,8 +287,8 @@ p {
 }
 
 .plus-modal {
-  padding: 0 30px 30px;
-  width: 30%;
+  padding: 0px 20px 0px 20px;
+  width: 315px;
   border-radius: 10px;
   position: fixed;
   transform: translate(-50%, -50%);
@@ -307,13 +307,11 @@ p {
   border-radius: 5px;
   border: 1px solid #d9d9d9;
   padding: 8px 0px;
-  margin-bottom: 15px;
-  margin-top: 30px;
+  margin: 25px -2px 11px 10px;
   color: white;
   text-transform: uppercase;
-  width: 125px;
+  width: 70px;
   font-family: inherit;
-  margin-right: 5px;
   transition: all 0.3s ease;
   font-weight: 500;
   box-shadow: 0 0 15px 0 0;
