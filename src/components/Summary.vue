@@ -123,7 +123,9 @@ h3 {
   .prod-detail {
     padding: 20px;
     border-bottom: none;
-    border-right: 2px solid #efefef;
+  }
+  .col-8 {
+    border-left: 2px solid #efefef;
   }
 }
 </style>

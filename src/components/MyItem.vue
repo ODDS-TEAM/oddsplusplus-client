@@ -17,10 +17,11 @@
               <div class="detail">
                 <table style="height:90px;">
                   <tr>
-                    <h3>{{ item.title }}</h3>
+                    <h3>{{ item.title }} ({{item.format}})</h3>
                   </tr>
                   <tr>
-                    <h4>{{item.format}}</h4>
+                    <h4>By {{ item.author }}</h4>
+                    <h3 style="color:red">${{item.price}}</h3>
                   </tr>
                 </table>
                 <table style="height:40px;" class="tb-btn">
@@ -90,8 +91,8 @@ p {
 .img-item {
   position: relative;
   margin: auto auto;
-  max-width: 110px;
-  max-height: 168.4px;
+  max-width: 230px;
+  max-height: 240px;
 }
 .card {
   border-radius: 10px;
@@ -103,14 +104,13 @@ p {
 .card:hover {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
 }
-
 .footer-btn {
   border: 0;
   color: white;
   width: 90px;
   height: 30px;
   border-radius: 4px;
-  margin: auto 5px;
+  font-size: 14px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -127,7 +127,7 @@ p {
     height: 140px;
   }
   .footer-btn {
-    margin: auto 15px 10px 0;
+    margin-left: 15px;
   }
 
   .img-item {
@@ -139,7 +139,8 @@ p {
   }
   .tb-btn {
     width: 50%;
-    margin: 10px 0;
+    margin: -20px 0;
+    float: right;
   }
   .header {
     margin-top: 100px;
