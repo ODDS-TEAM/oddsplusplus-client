@@ -4,35 +4,37 @@
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
           <div class="row">
-            <div class="col-3 col-s-4">
+            <div class="col-2">
               <p>
                 <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
               </p>
             </div>
-            <div class="col-9 col-s-8 title">
-              <table>
-                <tr>
-                  <h3>{{ item.title }}</h3>
-                </tr>
-                <tr>
-                  <h4>{{item.format}}</h4>
-                </tr>
-              </table>
-            </div>
-            <div class="col-9">
-              <table>
-                <tr>
-                  <div v-if="!orderdate" class="button-before">
-                    <button class="button-summary-before" v-on:click="goToSummary(item.id)">Summary</button>
-                  </div>
-                </tr>
-                <tr>
-                  <div class="button-after" v-if="orderdate">
-                    <button class="button-summary">Summary</button>
-                    <button class="button-delete" v-on:click="deleteItem(item.id)">Delete</button>
-                  </div>
-                </tr>
-              </table>
+
+            <div class="col-10">
+              <div class="detail">
+                <table style="height:90px;">
+                  <tr>
+                    <h3>{{ item.title }}</h3>
+                  </tr>
+                  <tr>
+                    <h4>{{item.format}}</h4>
+                  </tr>
+                </table>
+                <table style="height:40px;" class="tb-btn">
+                  <tr>
+                    <td>
+                      <p>
+                        <button class="footer-btn main-color">Summary</button>
+                      </p>
+                    </td>
+                    <td>
+                      <p>
+                        <button class="footer-btn" style="background-color: #f55246;">Delete</button>
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -51,66 +53,30 @@ export default {
     };
   },
   mounted: function() {
-    this.getUserData();
-  },
-  methods: {
-    getItemData: function() {
-      this.$http
-        .get(process.env.VUE_APP_API + "/items/users/" + this.user.id)
-        .then(response => {
-          this.data = response.body;
-          window.console.log(this.data);
-        });
-    },
-    getUserData: function() {
-      this.$http
-        .get(process.env.VUE_APP_API + "/users/Cheese")
-        .then(response => {
-          this.user = response.body;
-          window.console.log(this.user);
-          this.getItemData();
-        });
-    },
-    deleteItem: function(itemId) {
-      this.$http
-        .delete(
-          process.env.VUE_APP_API +
-            "/items/users/" +
-            itemId +
-            "/" +
-            this.user.id
-        )
-        .then(() => {
-          this.$emit("refreshMyItem");
-        });
-    },
-    goToSummary(id) {
-      window.console.log(id);
-      this.$router.push({
-        path: "summary",
-        name: "summary",
-        params: { id: id }
-      });
-    }
+    this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
+      this.data = response.body;
+      window.console.log(this.data);
+    });
   }
 };
 </script>
-
 <style scoped>
-h4 {
-  margin: 0;
-  color: #727272;
-  font-weight: 500;
-  font-size: 12px;
+.detail {
+  text-align: left;
+  padding: 0 25px;
 }
-ul {
-  margin-top: 80px;
-  padding: 0px;
+table {
+  border-spacing: 0;
 }
-
+.tb-btn {
+  width: 100%;
+  margin: 10px auto;
+}
+tr {
+  width: 100px;
+}
 p {
   text-align: center;
-  margin: 20px 0px 0px 0px;
 }
 .img-item {
   position: relative;
@@ -122,226 +88,51 @@ p {
   border-radius: 10px;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 70%;
-  height: 350px;
+  width: 80%;
   margin: 25px auto;
 }
 .card:hover {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
 }
-h3 {
-  color: #515151;
-  margin-bottom: 5px;
-  /* margin-top: 30px; */
-  font-size: 18px;
-}
-.title {
-  padding: 0px 25px;
-}
-.button-after {
-  margin: 20px 0px;
-  text-align: center;
-}
-.button-before {
-  text-align: center;
-  margin: 30px 0px;
-}
-.button-summary:hover {
-  background-color: #5d92e3;
-}
-.button-summary:active {
-  position: relative;
-  top: 1px;
-}
-.button-summary {
-  -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
-  -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
-  box-shadow: inset 0px 39px 0px -24px #4883db;
-  background-color: #5d92e3;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+
+.footer-btn {
+  border: 0;
+  color: white;
+  width: 90px;
+  height: 30px;
   border-radius: 4px;
-  border: 1px solid #ffffff;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 15px;
-  /* margin-top: 20px; */
-  padding: 6px 12px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #0066ff;
-}
-.button-summary-before:hover {
-  background-color: #5d92e3;
-}
-.button-summary-before:active {
-  position: relative;
-  top: 1px;
-}
-.button-summary-before {
-  -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
-  -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
-  box-shadow: inset 0px 39px 0px -24px #4883db;
-  background-color: #5d92e3;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ffffff;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 15px;
-  /* margin-top: 20px; */
-  padding: 10px 30px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #0066ff;
+  margin: auto 5px;
 }
 
-.button-delete:hover {
-  background-color: #fa1d12;
-}
-.button-delete:active {
-  position: relative;
-  top: 1px;
-}
-
-.button-delete {
-  -moz-box-shadow: inset 0px 39px 0px -24px #f76159;
-  -webkit-box-shadow: inset 0px 39px 0px -24px #f76159;
-  box-shadow: inset 0px 39px 0px -24px #f76159;
-  background-color: #fa3628;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ffffff;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 15px;
-  margin: 0px 5px;
-  margin-top: 5px;
-  padding: 6px 23px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #b23e35;
-}
-.button-add:hover {
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-.modal:hover {
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 @media only screen and (min-width: 768px) {
   p {
-    text-align: center;
-    margin: 0px 0px 0px 0px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
   }
   ul {
     margin-top: 94px;
   }
   .card {
-    width: 550px;
-    height: 150px;
+    width: 500px;
+    height: 140px;
   }
-  .modal {
-    width: 300px;
+  .footer-btn {
+    margin: auto 15px 10px 0;
   }
+
   .img-item {
     position: relative;
     margin: auto auto;
-    max-width: 120px;
-    max-height: 150px;
+    max-width: 100px;
+    max-height: 140px;
+    border-radius: 10px 0 0 10px;
   }
-  .button-before {
-    margin: 23px 10px;
-    text-align: center;
-  }
-  .button-after {
-    margin: 23px 10px;
-    text-align: center;
-  }
-  .button-delete:hover {
-    background-color: #fa1d12;
-  }
-  .button-delete:active {
-    position: relative;
-    top: 1px;
-  }
-
-  .button-delete {
-    -moz-box-shadow: inset 0px 39px 0px -24px #f76159;
-    -webkit-box-shadow: inset 0px 39px 0px -24px #f76159;
-    box-shadow: inset 0px 39px 0px -24px #f76159;
-    background-color: #fa3628;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    border: 1px solid #ffffff;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 15px;
-    margin: 5px 5px;
-    padding: 6px 30px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #b23e35;
-  }
-  .button-summary-before:hover {
-    background-color: #5d92e3;
-  }
-  .button-summary-before:active {
-    position: relative;
-    top: 1px;
-  }
-  .button-summary-before {
-    -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
-    -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
-    box-shadow: inset 0px 39px 0px -24px #4883db;
-    background-color: #5d92e3;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    border: 1px solid #ffffff;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 15px;
-    /* margin-top: 20px; */
-    padding: 6px 40px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #0066ff;
-  }
-  .button-summary:hover {
-    background-color: #5d92e3;
-  }
-  .button-summary:active {
-    position: relative;
-    top: 1px;
-  }
-  .button-summary {
-    -moz-box-shadow: inset 0px 39px 0px -24px #4883db;
-    -webkit-box-shadow: inset 0px 39px 0px -24px #4883db;
-    box-shadow: inset 0px 39px 0px -24px #4883db;
-    background-color: #5d92e3;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    border: 1px solid #ffffff;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 15px;
-    /* margin-top: 20px; */
-    padding: 6px 20px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #0066ff;
+  .tb-btn {
+    width: 50%;
+    margin: 10px 0;
   }
 }
 </style>
+
