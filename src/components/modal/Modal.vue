@@ -3,15 +3,9 @@
     <div class="modal">
       <div class="wrapper" @click="$emit('close')">
         <div class="modal-container" @click.stop>
-          <div class="modal-header">
-            <slot name="header"></slot>
-          </div>
-          <div class="modal-content">
-            <slot name="content"></slot>
-          </div>
-          <div class="modal-footer">
-            <slot name="footer"></slot>
-          </div>
+         <div class="modal-body">
+           <slot name="body"/>
+         </div>
         </div>
       </div>
     </div>
@@ -29,28 +23,20 @@ export default {
 </script>
 
 <style scoped>
-.modal-header {
-  width: 100%;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #efefef;
-}
-.modal-content {
-  width: 100%;
 
-  
-}
-.modal-footer {
-}
 
 .modal-container {
   width: 90%;
   border-radius: 10px;
   margin: 0px auto;
-  padding: 20px 20px 5px;
+  padding: 5px 20px 5px;
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
+  overflow-y:scroll;
+  max-height: 95%;
+
 }
 
 .modal {
