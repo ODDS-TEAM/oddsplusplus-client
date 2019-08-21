@@ -37,7 +37,7 @@
               <button
                 id="card-plus-button"
                 class="button-add btn-plus"
-                v-on:click="plus(item.id)"
+                v-on:click="plusX(item.id)"
               >PLUS 1</button>
             </div>
           </div>
@@ -58,14 +58,25 @@
       </li>
     </div>
 
-    <!-- <div class="plus-modal">
-      <h3>ABCD</h3>
+    <div class="plus-modal" v-if="plusModal">
+      <h3>X value</h3>
       <div style="  border-bottom: 2px solid #efefef;"></div>
-      <input class="input"/>
+      <div class="manage">
+        <div class="updateCount">
+          <button :disabled="minCount + plusItem.count <= 0" v-on:click="decrease">-</button>
+        </div>
+        <div class="updateCount">
+          <span>{{plusItem.count}}</span>
+        </div>
+        <div class="updateCount">
+          <button v-on:click="increase">+</button>
+        </div>
+      </div>
+
       <div style="  border-bottom: 2px solid #efefef;"></div>
-        <button class="main-color confirm-btn">confirm</button>
-        <button class="cancel-btn">cancel</button>
-    </div> -->
+      <button class="plus-btn" v-on:click="checkOrder">confirm</button>
+      <button class="plus-btn cancel-btn" v-on:click="clearPlusModalData">cancel</button>
+    </div>
   </div>
 </template>
 
@@ -84,8 +95,12 @@ export default {
       orderModal: false,
       date: null,
       waiting: false,
-      count: 1,
-      plusModal: false
+      minCount: null,
+      plusModal: false,
+      plusItem: {
+        itemId: null,
+        count: null
+      }
     };
   },
   mounted: function() {
@@ -120,7 +135,13 @@ export default {
     plus: function(itemId) {
       this.$http
         .post(
-          process.env.VUE_APP_API + "/reserves/" + this.user.id + "/" + itemId + "/" + this.count
+          process.env.VUE_APP_API +
+            "/reserves/" +
+            this.user.id +
+            "/" +
+            itemId +
+            "/" +
+            this.count
         )
         .then(response => {
           this.responses = response.body;
@@ -131,6 +152,73 @@ export default {
     exitOrderModal: function() {
       this.orderModal = false;
       this.orderList = null;
+    },
+    clearPlusModalData: function() {
+      this.plusModal = false;
+      this.minCount = null;
+      this.plusItem.count = 0;
+      this.plusItem.itemId = null;
+    },
+    plusX: function(itemId) {
+      this.$http
+        .get(
+          process.env.VUE_APP_API +
+            "/reserves/users/" +
+            this.user.id +
+            "/" +
+            itemId
+        )
+        .then(response => {
+          this.minCount = response.body;
+          this.plusItem.count = 0;
+          this.plusItem.itemId = itemId;
+          this.plusModal = true;
+          window.console.log(this.minCount);
+          window.console.log(response);
+          window.console.log(this.plusItem);
+        });
+    },
+    decrease: function() {
+      this.plusItem.count -= 1;
+    },
+    increase: function() {
+      this.plusItem.count += 1;
+    },
+    checkOrder: function() {
+      this.plusModal = false;
+      if ((this.minCount === 0 && this.plusItem.count > 0) ||(this.minCount + this.plusItem.count > 0)) {
+        this.$http
+          .post(
+            process.env.VUE_APP_API +
+              "/reserves/" +
+              this.user.id +
+              "/" +
+              this.plusItem.itemId +
+              "/" +
+              this.plusItem.count
+          )
+          .then(response => {
+            this.clearPlusModalData();
+            this.responses = response.body;
+            window.console.log(this.responses);
+            this.getItemData();
+          });
+      } else if(this.minCount + this.plusItem.count <= 0) {
+        this.$http
+          .delete(
+            process.env.VUE_APP_API +
+              "/reserves/" +
+              this.user.id +
+              "/" +
+              this.plusItem.itemId
+          )
+          .then(response => {
+            this.clearPlusModalData();
+            this.responses = response.body;
+            window.console.log(this.responses);
+            this.getItemData();
+          });
+      }
     }
   }
 };
@@ -199,41 +287,51 @@ p {
 }
 
 .plus-modal {
+  padding: 0 30px 30px;
+  width: 30%;
   border-radius: 10px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-  width: 325px;
+  position: fixed;
+  transform: translate(-50%, -50%);
   z-index: 1;
-  padding: 0px 16px 0px 16px;
+  background: white;
   margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: all 0.3s;
 }
 
-.confirm-btn {
+.plus-btn {
+  background-color: #1498d5;
   border-radius: 5px;
   border: 1px solid #d9d9d9;
   padding: 8px 0px;
-  margin: 5px;
+  margin-bottom: 15px;
+  margin-top: 30px;
   color: white;
   text-transform: uppercase;
-  width: 90px;
+  width: 125px;
   font-family: inherit;
+  margin-right: 5px;
   transition: all 0.3s ease;
   font-weight: 500;
   box-shadow: 0 0 15px 0 0;
-  margin-left: 105px;
 }
 
 .cancel-btn {
-  border-radius: 5px;
-  border: 1px solid #d9d9d9;
-  padding: 8px 0px;
-  background-color: #fa1d12;
   color: white;
-  text-transform: uppercase;
-  width: 90px;
-  font-family: inherit;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  box-shadow: 0 0 15px 0 0;
+  width: 70px;
+  background-color: #fa1d12;
+}
+
+.updateCount {
+  float: left;
+}
+
+.manage {
+  margin: auto;
+  left: 50%;
 }
 
 .input {
