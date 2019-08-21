@@ -257,7 +257,7 @@ p {
   border-radius: 10px;
   position: fixed;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 9998;
   background: white;
   margin: 0 auto;
   top: 50%;

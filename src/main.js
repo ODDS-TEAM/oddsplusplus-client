@@ -20,8 +20,10 @@ const router = new VueRouter({
   routes
 });
 
+Vue.component('modal', require('./components/modal/Modal.vue').default);
+
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
 
 }).$mount('#app')
