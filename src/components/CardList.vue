@@ -91,7 +91,7 @@ export default {
       urlInput: null,
       showResult: false,
       results: null,
-      user: null,
+      userId: null,
       orderModal: false,
       date: null,
       waiting: false,
@@ -104,17 +104,13 @@ export default {
     };
   },
   mounted: function() {
+    this.userId = localStorage.getItem("userId");
     this.getItemData();
-    this.$http.get(process.env.VUE_APP_API + "/users/Cheese").then(response => {
-      this.user = response.body;
-      window.console.log(this.user);
-    });
   },
   methods: {
     getItemData: function() {
       this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
         this.data = response.body;
-        window.console.log(this.data);
       });
     },
 
@@ -123,7 +119,6 @@ export default {
         .get(process.env.VUE_APP_API + "/reserves/" + itemId)
         .then(response => {
           this.orderList = response.body;
-          window.console.log(this.orderList);
         });
       this.orderModal = true;
     },
@@ -137,7 +132,7 @@ export default {
         .post(
           process.env.VUE_APP_API +
             "/reserves/" +
-            this.user.id +
+            this.userId +
             "/" +
             itemId +
             "/" +
@@ -145,7 +140,6 @@ export default {
         )
         .then(response => {
           this.responses = response.body;
-          window.console.log(this.responses);
           this.getItemData();
         });
     },
@@ -164,7 +158,7 @@ export default {
         .get(
           process.env.VUE_APP_API +
             "/reserves/users/" +
-            this.user.id +
+            this.userId +
             "/" +
             itemId
         )
@@ -173,9 +167,6 @@ export default {
           this.plusItem.count = 0;
           this.plusItem.itemId = itemId;
           this.plusModal = true;
-          window.console.log(this.minCount);
-          window.console.log(response);
-          window.console.log(this.plusItem);
         });
     },
     decrease: function() {
@@ -191,7 +182,7 @@ export default {
           .post(
             process.env.VUE_APP_API +
               "/reserves/" +
-              this.user.id +
+              this.userId +
               "/" +
               this.plusItem.itemId +
               "/" +
@@ -200,7 +191,6 @@ export default {
           .then(response => {
             this.clearPlusModalData();
             this.responses = response.body;
-            window.console.log(this.responses);
             this.getItemData();
           });
       } else if(this.minCount + this.plusItem.count <= 0) {
@@ -208,14 +198,13 @@ export default {
           .delete(
             process.env.VUE_APP_API +
               "/reserves/" +
-              this.user.id +
+              this.userId +
               "/" +
               this.plusItem.itemId
           )
           .then(response => {
             this.clearPlusModalData();
             this.responses = response.body;
-            window.console.log(this.responses);
             this.getItemData();
           });
       }

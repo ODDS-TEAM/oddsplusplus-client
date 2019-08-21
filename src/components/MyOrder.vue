@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-2">
               <p>
-                <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
+                <img id="card-boot-image" class="img-item" :src="item.item.imgUrl" />
               </p>
             </div>
 
@@ -52,12 +52,13 @@ export default {
   data() {
     return {
       data: null,
-      user: null,
+      userId: null,
       orderdate: true
     };
   },
   mounted: function() {
-    this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
+    this.userId = localStorage.getItem("userId");
+    this.$http.get(process.env.VUE_APP_API + "/reserves/users/" + this.userId).then(response => {
       this.data = response.body;
       window.console.log(this.data);
     });

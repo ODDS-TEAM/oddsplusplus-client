@@ -54,12 +54,13 @@ export default {
   data() {
     return {
       data: null,
-      user: null,
+      userId: null,
       orderdate: true
     };
   },
   mounted: function() {
-    this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
+    this.userId = localStorage.getItem("userId");
+    this.$http.get(process.env.VUE_APP_API + "/items/users/" + this.userId).then(response => {
       this.data = response.body;
       window.console.log(this.data);
     });

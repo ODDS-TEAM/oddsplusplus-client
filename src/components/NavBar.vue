@@ -84,7 +84,7 @@ export default {
       urlInput: null,
       showResult: false,
       results: null,
-      user: null,
+      userId: null,
       orderModal: false,
       date: null,
       waiting: false,
@@ -92,13 +92,7 @@ export default {
     };
   },
   mounted: function() {
-    // this.getItemData();
-    window.console.log();
-
-    this.$http.get(process.env.VUE_APP_API + "/users/Cheese").then(response => {
-      this.user = response.body;
-      window.console.log(this.user);
-    });
+    this.userId = localStorage.getItem("userId");
   },
   methods: {
     closeDropSHow(){
@@ -146,7 +140,7 @@ export default {
         .post(
           process.env.VUE_APP_API +
             "/items/" +
-            this.user.id +
+            this.userId +
             "/" +
             new Date(this.date),
           {

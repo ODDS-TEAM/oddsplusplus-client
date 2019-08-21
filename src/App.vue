@@ -17,7 +17,10 @@ export default {
     NavBar
   },
   mounted: function() {
-    window.console.log(process.env);
+    this.$http.get(process.env.VUE_APP_API + "/users/Cheese").then(response => {
+      this.user = response.body;
+      localStorage.setItem("userId", this.user.id);
+    });
   },
   data() {
     return {
@@ -39,7 +42,7 @@ export default {
 
 
 <style>
-ul{
+ul {
   padding: 0;
 }
 h3 {
