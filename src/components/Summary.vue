@@ -1,58 +1,38 @@
 <template>
   <div class="card">
     <div class="row">
-      <div class="col-3 col-s-3 menu">
-        <ul align="middle">
+      <div class="col-4 prod-detail" style>
+        <p>
           <img id="card-boot-image" class="img-item" :src="detail.imgUrl" />
-          <div style="padding-left: 10px" align="left">
-            <h4>{{detail.title}} ({{detail.format}})</h4>
-            <h4>{{detail.author}}</h4>
-            <h1 style="color: red">$ {{detail.price}}</h1>
-            <h5>Order date: {{detail.orderDate| formatDate}}</h5>
-          </div>
-        </ul>
+        </p>
+        <h3>{{detail.title}} ({{detail.format}})</h3>
+        <h4>by {{detail.author}}</h4>
+        <h1 style="color: red">$ {{detail.price}}</h1>
+        <h5>Order date: {{detail.orderDate| formatDate}}</h5>
       </div>
-
-      <div class="col-6 col-s-9">
-        <h3>
-          Total item:
-          <span style="color: blue">{{detail.count}}</span>
-        </h3>
-        <h3>
-          Total price:
-          <span style="color: blue">{{detail.cost}} USD </span>
-        </h3>
-        <h3>
-          List order:
-        </h3>
-        <table >
+      <div class="col-8 summary-detail">
+        <table style="height:110px;width: 100%; margin:10px 0; border-bottom: 2px solid #efefef;">
           <tr>
-            <td>
-              <img src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg" style="max-width: 20px">
-            </td>
-            <th style="color: blue; text-align:left">  
-              Pornpavit
-            </th>
-            <th style="color: blue; text-align:left">  
-              Sanusit
-            </th>
-            <th style="color: red; text-align:left">  
-              (1)
-            </th>
+            <h2 class="p-20-h p-20-t " >Qty : {{detail.count}}</h2>
           </tr>
           <tr>
-            <td>
-              <img src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg" style="max-width: 20px">
+            <h3 class="p-20-h p-20-t ">Total price : ${{detail.cost}}</h3>
+          </tr>
+        </table>
+        <table style="width: 100%;margin: 20px 0 0px;overflow-x:auto;">
+          <tr>
+            <th class="p-20-h" style="width:80%;">Name</th>
+            <th class="p-20-h" style="width:20%;">Qty</th>
+          </tr>
+          <tr v-for="name in names" :key="name">
+            <td class="p-20-h  p-20-t">
+              <img
+                src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg"
+                style="max-width: 20px"
+              />
+              {{name}}
             </td>
-            <th style="color: blue; text-align:left">  
-              Kittikarn
-            </th>
-            <th style="color: blue; text-align:left">  
-              Chaichana
-            </th>
-            <th style="color: red; text-align:left">  
-              (1)
-            </th>
+            <td class="p-20-h  p-20-t" style="color: red; text-align:left">1</td>
           </tr>
         </table>
       </div>
@@ -68,12 +48,13 @@ export default {
       itemId: null,
       detail: {},
       user: {},
-      orderList: {}
-    }
+      orderList: {},
+      names: ["Sivaroot Chuncharoen", "Pornpavit Sanusit", "Pitchayut CheeseJa","Anupong Chaisawan","Sivaroot Chuncharoen", "Pornpavit Sanusit", "Pitchayut CheeseJa","Anupong Chaisawan"]
+    };
   },
   mounted: function() {
-    if(typeof this.$route.params.id === 'undefined'){
-      this.$router.push('/myitem')
+    if (typeof this.$route.params.id === "undefined") {
+      this.$router.push("/myitem");
     }
     this.getUserData();
     this.getItemData();
@@ -85,7 +66,7 @@ export default {
         .get(process.env.VUE_APP_API + "/users/Cheese")
         .then(response => {
           this.user = response.body;
-          window.console.log("User Data=====>",this.user);
+          window.console.log("User Data=====>", this.user);
         });
     },
     getItemData: function() {
@@ -93,15 +74,17 @@ export default {
         .get(process.env.VUE_APP_API + "/items/" + this.$route.params.id)
         .then(response => {
           this.detail = response.body;
-          window.console.log("Item Data=====>",this.detail);
+          window.console.log("Item Data=====>", this.detail);
         });
     },
     getItemOrder: function() {
       this.$http
-        .get(process.env.VUE_APP_API + "/reserves/items/" + this.$route.params.id)
+        .get(
+          process.env.VUE_APP_API + "/reserves/items/" + this.$route.params.id
+        )
         .then(response => {
           this.orderList = response.body;
-          window.console.log("Item Order=====>",this.orderList);
+          window.console.log("Item Order=====>", this.orderList);
         });
     }
   }
@@ -109,133 +92,38 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  padding: 5px;
+
+.p-20-h {
+  padding: 0 20px;
+}
+.p-20-t {
+  padding-top: 10px;
+}
+.prod-detail {
+  padding: 20px;
+  border-bottom: 2px solid #efefef;
+}
+.card {
+  margin-top: 100px;
+}
+th {
+  text-align: left;
+}
+p {
+  text-align: center;
+}
+h2,
+h3 {
   margin: 0;
 }
-
-.card {
-  border-radius: 10px;
-  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 80%;
-  margin: 80px auto;
-}
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-[class*="col-"] {
-  float: left;
-  padding: 0 15px 0 15px;
-}
-/* For mobile phones: */
-[class*="col-"] {
-  width: 100%;
-}
-
 .img-item {
-  position: relative;
-  margin: 0 5% 0 5%;
-  max-width: 230px;
   max-height: 240px;
-  display: contents;
-}
-
-@media only screen and (min-width: 600px) {
-  .img-item {
-    position: relative;
-    margin: 0 5% 0 5%;
-    max-width: 230px;
-    max-height: 240px;
-    display: initial;
-  }
-  /* For tablets: */
-  .col-s-1 {
-    width: 8.33%;
-  }
-  .col-s-2 {
-    width: 16.66%;
-  }
-  .col-s-3 {
-    width: 25%;
-  }
-  .col-s-4 {
-    width: 33.33%;
-  }
-  .col-s-5 {
-    width: 41.66%;
-  }
-  .col-s-6 {
-    width: 50%;
-  }
-  .col-s-7 {
-    width: 58.33%;
-  }
-  .col-s-8 {
-    width: 66.66%;
-  }
-  .col-s-9 {
-    width: 75%;
-  }
-  .col-s-10 {
-    width: 83.33%;
-  }
-  .col-s-11 {
-    width: 91.66%;
-  }
-  .col-s-12 {
-    width: 100%;
-  }
 }
 @media only screen and (min-width: 768px) {
-  .img-item {
-    position: relative;
-    margin: 0 5% 0 5%;
-    max-width: 230px;
-    max-height: 240px;
-    display: initial;
-  }
-  /* For desktop: */
-  .col-1 {
-    width: 8.33%;
-  }
-  .col-2 {
-    width: 16.66%;
-  }
-  .col-3 {
-    width: 40%;
-    border-right: inset;
-  }
-  .col-4 {
-    width: 33.33%;
-  }
-  .col-5 {
-    width: 41.66%;
-  }
-  .col-6 {
-    padding-top: 5%;
-    width: 50%;
-  }
-  .col-7 {
-    width: 58.33%;
-  }
-  .col-8 {
-    width: 66.66%;
-  }
-  .col-9 {
-    width: 75%;
-  }
-  .col-10 {
-    width: 83.33%;
-  }
-  .col-11 {
-    width: 91.66%;
-  }
-  .col-12 {
-    width: 100%;
+  .prod-detail {
+    padding: 20px;
+    border-bottom: none;
+    border-right: 2px solid #efefef;
   }
 }
 </style>
