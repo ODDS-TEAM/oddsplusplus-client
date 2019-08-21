@@ -2,22 +2,38 @@
   <div>
     <div class="nav">
       <span>
-       <router-link to=/home> <img class src="./../assets/odds_logo.png" id="navbar-logo" /></router-link>
+       <router-link to=/home> <img class="user-img" src="./../assets/odds_logo.png" id="navbar-logo" /></router-link>
       </span>
-      <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
-        <p>+</p>
-      </div>
+      <div >
 
-      <router-link to="/myitem">
+            <table @click="menuDropShow = !menuDropShow" class="username">
+              <tr>
+                <td><img class="img-pro" style="" :src="user.imgURL" id="navbar-logo" /></td>
+                <td style="font-size: 17px;"><h3 >{{user.name}} <h3 class="lastname">Test</h3></h3></td>
+                <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-logo" /></td>
+              </tr>
+            </table>
+            <div v-if="menuDropShow" class="menu-drop" style="text-align:center;" >
+             <h4 class="menu-list" @click="routing(1)">My items </h4>
+             <h4 class="menu-list" @click="routing(2)">My orders </h4>
+              <h4 class="menu-list" style="border-bottom:none;margin-bottom:0;">Log out</h4>
+            </div>
+               
+      </div>
+     <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
+        <p>+</p>
+      </div> 
+
+      <!-- <router-link to="/myitem">
         <div class="main-color manage-btn" v-on:click="showModal = false" id="navbar-add-button">
           <p>My item</p>
         </div>
-      </router-link>
-        <router-link to="/myorder">
+     
+        
         <div class="main-color manage-btn" v-on:click="showModal = false" id="navbar-add-button">
           <p>My order</p>
         </div>
-      </router-link>
+      -->
     </div>
     <div class="card" v-if="showModal">
       <a class="modal-cancel" v-on:click="clearModalData" id="modal-cancel">X</a>
@@ -82,7 +98,8 @@ export default {
       user: null,
       orderModal: false,
       date: null,
-      waiting: false
+      waiting: false,
+      menuDropShow: false
     };
   },
   mounted: function() {
@@ -95,6 +112,20 @@ export default {
     });
   },
   methods: {
+    closeDropSHow(){
+        if(this.menuDropShow)
+          this.menuDropShow = false;
+
+    },
+    routing(page) {
+      this.menuDropShow = false;
+      if(page === 1){
+        this.$router.push( '/myitem' );
+      }
+       if(page === 2){
+        this.$router.push( '/myorder' );
+      }
+    },
     scrap: function() {
       this.results = null;
       this.showResult = false;
@@ -159,12 +190,57 @@ export default {
       this.urlInput = null;
     }
   }
+  
+
 };
 </script>
 
 <style scoped>
 * {
   box-sizing: border-box;
+}
+.lastname{
+  display: none;
+}
+.img-pro{
+  display: none;
+}
+.menu-list{
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 7px;
+  font-size:15px;
+
+}
+.menu-list:hover{
+    background-color: #c5c5c5;
+
+}
+.menu-drop{
+  position: fixed;
+  transform: translate(-50%, 0);
+  top:60px;
+  left: 50%;
+  background-color: #eeeeee;
+  width: 40%;
+  border-radius: 7px
+}
+
+
+
+.user-img{
+  position: fixed;
+  transform: translate(0, -50%);
+  top:20px;
+  left: 10px;
+  width: 80px;
+  height: auto;
+}
+.arrow{
+  margin-top: 9px;
+  width: 11px;
+  height: auto;
 }
 .alert-bar {
   width: 100%;
@@ -189,6 +265,22 @@ export default {
 [type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
 }
+.username{
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top:21.5px;
+  left: 50%;
+  color: #333;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.username:hover {
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: #dfdfdf;
+}
+
 .card {
   width: 90%;
   border-radius: 10px;
@@ -309,7 +401,7 @@ p {
   margin: 0;
   padding: 6px 10px;
   overflow: hidden;
-  background-color: white;
+  background-color: #f1f1f1;
   height: 43px;
   border-bottom: 2px solid #efefef;
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.5);
@@ -383,6 +475,17 @@ h5 {
 }
 
 @media only screen and (min-width: 600px) {
+  .user-img{
+    width: auto;
+    height: 30px;
+    top: 24px;
+  } 
+  .lastname{
+  display: inline-block;
+}
+  .menu-drop{
+    width: 200px;
+  }
   .nav {
     height: 64px;
   }
@@ -430,6 +533,18 @@ h5 {
   }
   .manage-btn > p {
     font-size: 20px;
+  }
+  .username{
+  
+  top:31.5px;
+
+}
+ .menu-drop{
+    top:80px;
+  }
+  .img-pro{
+    display: inline;
+    width:40px;height:40px;border-radius:5px;margin:5px 5px 0 5px;
   }
 }
 .modal-cancel {
