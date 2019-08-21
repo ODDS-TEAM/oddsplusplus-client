@@ -10,7 +10,7 @@
               </p>
             </div>
             <div class="col-8 col-s-8">
-                <h3 id="card-book-title" class="item-title">{{ item.title }}</h3>
+              <h3 id="card-book-title" class="item-title">{{ item.title }}</h3>
               <h4 id="card-book-author">By {{ item.author }}  ({{item.format}})</h4>
               <h1 id="card-book-price" style="color:red;">${{item.price}}</h1>
 

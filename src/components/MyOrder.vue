@@ -7,38 +7,42 @@
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
           <div class="row">
-            <div class="col-2">
+            <div class="col-3">
               <p>
                 <img id="card-boot-image" class="img-item" :src="item.item.imgUrl" />
               </p>
             </div>
 
-            <div class="col-10">
-              <div class="detail">
-                <table style="height:90px;">
-                  <tr>
-                    <h3>{{ item.title }} ({{item.format}})</h3>
-                  </tr>
-                  <tr>
-                    <h4>By {{ item.author }}</h4>
-                    <h3 style="">Qty 5</h3>
-                  </tr>
-                </table>
-                <table style="height:40px;" class="tb-btn">
-                  <tr>
-                    <td>
-                      <p>
-                        <button class="footer-btn main-color">Summary</button>
-                      </p>
-                    </td>
-                    <td>
-                      <p>
-                        <button class="footer-btn" style="background-color: #f55246;">Delete</button>
-                      </p>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+            <div class="col-9 detail" >
+              <h3 class="item-title">{{ item.item.title }}</h3>
+              <h4>By {{ item.item.author }} ({{item.item.format}})</h4>
+              <h3 style>Qty {{ item.item.count }}</h3>
+
+              <!-- <table style="height:90px;">
+                <tr>
+                  <td>
+                    <h3 class="item-title">{{ item.item.title }}</h3>
+                  </td>
+                </tr>
+                <tr>
+                  <h4>By {{ item.item.author }} ({{item.item.format}})</h4>
+                  <h3 style>Qty {{ item.item.count }}</h3>
+                </tr>
+              </table>-->
+              <table style="height:40px;" class="tb-btn">
+                <tr>
+                  <td>
+                    <p>
+                      <button class="footer-btn main-color">Summary</button>
+                    </p>
+                  </td>
+                  <td>
+                    <p>
+                      <button class="footer-btn" style="background-color: #f55246;">Delete</button>
+                    </p>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -58,10 +62,12 @@ export default {
   },
   mounted: function() {
     this.userId = localStorage.getItem("userId");
-    this.$http.get(process.env.VUE_APP_API + "/reserves/users/" + this.userId).then(response => {
-      this.data = response.body;
-      window.console.log(this.data);
-    });
+    this.$http
+      .get(process.env.VUE_APP_API + "/reserves/users/" + this.userId)
+      .then(response => {
+        this.data = response.body;
+        window.console.log(this.data);
+      });
   }
 };
 </script>
@@ -82,7 +88,6 @@ table {
   margin: 10px auto;
 }
 tr {
-  width: 100px;
 }
 p {
   text-align: center;
@@ -112,6 +117,13 @@ p {
   border-radius: 4px;
   margin: auto 5px;
 }
+.item-title {
+  position: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
+  text-overflow: ellipsis;
+}
 
 @media only screen and (min-width: 768px) {
   p {
@@ -129,7 +141,10 @@ p {
   .footer-btn {
     margin: auto 15px 10px 0;
   }
-
+.detail {
+  text-align: left;
+  padding: 0 ;
+}
   .img-item {
     position: relative;
     margin: auto auto;
@@ -141,7 +156,6 @@ p {
     width: 50%;
     float: right;
     margin: -20px 0;
-
   }
   .header {
     margin-top: 100px;
