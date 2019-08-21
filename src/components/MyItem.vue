@@ -27,7 +27,9 @@
                   <tr>
                     <td>
                       <p>
-                        <button class="footer-btn main-color">Summary</button>
+                        <router-link :to="{ name: 'summary', params: { id: item.id }}">
+                          <button class="footer-btn main-color">Summary</button>
+                        </router-link>
                       </p>
                     </td>
                     <td>
