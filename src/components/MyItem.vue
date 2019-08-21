@@ -17,10 +17,10 @@
               <div class="detail">
                 <table style="height:90px;">
                   <tr>
-                    <h3>{{ item.title }} ({{item.format}})</h3>
+                    <h3>{{ item.title }}</h3>
                   </tr>
                   <tr>
-                    <h4>By {{ item.author }}</h4>
+                    <h4>By {{ item.author }} ({{item.format}})</h4>
                     <h3 style="color:red">${{item.price}}</h3>
                   </tr>
                 </table>
@@ -115,6 +115,13 @@ p {
 }
 
 @media only screen and (min-width: 768px) {
+  h3 {
+  white-space: nowrap;
+  width: 370px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
   p {
     margin: 0;
     padding: 0;

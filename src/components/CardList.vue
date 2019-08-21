@@ -122,6 +122,7 @@ export default {
     getItemData: function() {
       this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
         this.data = response.body;
+        window.console.log(this.data);
       });
     },
 
@@ -130,6 +131,7 @@ export default {
         .get(process.env.VUE_APP_API + "/reserves/" + itemId)
         .then(response => {
           this.orderList = response.body;
+          window.console.log(this.orderList);
         });
       this.orderModal = true;
     },
@@ -186,7 +188,7 @@ export default {
         .post(
           process.env.VUE_APP_API +
             "/reserves/" +
-            this.user.id +
+            this.userId +
             "/" +
             this.plusItem.itemId +
             "/" +

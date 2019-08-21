@@ -246,398 +246,357 @@
 </script>
 
 <style scoped>
-    * {
-        box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
+.lastname{
+  display: none;
+}
+.img-pro{
+  display: none;
+}
+.menu-list{
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 7px;
+  font-size:15px;
 
-    .lastname {
-        display: none;
-    }
+}
+.menu-list:hover{
+    background-color: #c5c5c5;
 
-    .img-pro {
-        display: none;
-    }
-
-    .menu-list {
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        border-radius: 7px;
-        font-size: 15px;
-
-    }
-
-    .menu-list:hover {
-        background-color: #c5c5c5;
-
-    }
-
-    .menu-drop {
-        position: fixed;
-        transform: translate(-50%, 0);
-        top: 60px;
-        left: 50%;
-        background-color: #eeeeee;
-        width: 40%;
-        border-radius: 7px
-    }
+}
+.menu-drop{
+  position: fixed;
+  transform: translate(-50%, 0);
+  top:60px;
+  left: 50%;
+  background-color: #eeeeee;
+  width: 40%;
+  border-radius: 7px
+}
 
 
-    .user-img {
-        position: fixed;
-        transform: translate(0, -50%);
-        top: 20px;
-        left: 10px;
-        width: 80px;
-        height: auto;
-    }
 
-    .arrow {
-        margin-top: 9px;
-        width: 11px;
-        height: auto;
-    }
+.user-img{
+  position: fixed;
+  transform: translate(0, -50%);
+  top:20px;
+  left: 10px;
+  width: 80px;
+  height: auto;
+}
+.arrow{
+  margin-top: 9px;
+  width: 11px;
+  height: auto;
+}
+.alert-bar {
+  width: 100%;
+  background-color: #b13636;
+  text-align: center;
+}
+[type="date"] {
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(83, 83, 83, 0.2);
+  width: 125px;
+  margin: 5px 0px 15px;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+.username{
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top:21.5px;
+  left: 50%;
+  color: #333;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.username:hover {
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: #dfdfdf;
+}
 
-    .alert-bar {
-        width: 100%;
-        background-color: #b13636;
-        text-align: center;
-    }
+.card {
+  width: 90%;
+  border-radius: 10px;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background: white;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 5px 10000px rgba(0, 0, 0, 0.5) !important;
+  transition:  0.3s;
+}
 
-    [type="date"] {
-        background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
-        border: 1px solid #c4c4c4;
-        border-radius: 5px;
-        background-color: #fff;
-        padding: 3px 5px;
-        box-shadow: inset 0 3px 6px rgba(83, 83, 83, 0.2);
-        width: 125px;
-        margin: 5px 0px 15px;
-    }
-
-    [type="date"]::-webkit-inner-spin-button {
-        display: none;
-    }
-
-    [type="date"]::-webkit-calendar-picker-indicator {
-        opacity: 0;
-    }
-
-    .username {
-        position: fixed;
-        transform: translate(-50%, -50%);
-        top: 21.5px;
-        left: 50%;
-        color: #333;
-        background-color: #f1f1f1;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .username:hover {
-        padding: 0 5px;
-        border-radius: 5px;
-        background-color: #dfdfdf;
-    }
-
-    .card {
-        width: 90%;
-        border-radius: 10px;
-        position: fixed;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        background: white;
-        margin: 0 auto;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 2px 5px 10000px rgba(0, 0, 0, 0.5) !important;
-        transition: 0.3s;
-    }
-
-    nav {
-        width: 100%;
-        color: #727272;
-        text-transform: uppercase;
-        padding: 10px 20px;
-        border-bottom: 0;
-        font-size: 12px;
-    }
-
-    .photo {
-        padding: 1%;
-        width: 45%;
-        text-align: center;
-        float: left;
-        border-right: 2px solid #efefef;
-    }
-
-    .imgBook {
-        margin: 10px auto;
-        width: 125px;
-        height: auto;
-        border-radius: 15px;
-    }
-
-    .description {
-        padding: 5% 3% 0 5%;
-        float: left;
-        width: 55%;
-    }
+nav {
+  width: 100%;
+  color: #727272;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-bottom: 0;
+  font-size: 12px;
+}
+.photo {
+  padding: 1%;
+  width: 45%;
+  text-align: center;
+  float: left;
+  border-right: 2px solid #efefef;
+}
+.imgBook {
+  margin: 10px auto;
+  width: 125px;
+  height: auto;
+  border-radius: 15px;
+}
+.description {
+  padding: 5% 3% 0 5%;
+  float: left;
+  width: 55%;
+}
 
 
-    h3 {
-        color: #515151;
-        margin: 0;
-    }
+h3 {
+  color: #515151;
+  margin: 0;
+}
 
 
-    p {
-        font-size: 12px;
-        line-height: 20px;
-        color: #727272;
-        padding: 10px 0;
-        margin: 0;
-    }
 
-    .button-add {
-        outline: 0;
-        border: 0;
-        border: 1px solid #d9d9d9;
-        padding: 8px 0px;
-        margin-bottom: 30px;
-        color: white;
-        text-transform: uppercase;
-        width: 125px;
-        font-family: inherit;
-        margin-right: 5px;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        cursor: pointer;
-    }
+p {
+  font-size: 12px;
+  line-height: 20px;
+  color: #727272;
+  padding: 10px 0;
+  margin: 0;
+}
 
-    .rs-img {
-        clear: both;
-        width: 50%;
-        height: auto;
-        transform: translateX(50%);
-        left: 50%;
-    }
+.button-add {
+  outline: 0;
+  border: 0;
+  border: 1px solid #d9d9d9;
+  padding: 8px 0px;
+  margin-bottom: 30px;
+  color: white;
+  text-transform: uppercase;
+  width: 125px;
+  font-family: inherit;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  cursor: pointer;
+}
+.rs-img {
+  clear: both;
+  width: 50%;
+  height: auto;
+  transform: translateX(50%);
+  left: 50%;
+}
+.fetchBtn {
+  border: 0px;
+  color: white;
+  float: right;
+  width: 20%;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 8px 0;
+  font-size: 15px;
+}
+.urlInput {
+  width: 78%;
+  height: 30px;
+  padding: 0 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+  border: 0;
+  border-radius: 4px;
+}
+.nav {
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%;
+  margin: 0;
+  padding: 6px 10px;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  height: 43px;
+  border-bottom: 2px solid #efefef;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+img {
+  margin: 2px 0;
+  height: 27px;
+}
+.manage-btn {
+  float: right;
+  text-align: center;
+  width: 100px;
+  height: 31px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.manage-btn > p {
+  color: white;
+  font-size: 17px;
+  padding: 5px 0;
+  text-align: center;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+}
+.add-btn {
+  float: right;
+  width: 40px;
+  height: 31px;
+  font-size: 23px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 0;
+}
+.add-btn > p {
+  text-align: center;
+  padding: 7px 0;
+  font-size: 35px;
+  color: white;
+  font-weight: 800;
+  font-family: "Roboto", sans-serif;
+}
+h5 {
+  margin: 0;
+}
 
-    .fetchBtn {
-        border: 0px;
-        color: white;
-        float: right;
-        width: 20%;
-        height: 30px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin: 8px 0;
-        font-size: 15px;
-    }
+.modal {
+  width: 90%;
+  padding: 20p;
+  border-radius: 4px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 25px;
+  z-index: 1;
+}
+[type="date"] {
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
 
-    .urlInput {
-        width: 78%;
-        height: 30px;
-        padding: 0 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.75);
-        border: 0;
-        border-radius: 4px;
-    }
+@media only screen and (min-width: 600px) {
+  .user-img{
+    width: auto;
+    height: 30px;
+    top: 24px;
+  } 
+  .lastname{
+  display: inline-block;
+}
+  .menu-drop{
+    width: 200px;
+  }
+  .nav {
+    height: 64px;
+  }
+  img {
+    margin: 7px 0;
+    height: 40px;
+  }
+  .add-btn {
+    width: 53px;
+    height: 50px;
+    font-size: 35px;
+  }
+  .add-btn > p {
+    padding: 15px 0;
+  }
+  .photo {
+    width: 40%;
+    padding: 15px;
+    float: left;
+  }
+  .description {
+    float: left;
+  }
+  .card {
+    width: 550px;
+  }
+  .imgBook {
+    position: static;
+    margin: auto auto;
+    width: auto;
+    height: 240px;
+    max-width: 180px;
+    border-radius: 10px;
+  }
+  p {
+    font-size: 12px;
+    line-height: 20px;
+    color: #727272;
+    padding: 20px 0;
+    margin: 0;
+  }
+  .manage-btn {
+    padding: 9px 0;
+    height: 50px;
+  }
+  .manage-btn > p {
+    font-size: 20px;
+  }
+  .username{
+  
+  top:31.5px;
 
-    .nav {
-        position: fixed; /* Set the navbar to fixed position */
-        top: 0; /* Position the navbar at the top of the page */
-        width: 100%;
-        margin: 0;
-        padding: 6px 10px;
-        overflow: hidden;
-        background-color: #f1f1f1;
-        height: 43px;
-        border-bottom: 2px solid #efefef;
-        box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.5);
-        z-index: 2;
-    }
-
-    img {
-        margin: 2px 0;
-        height: 27px;
-    }
-
-    .manage-btn {
-        float: right;
-        text-align: center;
-        width: 100px;
-        height: 31px;
-        border-radius: 5px;
-        margin-left: 10px;
-    }
-
-    .manage-btn > p {
-        color: white;
-        font-size: 17px;
-        padding: 5px 0;
-        text-align: center;
-        font-weight: 600;
-        font-family: "Roboto", sans-serif;
-    }
-
-    .add-btn {
-        float: right;
-        width: 40px;
-        height: 31px;
-        font-size: 23px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-        padding: 0;
-    }
-
-    .add-btn > p {
-        text-align: center;
-        padding: 7px 0;
-        font-size: 35px;
-        color: white;
-        font-weight: 800;
-        font-family: "Roboto", sans-serif;
-    }
-
-    h5 {
-        margin: 0;
-    }
-
-    .modal {
-        width: 90%;
-        padding: 20 p;
-        border-radius: 4px;
-        box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-        background-color: #ffffff;
-        position: fixed;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        padding: 25px;
-        z-index: 1;
-    }
-
-    [type="date"] {
-        background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
-    }
-
-    [type="date"]::-webkit-inner-spin-button {
-        display: none;
-    }
-
-    [type="date"]::-webkit-calendar-picker-indicator {
-        opacity: 0;
-    }
-
-    @media only screen and (min-width: 600px) {
-        .user-img {
-            width: auto;
-            height: 30px;
-            top: 24px;
-        }
-
-        .lastname {
-            display: inline-block;
-        }
-
-        .menu-drop {
-            width: 200px;
-        }
-
-        .nav {
-            height: 64px;
-        }
-
-        img {
-            margin: 7px 0;
-            height: 40px;
-        }
-
-        .add-btn {
-            width: 53px;
-            height: 50px;
-            font-size: 35px;
-        }
-
-        .add-btn > p {
-            padding: 15px 0;
-        }
-
-        .photo {
-            width: 40%;
-            padding: 15px;
-            float: left;
-        }
-
-        .description {
-            float: left;
-        }
-
-        .card {
-            width: 550px;
-        }
-
-        .imgBook {
-            position: static;
-            margin: auto auto;
-            width: auto;
-            height: 240px;
-            max-width: 180px;
-            border-radius: 10px;
-        }
-
-        p {
-            font-size: 12px;
-            line-height: 20px;
-            color: #727272;
-            padding: 20px 0;
-            margin: 0;
-        }
-
-        .manage-btn {
-            padding: 9px 0;
-            height: 50px;
-        }
-
-        .manage-btn > p {
-            font-size: 20px;
-        }
-
-        .username {
-
-            top: 31.5px;
-
-        }
-
-        .menu-drop {
-            top: 80px;
-        }
-
-        .img-pro {
-            display: inline;
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
-            margin: 5px 5px 0 5px;
-        }
-    }
-
-    .modal-cancel {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        top: -10px;
-        right: -10px;
-        color: white;
-        cursor: pointer;
-        border-radius: 50%;
-        background-color: #ff0000;
-        text-align: center;
-    }
+}
+ .menu-drop{
+    top:80px;
+  }
+  .img-pro{
+    display: inline;
+    border-radius:5px;
+    margin:5px 5px 0 5px;
+  }
+}
+.modal-cancel {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  right: -10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #ff0000;
+  text-align: center;
+}
 </style>
 
