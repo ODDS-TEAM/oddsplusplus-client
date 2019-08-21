@@ -10,8 +10,8 @@
               </p>
             </div>
             <div class="col-8 col-s-8">
-              <h3 id="card-book-title">{{ item.title }} ({{item.format}})</h3>
-              <h4 id="card-book-author">By {{ item.author }}</h4>
+                <h3 id="card-book-title" class="item-title">{{ item.title }}</h3>
+              <h4 id="card-book-author">By {{ item.author }}  ({{item.format}})</h4>
               <h1 id="card-book-price" style="color:red;">${{item.price}}</h1>
 
               <h5>
@@ -37,7 +37,7 @@
               <button
                 id="card-plus-button"
                 class="button-add btn-plus"
-                v-on:click="plusX(item.id)"
+                v-on:click="getOrderCount(item.id)"
               >PLUS 1</button>
             </div>
           </div>
@@ -61,20 +61,31 @@
     <div class="plus-modal" v-if="plusModal">
       <h3>X value</h3>
       <div style="  border-bottom: 2px solid #efefef;"></div>
-      <div class="manage">
-        <div class="updateCount">
-          <button :disabled="minCount + plusItem.count <= 0" v-on:click="decrease">-</button>
-        </div>
-        <div class="updateCount">
-          <span>{{plusItem.count}}</span>
-        </div>
-        <div class="updateCount">
-          <button v-on:click="increase">+</button>
-        </div>
-      </div>
+
+      <table style="width:100%;">
+        <tr>
+          <td>
+            <p>
+              <button
+                class="btn-count"
+                :disabled="plusItem.current == 0"
+                v-on:click="plusItem.current--;plusItem.send--"
+              >-</button>
+            </p>
+          </td>
+          <td>
+            <h2 style="margin:0;">{{plusItem.current}}</h2>
+          </td>
+          <td>
+            <p>
+              <button class="btn-count" v-on:click="plusItem.current++;plusItem.send++">+</button>
+            </p>
+          </td>
+        </tr>
+      </table>
 
       <div style="  border-bottom: 2px solid #efefef;"></div>
-      <button class="plus-btn" v-on:click="checkOrder">confirm</button>
+      <button class="plus-btn" v-on:click="sendOrder" :disabled="plusItem.send == 0">confirm</button>
       <button class="plus-btn cancel-btn" v-on:click="clearPlusModalData">cancel</button>
     </div>
   </div>
@@ -95,12 +106,12 @@ export default {
       orderModal: false,
       date: null,
       waiting: false,
-      minCount: null,
-      plusModal: false,
       plusItem: {
         itemId: null,
-        count: null
-      }
+        current: null,
+        send: 0
+      },
+      plusModal: false
     };
   },
   mounted: function() {
@@ -148,12 +159,12 @@ export default {
       this.orderList = null;
     },
     clearPlusModalData: function() {
+      this.plusItem.send = 0;
       this.plusModal = false;
-      this.minCount = null;
-      this.plusItem.count = 0;
+      this.plusItem.current = null;
       this.plusItem.itemId = null;
     },
-    plusX: function(itemId) {
+    getOrderCount: function(itemId) {
       this.$http
         .get(
           process.env.VUE_APP_API +
@@ -163,51 +174,30 @@ export default {
             itemId
         )
         .then(response => {
-          this.minCount = response.body;
-          this.plusItem.count = 0;
+          this.plusItem.current = response.body;
           this.plusItem.itemId = itemId;
           this.plusModal = true;
         });
     },
-    decrease: function() {
-      this.plusItem.count -= 1;
-    },
-    increase: function() {
-      this.plusItem.count += 1;
-    },
-    checkOrder: function() {
+    sendOrder: function() {
       this.plusModal = false;
-      if ((this.minCount === 0 && this.plusItem.count > 0) ||(this.minCount + this.plusItem.count > 0)) {
-        this.$http
-          .post(
-            process.env.VUE_APP_API +
-              "/reserves/" +
-              this.userId +
-              "/" +
-              this.plusItem.itemId +
-              "/" +
-              this.plusItem.count
-          )
-          .then(response => {
-            this.clearPlusModalData();
-            this.responses = response.body;
-            this.getItemData();
-          });
-      } else if(this.minCount + this.plusItem.count <= 0) {
-        this.$http
-          .delete(
-            process.env.VUE_APP_API +
-              "/reserves/" +
-              this.userId +
-              "/" +
-              this.plusItem.itemId
-          )
-          .then(response => {
-            this.clearPlusModalData();
-            this.responses = response.body;
-            this.getItemData();
-          });
-      }
+      if (this.plusItem.send == 0) return;
+      this.$http
+        .post(
+          process.env.VUE_APP_API +
+            "/reserves/" +
+            this.user.id +
+            "/" +
+            this.plusItem.itemId +
+            "/" +
+            this.plusItem.send
+        )
+        .then(response => {
+          this.clearPlusModalData();
+          this.responses = response.body;
+          window.console.log(this.responses);
+          this.getItemData();
+        });
     }
   }
 };
@@ -232,7 +222,12 @@ p {
   max-width: 230px;
   max-height: 240px;
 }
-
+.item-title {
+  white-space: nowrap;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .button-add {
   border-radius: 5px;
   border: 1px solid #d9d9d9;
@@ -295,15 +290,16 @@ p {
   background-color: #1498d5;
   border-radius: 5px;
   border: 1px solid #d9d9d9;
-  padding: 8px 0px;
-  margin: 25px -2px 11px 10px;
+  padding: 8px;
+  margin: 10px 0 10px 10px;
   color: white;
   text-transform: uppercase;
-  width: 70px;
+  width: 90px;
   font-family: inherit;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  box-shadow: 0 0 15px 0 0;
+  float: right;
+}
+.plus-btn:disabled {
+  display: none;
 }
 
 .cancel-btn {
@@ -323,6 +319,18 @@ p {
 
 .input {
   margin: 10px;
+}
+.btn-count {
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  border: 0;
+  font-size: 22px;
+  border-radius: 5px;
+  background-color: rgb(244, 244, 244);
+}
+.btn-count:hover {
+  background-color: rgb(238, 238, 238);
 }
 
 @media only screen and (min-width: 768px) {
