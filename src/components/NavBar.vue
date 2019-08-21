@@ -84,7 +84,12 @@ export default {
       urlInput: null,
       showResult: false,
       results: null,
-      userId: null,
+      user: {
+        id: null,
+        name: null,
+        email: null,
+        imgURL: null,
+      },
       orderModal: false,
       date: null,
       waiting: false,
@@ -92,7 +97,10 @@ export default {
     };
   },
   mounted: function() {
-    this.userId = localStorage.getItem("userId");
+    this.user.id = localStorage.getItem("userId");
+    this.user.name = localStorage.getItem("name");
+    this.user.email = localStorage.getItem("email");
+    this.user.imgURL = localStorage.getItem("imgURL");
   },
   methods: {
     closeDropSHow(){
@@ -140,7 +148,7 @@ export default {
         .post(
           process.env.VUE_APP_API +
             "/items/" +
-            this.userId +
+            this.user.id +
             "/" +
             new Date(this.date),
           {

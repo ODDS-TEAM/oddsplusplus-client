@@ -19,7 +19,11 @@ export default {
   mounted: function() {
     this.$http.get(process.env.VUE_APP_API + "/users/Cheese").then(response => {
       this.user = response.body;
+      window.console.log(this.user);
       localStorage.setItem("userId", this.user.id);
+      localStorage.setItem("name", this.user.name);
+      localStorage.setItem("email", this.user.email);
+      localStorage.setItem("imgURL", this.user.imgURL);
     });
   },
   data() {
