@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="header">
+      <h1 style="text-align:center;padding:0;">My orders</h1>
+    </div>
     <ul>
       <li v-for="item in data" v-bind:key="item.value">
         <div class="card">
@@ -61,6 +64,10 @@ export default {
 };
 </script>
 <style scoped>
+.header {
+  margin-top: 50px;
+  font-weight: 900;
+}
 .detail {
   text-align: left;
   padding: 0 25px;
@@ -104,7 +111,6 @@ p {
   margin: auto 5px;
 }
 
-
 @media only screen and (min-width: 768px) {
   p {
     margin: 0;
@@ -112,7 +118,7 @@ p {
     text-align: left;
   }
   ul {
-    margin-top: 94px;
+    margin-top: 10px;
   }
   .card {
     width: 500px;
@@ -132,6 +138,9 @@ p {
   .tb-btn {
     width: 50%;
     margin: 10px 0;
+  }
+  .header {
+    margin-top: 100px;
   }
 }
 </style>
