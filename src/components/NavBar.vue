@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="nav">
-            <span>
-                                    <router-link to=/home> <img class="user-img" src="./../assets/odds_logo.png" id="navbar-logo"/></router-link>
-                                </span>
+            <router-link to=/home>
+                <img class="user-img" src="./../assets/odds_logo.png" id="navbar-logo" />
+            </router-link>
             <div>
                 <table @click="menuDropShow = !menuDropShow" class="username">
                     <tr>
@@ -16,11 +16,16 @@
                         <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-logo" /></td>
                     </tr>
                 </table>
-                <div v-if="menuDropShow" class="menu-drop" style="text-align:center;">
-                    <h4 class="menu-list" @click="routing(1)">My items </h4>
-                    <h4 class="menu-list" @click="routing(2)">My orders </h4>
-                    <h4 class="menu-list" style="border-bottom:none;margin-bottom:0;">Log out</h4>
+                <div class="menu" v-if="menuDropShow">
+                    <div class="menu-wrapper" @click="menuDropShow =false">
+                        <div class="menu-container" @click.stop>
+                            <h4 class="menu-list" @click="routing(1)">My items </h4>
+                            <h4 class="menu-list" @click="routing(2)">My orders </h4>
+                            <h4 class="menu-list" style="border-bottom:none;margin-bottom:0;">Log out</h4>
+                        </div>
+                    </div>
                 </div>
+    
             </div>
             <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
                 <p>+</p>
@@ -100,6 +105,33 @@ export default {
     display: none;
 }
 
+.menu {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+}
+
+.menu-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.menu-container {
+    position: fixed;
+    transform: translate(-50%, 0);
+    top: 60px;
+    left: 50%;
+    background-color: #eeeeee;
+    width: 70%;
+    border-radius: 7px
+}
+
 .img-pro {
     width: 40px;
     height: 40px;
@@ -111,21 +143,12 @@ export default {
     text-decoration: none;
     display: block;
     border-radius: 7px;
+    text-align: center;
     font-size: 15px;
 }
 
 .menu-list:hover {
     background-color: #c5c5c5;
-}
-
-.menu-drop {
-    position: fixed;
-    transform: translate(-50%, 0);
-    top: 60px;
-    left: 50%;
-    background-color: #eeeeee;
-    width: 40%;
-    border-radius: 7px
 }
 
 .user-img {
@@ -223,8 +246,13 @@ h5 {
     .l-name {
         display: inline-block;
     }
-    .menu-drop {
+    .menu-container {
+        
+        top: 80px;
+        left: 50%;
+        background-color: #eeeeee;
         width: 200px;
+        border-radius: 7px
     }
     .nav {
         height: 64px;
@@ -250,9 +278,6 @@ h5 {
     }
     .username {
         top: 31.5px;
-    }
-    .menu-drop {
-        top: 80px;
     }
     .img-pro {
         display: inline;
