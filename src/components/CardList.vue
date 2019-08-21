@@ -59,7 +59,7 @@
     </div>
 
     <div class="plus-modal" v-if="plusModal">
-      <h3>X value</h3>
+      <h3>Value</h3>
       <div style="  border-bottom: 2px solid #efefef;"></div>
 
       <table style="width:100%;">
@@ -72,13 +72,13 @@
                 v-on:click="plusItem.current--;plusItem.send--"
               >-</button>
             </p>
-          </td>
-          <td>
-            <h2 style="margin:0;">{{plusItem.current}}</h2>
+          </td >
+          <td style="text-align:center;">
+            <h2 style="margin:0 ;">{{plusItem.current}}</h2>
           </td>
           <td>
             <p>
-              <button class="btn-count" v-on:click="plusItem.current++;plusItem.send++">+</button>
+              <button class="btn-count_" v-on:click="plusItem.current++;plusItem.send++">+</button>
             </p>
           </td>
         </tr>
@@ -306,7 +306,7 @@ p {
 
 .cancel-btn {
   color: white;
-  width: 70px;
+  width: 88px;
   background-color: #fa1d12;
 }
 
@@ -323,16 +323,39 @@ p {
   margin: 10px;
 }
 .btn-count {
-  cursor: pointer;
-  width: 100px;
-  height: 30px;
-  border: 0;
-  font-size: 22px;
-  border-radius: 5px;
-  background-color: rgb(244, 244, 244);
+	background-color:#db3223;
+  border-radius:14px;
+	border:2px solid #d02718;
+  color:#ffffff;
+	font-family:Georgia;
+	font-size:16px;
+	padding:8px 27px;
+	text-decoration:none;
 }
 .btn-count:hover {
-  background-color: rgb(238, 238, 238);
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, rgb(236, 139, 139)), color-stop(1, #ff2222));
+}
+.btn-count:active {
+	position:relative;
+	top:2px;
+}
+.btn-count_ {
+	
+	background-color:#77b55a;
+	border-radius:14px;
+	border:1px solid #4b8f29;
+	color:#ffffff;
+	font-family:Georgia;
+	font-size:16px;
+	padding:8px 27px;
+	text-decoration:none;
+}
+.btn-count_:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, rgb(164, 247, 145)), color-stop(1, #209908));
+}
+.btn-count_:active {
+	position:relative;
+	top:2px;
 }
 
 @media only screen and (min-width: 768px) {
