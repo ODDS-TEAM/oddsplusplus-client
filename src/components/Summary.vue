@@ -104,9 +104,7 @@ h3 {
   .prod-detail {
     padding: 20px;
     border-bottom: none;
-  }
-  .col-8 {
-    border-left: 2px solid #efefef;
+    border-right: 2px solid #efefef;
   }
 }
 </style>
