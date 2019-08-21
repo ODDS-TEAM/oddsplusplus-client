@@ -37,6 +37,7 @@
               <button
                 id="card-plus-button"
                 class="button-add btn-plus"
+                v-if="item.status.status == 'pending'"
                 v-on:click="getOrderCount(item.id)"
               >PLUS 1</button>
             </div>
