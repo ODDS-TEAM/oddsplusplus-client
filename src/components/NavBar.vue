@@ -23,17 +23,6 @@
      <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
         <p>+</p>
       </div> 
-
-      <!-- <router-link to="/myitem">
-        <div class="main-color manage-btn" v-on:click="showModal = false" id="navbar-add-button">
-          <p>My item</p>
-        </div>
-     
-        
-        <div class="main-color manage-btn" v-on:click="showModal = false" id="navbar-add-button">
-          <p>My order</p>
-        </div>
-      -->
     </div>
     <div class="card" v-if="showModal">
       <a class="modal-cancel" v-on:click="clearModalData" id="modal-cancel">X</a>
@@ -322,26 +311,14 @@ nav {
   float: left;
   width: 55%;
 }
-h1 {
-  color: #515151;
-  font-weight: 300;
-  padding-top: 15px;
-  margin: 0;
-  font-size: 30px;
-  font-weight: 300;
-}
+
 
 h3 {
   color: #515151;
   margin: 0;
 }
 
-h4 {
-  margin: 0;
-  color: #727272;
-  font-weight: 500;
-  font-size: 12px;
-}
+
 
 p {
   font-size: 12px;

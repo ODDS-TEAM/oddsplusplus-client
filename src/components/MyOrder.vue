@@ -17,10 +17,11 @@
               <div class="detail">
                 <table style="height:90px;">
                   <tr>
-                    <h3>{{ item.title }}</h3>
+                    <h3>{{ item.title }} ({{item.format}})</h3>
                   </tr>
                   <tr>
-                    <h4>{{item.format}}</h4>
+                    <h4>By {{ item.author }}</h4>
+                    <h3 style="">Qty 5</h3>
                   </tr>
                 </table>
                 <table style="height:40px;" class="tb-btn">
@@ -137,7 +138,9 @@ p {
   }
   .tb-btn {
     width: 50%;
-    margin: 10px 0;
+    float: right;
+    margin: -20px 0;
+
   }
   .header {
     margin-top: 100px;
