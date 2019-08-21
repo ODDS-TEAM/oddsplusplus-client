@@ -93,6 +93,8 @@ export default {
       this.$http
         .patch(process.env.VUE_APP_API + "/updateOrder/" + this.$route.params.id + "/" + this.cost + "/" + this.charge)
         .then(response => {
+          this.clearModalData();
+          this.$emit("refreshMyItem");
           this.responses = response.body;
         });
     },

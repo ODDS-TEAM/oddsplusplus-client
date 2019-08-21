@@ -523,7 +523,8 @@ h5 {
   }
   .img-pro{
     display: inline;
-    width:40px;height:40px;border-radius:5px;margin:5px 5px 0 5px;
+    border-radius:5px;
+    margin:5px 5px 0 5px;
   }
 }
 .modal-cancel {
