@@ -18,7 +18,7 @@
                             <h4>By {{ item.item.author }} ({{item.item.format}})</h4>
                             <table style="height:40px;" class="tb-btn">
                                 <tr>
-                                    <td >
+                                    <td>
                                         <div style="position: relative;margin: auto;overflow: hidden;width: 40px;height:40px;">
                                             <img v-if="loading[index]" src="../assets/loading.gif" style="width:40px;height:40px;margin: 0;border-radius:50%;transform: scale(1.6);">
                                         </div>
@@ -39,8 +39,8 @@
                                     <td style="margin-left:5px;">
                                         <p>
                                             <button class="del-btn" v-on:click="deleteOrder(item.id)">
-                                                                            <img class="img-delete" src="./../assets/delete.png" />
-                                                                          </button>
+                                                                                <img class="img-delete" src="./../assets/delete.png" />
+                                                                              </button>
                                         </p>
                                     </td>
                                 </tr>
@@ -141,10 +141,8 @@ export default {
                     "/reserves/" +
                     orderId
                 )
-                .then(response => {
-                    this.responses = response;
-                    this.$emit("close");
-                    this.$emit("refresh");
+                .then(() => {
+                    this.getOrder();
                 });
 
         }
