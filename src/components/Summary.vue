@@ -12,8 +12,8 @@
       </div>
       <div class="col-8 summary-detail">
         <table style="height:110px;width: 100%; margin:10px 0; border-bottom: 2px solid #efefef;">
-          <button class="btn-order btn-sum" v-on:click="modal = true">Result</button>
-          <button class="btn-order" v-on:click="goToAmazon">Order Book</button>
+          <button class="btn-order btn-sum" v-on:click="modal = true">Order Update</button>
+          <button class="btn-order" v-on:click="goToAmazon">Go to Amazon</button>
           <tr>
             <h2 class="p-20-t">Qty : {{summary.item.count}}</h2>
           </tr>
@@ -52,15 +52,8 @@
         </thead>
       </div>
     </div>
-    <!-- <div class="modal" v-if="modal">
-      <h3>Total Costs</h3>
-      <input type="text" v-model="cost" />
-      <h3>Shipping Charge</h3>
-      <input type="text" v-model="charge" />
-      <button class="plus-btn" v-on:click="updateOrder">confirm</button>
-      <button class="plus-btn cancel-btn" v-on:click="clearModalData">cancel</button>
-    </div> -->
-    <ResultModal @close="modal=false" v-if="modal"/>
+    
+    <ResultModal @close="modal=false" @refresh="getItemData" v-if="modal"/>
   </div>
 </template>
 
@@ -191,7 +184,7 @@ h3 {
   padding: 8px 0px;
   color: #515151;
   text-transform: uppercase;
-  width: 105px;
+  width: 125px;
   font-family: inherit;
   margin-right: 5px;
   transition: all 0.3s ease;
@@ -207,9 +200,10 @@ h3 {
 }
 
 .btn-sum {
+  border: 0;
   background-color: #1498d5;
   color: white;
-  width: 70px;
+  width: 120px;
   margin-right: 20px;
 }
 
