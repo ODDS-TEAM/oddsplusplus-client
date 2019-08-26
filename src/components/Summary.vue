@@ -24,6 +24,8 @@
             <h3 class="p-20-t">Total charge : ${{summary.item.shippingCharge}}</h3>
           </tr>
         </table>
+        <thead>
+          <tbody>
         <table style="width: 100%;margin: 20px 0 0px;overflow-x:auto;">
           <tr>
             <th class="p-20-h" style="width:80%;">Name</th>
@@ -46,6 +48,8 @@
             <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.shippingCharge}}</td>
           </tr>
         </table>
+          </tbody>
+        </thead>
       </div>
     </div>
     <div class="modal" v-if="modal">
@@ -120,6 +124,16 @@ export default {
 </script>
 
 <style scoped>
+thead {
+    display: inline-block;
+    width: 100%;
+}
+tbody {
+    height: 150px;
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+}
 .p-20-h {
   padding: 0 10px 0 10px;
   font-size: 12px;
@@ -151,6 +165,13 @@ h3 {
   .p-20-h {
   font-size: 16px;
   }
+
+  tbody {
+    height: 290px;
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+}
 
   .prod-detail {
     padding: 20px;
