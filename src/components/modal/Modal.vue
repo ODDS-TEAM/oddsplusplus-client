@@ -26,7 +26,6 @@ export default {
 
 
 .modal-container {
-  width: 90%;
   border-radius: 10px;
   margin: 0px auto;
   padding: 5px 20px 5px;
@@ -57,7 +56,7 @@ export default {
 }
 @media only screen and (min-width: 768px) {
   .modal-container {
-    width: 550px;
+    width: 400px;
   }
 }
 </style>
