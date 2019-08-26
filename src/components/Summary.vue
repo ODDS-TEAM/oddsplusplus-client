@@ -2,7 +2,8 @@
     <div class="card">
     
         <div class="row">
-            <div v-if="loading" class="col-12"> <p><img  src="../assets/loading.gif" style="width:100px;height:100px;margin: 0;border-radius:50%;;"></p>
+            <div v-if="loading" class="col-12">
+                <p><img src="../assets/loading.gif" style="width:100px;height:100px;margin: 0;border-radius:50%;;"></p>
             </div>
     
             <div v-if="!loading" class="col-4 prod-detail" style>
@@ -16,10 +17,20 @@
             </div>
             <div v-if="!loading" class="col-8 summary-detail">
                 <table style="height:110px;width: 100%; margin:10px 0; border-bottom: 2px solid #efefef;">
-                    <button class="btn-order btn-sum" v-on:click="modal = true">Order Update</button>
-                    <button class="btn-order" v-on:click="goToAmazon">Go to Amazon</button>
                     <tr>
-                        <h2 class="p-20-t">Qty : {{summary.item.count}}</h2>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:45%;">
+                                    <h2 class="p-20-t">Qty : {{summary.item.count}}</h2>
+                                </td>
+                                <td style="width:27.5%;">
+                                    <button class="btn-order" v-on:click="goToAmazon">Go to Amazon</button>
+                                </td>
+                                <td style="width:27.5%;"> <button class="btn-order btn-sum" v-on:click="modal = true">Order Update</button>
+                                </td>
+                            </tr>
+                        </table>
+    
                     </tr>
                     <tr>
                         <h3 class="p-20-t">Total price : ${{summary.item.cost}}</h3>
@@ -192,10 +203,10 @@ h3 {
 .btn-order {
     border-radius: 5px;
     border: 1px solid #d9d9d9;
-    padding: 8px 0px;
+    padding: 8px;
     color: #515151;
     text-transform: uppercase;
-    width: 125px;
+    width: 100% !important;
     font-family: inherit;
     margin-right: 5px;
     transition: all 0.3s ease;
@@ -215,7 +226,6 @@ h3 {
     background-color: #1498d5;
     color: white;
     width: 120px;
-    margin-right: 20px;
 }
 
 .modal {
