@@ -30,8 +30,8 @@
                                     <td>
                                         <p>
                                             <button class="footer-btn" style="background-color: #f55246;">
-                                                            <img class="img-delete" src="./../assets/delete.png" />
-                                                          </button>
+                                                                                                    <img class="img-delete" src="./../assets/delete.png" />
+                                                                                                  </button>
                                         </p>
                                     </td>
                                 </tr>
@@ -52,36 +52,73 @@ export default {
             userId: null,
             orderdate: true,
             timeout: null,
-            qtySend: 0
+            qtySend: 0,
+            user: {
+                id: null,
+                name: null,
+                email: null,
+                imgURL: null,
+            }
         };
     },
     mounted: function() {
-        this.userId = localStorage.getItem("userId");
-        this.$http
-            .get(process.env.VUE_APP_API + "/reserves/users/" + this.userId)
-            .then(response => {
-                this.data = response.body;
-                window.console.log(this.data);
-            });
+        this.user.id = localStorage.getItem("userId");
+        this.user.name = localStorage.getItem("name");
+        this.user.email = localStorage.getItem("email");
+        this.user.imgURL = localStorage.getItem("imgURL");
+        this.getOreder();
     },
     methods: {
         decrease: function(index) {
+            this.data[index].count--;
             if (this.timeout) {
                 clearTimeout(this.timeout);
-                this.data[index].count--;
             }
             this.timeout = setTimeout(() => {
-                window.console.log("Qty", this.data[index].count);
+                this.$http
+                    .post(
+                        process.env.VUE_APP_API +
+                        "/orders/" +
+                        this.user.id +
+                        "/" +
+                        this.data[index].item.id +
+                        "/" +
+                        this.data[index].count
+                    )
+                    .then(() => {
+                        this.getOreder();
+                    });
             }, 900);
 
         },
         increase: function(index) {
-            if (this.timeout) clearTimeout(this.timeout);
+            this.data[index].count++;
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+            }
             this.timeout = setTimeout(() => {
-                window.console.log("test", this.data[index].count)
-                /* ---- action */
+                this.$http
+                    .post(
+                        process.env.VUE_APP_API +
+                        "/orders/" +
+                        this.user.id +
+                        "/" +
+                        this.data[index].item.id +
+                        "/" +
+                        this.data[index].count
+                    )
+                    .then(() => {
+                        this.getOreder();
+                    });
             }, 900);
-            this.data[index].count += 1;
+        },
+        getOreder() {
+            this.$http
+                .get(process.env.VUE_APP_API + "/reserves/users/" + this.user.id)
+                .then(response => {
+                    this.data = response.body;
+                    window.console.log(this.data);
+                });
         }
     }
 };
