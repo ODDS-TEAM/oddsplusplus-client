@@ -8,20 +8,20 @@
                 <table @click="menuDropShow = !menuDropShow" class="account-bar-m">
                     <tr>
                         <td><img class="img-pro" :src="user.imgURL" id="navbar-logo" /></td>
-                        <td style="font-size: 17px;margin:0">
+                        <td style="font-size: 15px;margin:0">
                             <h3 class="f-name">{{user.name}}
-                                <h3 class="l-name">Test</h3>
                             </h3>
                         </td>
                         <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-logo" /></td>
                     </tr>
                 </table>
                 <div class="menu" v-if="menuDropShow">
-                    <div class="menu-wrapper" @click="menuDropShow =false">
+                    <div class="menu-wrapper" @click="menuDropShow =false" >
                         <div class="menu-container" @click.stop>
-                            <h4 class="menu-list" @click="routing(1)">My items </h4>
-                            <h4 class="menu-list" @click="routing(2)">My orders </h4>
-                            <h4 class="menu-list" style="border-bottom:none;margin-bottom:0;">Log out</h4>
+                            <h4 class="menu-list" @click="routing(0)">Home</h4>
+                            <h4 class="menu-list" @click="routing(1)">Your Lists </h4>
+                            <h4 class="menu-list" @click="routing(2)">Your Orders </h4>
+                            <h4 class="menu-list" style="border-bottom:none;margin-bottom:0;">Sign Out</h4>
                         </div>
                     </div>
                 </div>
@@ -30,12 +30,11 @@
             <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
                 <p>+</p>
             </div>
-            <table @click="menuDropShow = !menuDropShow" class="account-bar-d">
+            <table class="account-bar-d" @click="menuDropShow =true" >
                 <tr>
-                    <td><img class="img-pro" style="margin:1px 5px;width:45px;height:45px; " :src="user.imgURL" id="navbar-logo" /></td>
-                    <td style="font-size: 17px;margin:0; padding:0;">
+                    <td><img class="img-pro" style="margin:3px 5px; " :src="user.imgURL" id="navbar-logo" /></td>
+                    <td style="font-size: 15px;margin:0; padding:0;">
                         <h3 class="f-name" style="margin-bottom: 3px;">{{user.name}}
-                            <h3 class="l-name">Test</h3>
                         </h3>
                     </td>
                     <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-logo" /></td>
@@ -109,6 +108,7 @@ export default {
 
 .account-bar-d {
     float: right;
+    margin-right: 10px;
     height: 50px;
     display: none;
 }
@@ -145,7 +145,7 @@ export default {
     top: 60px;
     right: 50%;
     background-color: #eeeeee;
-    width: 200px;
+    width: 170px;
     border-radius: 7px
 }
 
@@ -156,11 +156,11 @@ export default {
 }
 
 .menu-list {
-    padding: 12px 16px;
+    padding: 12px 25px;
     text-decoration: none;
     display: block;
     border-radius: 7px;
-    text-align: center;
+    text-align: left;
     font-size: 15px;
 }
 
@@ -256,7 +256,7 @@ h5 {
 
 @media only screen and (min-width: 600px) {
     .account-bar-d {
-        height: 53px;
+        height: 52px;
         display: block;
     }
     .account-bar-d:hover {
@@ -275,7 +275,7 @@ h5 {
     }
     .menu-container {
         top: 80px;
-        right: 150px;
+        right: 140px;
         border-radius: 7px
     }
     .nav {
