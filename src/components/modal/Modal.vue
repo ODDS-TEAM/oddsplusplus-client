@@ -34,8 +34,8 @@ export default {
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
   overflow-y:scroll;
-  max-height: 95%;
-
+  max-height: 90%;
+  width: 90%;
 }
 
 .modal {
