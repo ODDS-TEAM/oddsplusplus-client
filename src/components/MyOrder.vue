@@ -13,7 +13,7 @@
               </p>
             </div>
 
-            <div class="col-9 detail" >
+            <div class="col-9 detail">
               <h3 class="item-title">{{ item.item.title }}</h3>
               <h4>By {{ item.item.author }} ({{item.item.format}})</h4>
               <h3 style>Qty {{ item.item.count }}</h3>
@@ -32,13 +32,19 @@
               <table style="height:40px;" class="tb-btn">
                 <tr>
                   <td>
-                    <p>
-                      <button class="footer-btn main-color">Summary</button>
-                    </p>
+                    <button class="minus-btn">-</button>
+                  </td>
+                  <td>
+                    <h3 class="amount">1</h3>
+                  </td>
+                  <td>
+                    <button class="plus-btn">+</button>
                   </td>
                   <td>
                     <p>
-                      <button class="footer-btn" style="background-color: #f55246;">Delete</button>
+                      <button class="footer-btn" style="background-color: #f55246;">
+                        <img class="img-delete" src="./../assets/delete.png" />
+                      </button>
                     </p>
                   </td>
                 </tr>
@@ -72,6 +78,29 @@ export default {
 };
 </script>
 <style scoped>
+.minus-btn {
+  background-color: #db3223;
+  border-radius: 14px;
+  border: 2px solid #d02718;
+  color: #ffffff;
+  font-family: Georgia;
+  font-size: 16px;
+  padding: 5px 20px;
+  margin: 0px 10px 9px 10px;
+  text-decoration: none;
+}
+
+.plus-btn {
+  background-color: #77b55a;
+  border-radius: 14px;
+  border: 1px solid #4b8f29;
+  color: #ffffff;
+  font-family: Georgia;
+  font-size: 16px;
+  padding: 5px 20px;
+  margin: 0px 10px 9px 10px;
+  text-decoration: none;
+}
 .header {
   margin-top: 50px;
   font-weight: 900;
@@ -86,8 +115,6 @@ table {
 .tb-btn {
   width: 100%;
   margin: 10px auto;
-}
-tr {
 }
 p {
   text-align: center;
@@ -112,7 +139,7 @@ p {
 .footer-btn {
   border: 0;
   color: white;
-  width: 90px;
+  width: 40px;
   height: 30px;
   border-radius: 4px;
   margin: auto 5px;
@@ -124,6 +151,9 @@ p {
   width: 90%;
   text-overflow: ellipsis;
 }
+.img-delete {
+    height: 20px;
+  }
 
 @media only screen and (min-width: 768px) {
   p {
@@ -141,10 +171,10 @@ p {
   .footer-btn {
     margin: auto 15px 10px 0;
   }
-.detail {
-  text-align: left;
-  padding: 0 ;
-}
+  .detail {
+    text-align: left;
+    padding: 0;
+  }
   .img-item {
     position: relative;
     margin: auto auto;
@@ -159,6 +189,9 @@ p {
   }
   .header {
     margin-top: 100px;
+  }
+  .img-delete {
+    height: 20px;
   }
 }
 </style>
