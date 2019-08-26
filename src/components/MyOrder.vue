@@ -89,33 +89,34 @@ export default {
 
 <style scoped>
 .minus-btn {
-    background-color: #db3223;
-    border-radius: 14px;
-    border: 2px solid #d02718;
-    color: #ffffff;
-    font-family: Georgia;
-    font-size: 16px;
-    padding: 5px 20px;
-    margin: 0px 10px 9px 10px;
-    text-decoration: none;
+  color: #000000;
+  padding: 5px 13px;
 }
 
 .amount {
     padding-bottom: 20px;
 }
 
-.plus-btn {
-    background-color: #77b55a;
-    border-radius: 14px;
-    border: 1px solid #4b8f29;
-    color: #ffffff;
-    font-family: Georgia;
-    font-size: 16px;
-    padding: 5px 20px;
-    margin: 0px 10px 9px 10px;
-    text-decoration: none;
+.footer-btn {
+  border: 0;
+  color: white;
+  width: 40px;
+  height: 30px;
+  border-radius: 4px;
+  margin: auto 5px;
 }
-
+.btn {
+  border-radius: 4px;
+  font-family: Georgia;
+  font-size: 16px;
+  margin: 0px 10px 9px 10px;
+  text-decoration: none;
+}
+.plus-btn {
+  background-color: #1498d5;
+  color: #ffffff;
+  padding: 5px 12px;
+}
 .header {
     margin-top: 50px;
     font-weight: 900;
@@ -156,15 +157,6 @@ p {
 
 .card:hover {
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
-}
-
-.footer-btn {
-    border: 0;
-    color: white;
-    width: 40px;
-    height: 30px;
-    border-radius: 4px;
-    margin: auto 5px;
 }
 
 .item-title {
