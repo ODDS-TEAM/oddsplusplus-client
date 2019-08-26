@@ -13,7 +13,8 @@
                             </p>
                         </td>
                         <td style="text-align:center;width:50%">
-                            <h2 style="margin:0 ;">{{plusItem.current}}</h2>
+                            <h2  v-if="!loading" style="margin:0 ;">{{plusItem.current}}</h2>
+                            <img v-if="loading" src="../../assets/loading.gif" style="width:50px;height:50px;margin:0 auto;transform: scale(1.2);">
                         </td>
                         <td style="width:25%">
                             <p>
@@ -44,6 +45,7 @@ export default {
     data() {
         return {
             userId: null,
+            loading:true,
             plusItem: {
                 itemId: null,
                 current: null,
@@ -76,6 +78,7 @@ export default {
                     this.plusItem.count = response.body;
                     this.plusItem.itemId = itemId;
                     this.plusModal = true;
+                    this.loading= false;
                 });
         },
         sendOrder: function() {
