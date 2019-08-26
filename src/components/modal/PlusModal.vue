@@ -89,6 +89,8 @@ export default {
                     this.plusItem.send
                 )
                 .then(response => {
+                    this.$emit('close');
+                    this.$emit('refreshMyItem');
                     this.clearPlusModalData();
                     this.responses = response.body;
                     window.console.log(this.responses);
