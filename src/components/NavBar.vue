@@ -16,10 +16,10 @@
                     </tr>
                 </table>
                 <div class="menu" v-if="menuDropShow">
-                    <div class="menu-wrapper" @click="menuDropShow =false" >
+                    <div class="menu-wrapper" @click="menuDropShow =false">
                         <div class="menu-container" @click.stop>
                             <h4 class="menu-list" @click="routing(0)">Home</h4>
-                            <h4 class="menu-list" @click="routing(1)">Your Lists </h4>
+                            <h4 class="menu-list" @click="routing(1)">Your Items </h4>
                             <h4 class="menu-list" @click="routing(2)">Your Orders </h4>
                             <h4 class="menu-list" style="border-bottom:none;margin-bottom:0;">Sign Out</h4>
                         </div>
@@ -28,9 +28,9 @@
     
             </div>
             <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
-                <p>+</p>
+                <p style="padding:0;"><img class="ico-add-item" src="./../assets/add.png" id="navbar-logo" /></p>
             </div>
-            <table class="account-bar-d" @click="menuDropShow =true" >
+            <table class="account-bar-d" @click="menuDropShow =true">
                 <tr>
                     <td><img class="img-pro" style="margin:3px 5px; " :src="user.imgURL" id="navbar-logo" /></td>
                     <td style="font-size: 15px;margin:0; padding:0;">
@@ -90,9 +90,10 @@ export default {
             this.menuDropShow = false;
             if (page === 1) {
                 this.$router.push('/myitem');
-            }
-            if (page === 2) {
+            } else if (page === 2) {
                 this.$router.push('/myorder');
+            } else {
+                this.$router.push('/home');
             }
         }
 
@@ -132,6 +133,12 @@ export default {
     background-color: rgba(0, 0, 0, 0.5);
     display: table;
     transition: opacity 0.3s ease;
+}
+
+.ico-add-item {
+    margin: 7px auto;
+    width: 18px;
+    height: 18px;
 }
 
 .menu-wrapper {
@@ -307,6 +314,11 @@ h5 {
         display: inline;
         border-radius: 5px;
         margin: 5px 5px 0 5px;
+    }
+    .ico-add-item {
+        margin: 12px auto;
+        width: 27px;
+        height: 27px;
     }
 }
 </style>

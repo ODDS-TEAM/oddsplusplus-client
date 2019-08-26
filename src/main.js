@@ -22,6 +22,8 @@ const router = new VueRouter({
 
 Vue.component('modal', require('./components/modal/Modal.vue').default);
 
+
+
 new Vue({
   router,
   render: h => h(App),
