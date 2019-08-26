@@ -14,33 +14,35 @@
         <table style="height:110px;width: 100%; margin:10px 0; border-bottom: 2px solid #efefef;">
           <button v-on:click="modal = true">SUM</button>
           <tr>
-            <h2 class="p-20-h p-20-t">Qty : {{summary.item.count}}</h2>
+            <h2 class="p-20-t">Qty : {{summary.item.count}}</h2>
           </tr>
           <tr>
-            <h3 class="p-20-h p-20-t">Total price : ${{summary.item.cost}}</h3>
+            <h3 class="p-20-t">Total price : ${{summary.item.cost}}</h3>
           </tr>
           <tr>
-            <h3 class="p-20-h p-20-t">Total charge : ${{summary.item.shippingCharge}}</h3>
+            <h3 class="p-20-t">Total charge : ${{summary.item.shippingCharge}}</h3>
           </tr>
         </table>
         <table style="width: 100%;margin: 20px 0 0px;overflow-x:auto;">
           <tr>
             <th class="p-20-h" style="width:80%;">Name</th>
-            <th class="p-20-h" style="width:20%;">Qty</th>
+            <th class="p-20-h" style="width:20%; text-align:center">Qty</th>
             <th class="p-20-h" style="width:20%;">Costs($)</th>
             <th class="p-20-h" style="width:20%;">Charge($)</th>
           </tr>
           <tr v-for="order in summary.order" :key="order.id">
             <td class="p-20-h p-20-t">
+              <p style="text-align:left; margin: 0">
               <img
                 src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg"
                 style="max-width: 20px"
               />
+              </p>
               {{order.user.name}}
             </td>
             <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
-            <td class="p-20-h p-20-t" style="color: red; text-align:right">{{order.cost}}</td>
-            <td class="p-20-h p-20-t" style="color: red; text-align:right">{{order.shippingCharge}}</td>
+            <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.cost}}</td>
+            <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.shippingCharge}}</td>
           </tr>
         </table>
       </div>
@@ -109,10 +111,11 @@ export default {
 
 <style scoped>
 .p-20-h {
-  padding: 0 20px;
+  padding: 0 10px 0 10px;
+  font-size: 12px;
 }
 .p-20-t {
-  padding-top: 10px;
+  padding: 10px 10px 0 10px;
 }
 .prod-detail {
   padding: 20px;
@@ -135,6 +138,10 @@ h3 {
   max-height: 240px;
 }
 @media only screen and (min-width: 768px) {
+  .p-20-h {
+  font-size: 16px;
+  }
+
   .prod-detail {
     padding: 20px;
     border-bottom: none;
