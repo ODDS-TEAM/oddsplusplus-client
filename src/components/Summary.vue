@@ -35,13 +35,13 @@
           </tr>
           <tr v-for="order in summary.order" :key="order.id">
             <td class="p-20-h p-20-t">
-              <p style="text-align:left; margin: 0">
-              <img
-                src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg"
-                style="max-width: 20px"
-              />
+              <p style="text-align:left; margin : 0">
+                <img
+                  src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg"
+                  style="max-width: 20px "
+                />
+                 {{order.user.name}}
               </p>
-              {{order.user.name}}
             </td>
             <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
             <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.cost}}</td>
@@ -117,7 +117,7 @@ export default {
       this.charge = 0.0;
     },
     goToAmazon: function() {
-      window.open(this.summary.item.url, '_blank');
+      window.open(this.summary.item.url, "_blank");
     }
   }
 };
@@ -163,7 +163,7 @@ h3 {
 }
 @media only screen and (min-width: 768px) {
   .p-20-h {
-  font-size: 16px;
+    font-size: 16px;
   }
 
   tbody {
