@@ -52,19 +52,24 @@
         </thead>
       </div>
     </div>
-    <div class="modal" v-if="modal">
+    <!-- <div class="modal" v-if="modal">
       <h3>Total Costs</h3>
       <input type="text" v-model="cost" />
       <h3>Shipping Charge</h3>
       <input type="text" v-model="charge" />
       <button class="plus-btn" v-on:click="updateOrder">confirm</button>
       <button class="plus-btn cancel-btn" v-on:click="clearModalData">cancel</button>
-    </div>
+    </div> -->
+    <ResultModal @close="modal=false" v-if="modal"/>
   </div>
 </template>
 
 <script>
+import ResultModal from './modal/ResultModal.vue'
 export default {
+  components: {
+    ResultModal
+  },
   props: ["itemid"],
   data() {
     return {
