@@ -51,8 +51,10 @@ export default {
       plusItem: {
         itemId: null,
         current: null,
+        count: null,
         send: 0
-      }
+      },
+      responses: null
     };
   },
 
@@ -75,30 +77,48 @@ export default {
         )
         .then(response => {
           this.plusItem.current = response.body;
+          this.plusItem.count = response.body;
           this.plusItem.itemId = itemId;
           this.plusModal = true;
         });
     },
     sendOrder: function() {
       this.plusModal = false;
-      if (this.plusItem.send == 0) return;
-      this.$http
-        .post(
-          process.env.VUE_APP_API +
-            "/reserves/" +
-            this.userId +
-            "/" +
-            this.plusItem.itemId +
-            "/" +
-            this.plusItem.send
-        )
-        .then(response => {
-          this.clearPlusModalData();
-          this.responses = response.body;
-          window.console.log(this.responses);
-          this.$emit("close");
-          this.$emit("refresh");
-        });
+      if (this.plusItem.send == 0) {
+        return;
+      } else if (this.plusItem.count + this.plusItem.send == 0) {
+        this.$http
+          .delete(
+            process.env.VUE_APP_API +
+              "/reserves/" +
+              this.userId +
+              "/" +
+              this.plusItem.itemId
+          )
+          .then(response => {
+            this.responses = response;
+            this.clearPlusModalData();
+            this.$emit("close");
+            this.$emit("refresh");
+          });
+      } else {
+        this.$http
+          .post(
+            process.env.VUE_APP_API +
+              "/reserves/" +
+              this.userId +
+              "/" +
+              this.plusItem.itemId +
+              "/" +
+              this.plusItem.send
+          )
+          .then(response => {
+            this.clearPlusModalData();
+            this.responses = response.body;
+            this.$emit("close");
+            this.$emit("refresh");
+          });
+      }
     },
 
     clearPlusModalData: function() {
