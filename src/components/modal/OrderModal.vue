@@ -3,11 +3,11 @@
         <div slot="body">
             <h3>Order List</h3>
             <div style="  border-bottom: 2px solid #efefef; margin-bottom:10px;"></div>
-            <table style="width: 100%;margin: 15px 0 10px;overflow-x:auto;">
+            <table v-if="!loading" style="width: 100%;margin: 15px 0 10px;overflow-x:auto;">
                 <tr v-for="order in orderList" :key="order.id" style="height:50px">
                     <td style="width: 56px;">
-                        <div >
-                            <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;"/>
+                        <div>
+                            <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;" />
                         </div>
                     </td>
                     <td class="p-20-h p-20-t">
@@ -16,6 +16,8 @@
                     <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
                 </tr>
             </table>
+            <p style="text-align:center;"><img v-if="loading" src="../../assets/loading.gif" style="width:100px;height:100px;margin:0 auto;transform: scale(1.2);"></p>
+    
         </div>
     </modal>
 </template>
@@ -35,7 +37,8 @@ export default {
     },
     data() {
         return {
-            orderList: null
+            orderList: null,
+            loading: true
         };
     },
     mounted: function() {
@@ -49,6 +52,7 @@ export default {
                 .then(response => {
                     this.orderList = response.body;
                     window.console.log(this.orderList);
+                    this.loading = false;
                 });
             this.orderModal = true;
         }
