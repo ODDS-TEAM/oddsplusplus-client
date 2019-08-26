@@ -4,7 +4,7 @@
       <h1 style="text-align:center;padding:0;">My Orders</h1>
     </div>
     <ul>
-      <li v-for="item in data" v-bind:key="item.value">
+      <li v-for="(item, index) in data" v-bind:key="item.value">
         <div class="card">
           <div class="row">
             <div class="col-3">
@@ -16,29 +16,20 @@
             <div class="col-9 detail">
               <h3 class="item-title">{{ item.item.title }}</h3>
               <h4>By {{ item.item.author }} ({{item.item.format}})</h4>
-              <h3 style>Qty {{ item.item.count }}</h3>
-
-              <!-- <table style="height:90px;">
-                <tr>
-                  <td>
-                    <h3 class="item-title">{{ item.item.title }}</h3>
-                  </td>
-                </tr>
-                <tr>
-                  <h4>By {{ item.item.author }} ({{item.item.format}})</h4>
-                  <h3 style>Qty {{ item.item.count }}</h3>
-                </tr>
-              </table>-->
               <table style="height:40px;" class="tb-btn">
                 <tr>
                   <td>
-                    <button class="minus-btn">-</button>
+                    <button
+                      class="minus-btn"
+                      :disabled="item.count == 0"
+                      v-on:click="decrease(index)"
+                    >-</button>
                   </td>
                   <td>
-                    <h3 class="amount">1</h3>
+                    <h3 class="amount">{{item.count}}</h3>
                   </td>
                   <td>
-                    <button class="plus-btn">+</button>
+                    <button class="plus-btn" v-on:click="increase(index)">+</button>
                   </td>
                   <td>
                     <p>
@@ -74,6 +65,14 @@ export default {
         this.data = response.body;
         window.console.log(this.data);
       });
+  },
+  methods: {
+    decrease: function(index) {
+      this.data[index].count -= 1;
+    },
+    increase: function(index) {
+      this.data[index].count += 1;
+    }
   }
 };
 </script>
@@ -89,7 +88,9 @@ export default {
   margin: 0px 10px 9px 10px;
   text-decoration: none;
 }
-
+.amount {
+  padding-bottom: 20px;
+}
 .plus-btn {
   background-color: #77b55a;
   border-radius: 14px;
@@ -152,8 +153,8 @@ p {
   text-overflow: ellipsis;
 }
 .img-delete {
-    height: 20px;
-  }
+  height: 20px;
+}
 
 @media only screen and (min-width: 768px) {
   p {
