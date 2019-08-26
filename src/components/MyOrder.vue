@@ -33,8 +33,8 @@
                                     <td>
                                         <p>
                                             <button class="del-btn">
-                                                                                        <img class="img-delete" src="./../assets/delete.png" />
-                                                                                    </button>
+                                                                                                    <img class="img-delete" src="./../assets/delete.png" />
+                                                                                                </button>
                                         </p>
                                     </td>
                                 </tr>
@@ -129,6 +129,7 @@ export default {
 
 <style scoped>
 .minus-btn {
+    cursor: pointer;
     background-color: #1e9cb5;
     border: 0;
     color: white;
@@ -147,6 +148,7 @@ export default {
 }
 
 .del-btn {
+    cursor: pointer;
     background-color: #f55246;
     border: 0;
     color: white;
@@ -165,6 +167,7 @@ export default {
 }
 
 .plus-btn {
+    cursor: pointer;
     background-color: #1e9cb5;
     border: 0;
     color: white;
