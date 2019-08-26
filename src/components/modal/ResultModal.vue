@@ -40,7 +40,7 @@ export default {
                     "/" +
                     this.charge
                 )
-                .then(response => {
+                .then(() => {
                     this.clearModalData();
                     this.$emit('refresh');
                     this.$emit("close");
