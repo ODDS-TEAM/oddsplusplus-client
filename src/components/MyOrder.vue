@@ -19,19 +19,22 @@
                             <table style="height:40px;" class="tb-btn">
                                 <tr>
                                     <td>
-                                        <button class="minus-btn" :disabled="item.count == 0" v-on:click="decrease(index)">-</button>
+                                        <p><button class="minus-btn" :disabled="item.count == 0" v-on:click="decrease(index)">-</button></p>
                                     </td>
                                     <td>
-                                        <h3 class="amount">{{item.count}}</h3>
+                                        <h3 class="amount">
+                                            {{item.count}}
+                                        </h3>
                                     </td>
                                     <td>
-                                        <button class="plus-btn" v-on:click="increase(index)">+</button>
+                                        <p> <button class="plus-btn" v-on:click="increase(index)">+</button>
+                                        </p>
                                     </td>
                                     <td>
                                         <p>
-                                            <button class="footer-btn" style="background-color: #f55246;">
-                                                                                                    <img class="img-delete" src="./../assets/delete.png" />
-                                                                                                  </button>
+                                            <button class="del-btn">
+                                                                                        <img class="img-delete" src="./../assets/delete.png" />
+                                                                                    </button>
                                         </p>
                                     </td>
                                 </tr>
@@ -126,34 +129,51 @@ export default {
 
 <style scoped>
 .minus-btn {
-  color: #000000;
-  padding: 5px 13px;
+    background-color: #1e9cb5;
+    border: 0;
+    color: white;
+    width: 40px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 .amount {
-    padding-bottom: 20px;
+    text-align: center;
+    width: 30px;
+    margin: 0 auto;
+    padding: 0;
+    /* padding-bottom: 20px; */
 }
 
-.footer-btn {
-  border: 0;
-  color: white;
-  width: 40px;
-  height: 30px;
-  border-radius: 4px;
-  margin: auto 5px;
+.del-btn {
+    background-color: #f55246;
+    border: 0;
+    color: white;
+    width: 40px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 14px;
 }
+
 .btn {
-  border-radius: 4px;
-  font-family: Georgia;
-  font-size: 16px;
-  margin: 0px 10px 9px 10px;
-  text-decoration: none;
+    border-radius: 4px;
+    font-family: Georgia;
+    font-size: 16px;
+    margin: 0px 10px 9px 10px;
+    text-decoration: none;
 }
+
 .plus-btn {
-  background-color: #1498d5;
-  color: #ffffff;
-  padding: 5px 12px;
+    background-color: #1e9cb5;
+    border: 0;
+    color: white;
+    width: 40px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 14px;
 }
+
 .header {
     margin-top: 50px;
     font-weight: 900;
@@ -205,7 +225,7 @@ p {
 }
 
 .img-delete {
-    height: 20px;
+    height: 17px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -238,13 +258,16 @@ p {
     .tb-btn {
         width: 50%;
         float: right;
-        margin: -20px 0;
+        margin: 25px 10px;
     }
     .header {
         margin-top: 100px;
     }
     .img-delete {
         height: 20px;
+    }
+    .plus-btn {
+        margin-left: 3px;
     }
 }
 </style>
