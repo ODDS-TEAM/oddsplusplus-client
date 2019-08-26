@@ -5,7 +5,7 @@
                 <img class="user-img" src="./../assets/odds_logo.png" id="navbar-logo" />
             </router-link>
             <div>
-                <table @click="menuDropShow = !menuDropShow" class="username">
+                <table @click="menuDropShow = !menuDropShow" class="account-bar-m">
                     <tr>
                         <td><img class="img-pro" :src="user.imgURL" id="navbar-logo" /></td>
                         <td style="font-size: 17px;margin:0">
@@ -30,6 +30,17 @@
             <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
                 <p>+</p>
             </div>
+            <table @click="menuDropShow = !menuDropShow" class="account-bar-d">
+                <tr>
+                    <td><img class="img-pro" style="margin:1px 5px;width:45px;height:45px; " :src="user.imgURL" id="navbar-logo" /></td>
+                    <td style="font-size: 17px;margin:0; padding:0;">
+                        <h3 class="f-name" style="margin-bottom: 3px;">{{user.name}}
+                            <h3 class="l-name">Test</h3>
+                        </h3>
+                    </td>
+                    <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-logo" /></td>
+                </tr>
+            </table>
         </div>
         <AddItemModal v-if="showModal" @close="showModal =false" @refresh="$emit('refreshMyItem')" />
     </div>
@@ -96,6 +107,12 @@ export default {
     box-sizing: border-box;
 }
 
+.account-bar-d {
+    float: right;
+    height: 50px;
+    display: none;
+}
+
 .l-name,
 .f-name {
     margin: 0;
@@ -124,11 +141,11 @@ export default {
 
 .menu-container {
     position: fixed;
-    transform: translate(-50%, 0);
+    transform: translate(50%, 0);
     top: 60px;
-    left: 50%;
+    right: 50%;
     background-color: #eeeeee;
-    width: 70%;
+    width: 200px;
     border-radius: 7px
 }
 
@@ -166,7 +183,7 @@ export default {
     height: auto;
 }
 
-.username {
+.account-bar-m {
     position: fixed;
     transform: translate(-50%, -50%);
     top: 21.5px;
@@ -177,7 +194,7 @@ export default {
     transition: 0.2s;
 }
 
-.username:hover {
+.account-bar-m:hover {
     padding: 0 5px;
     border-radius: 5px;
     background-color: #dfdfdf;
@@ -238,6 +255,16 @@ h5 {
 }
 
 @media only screen and (min-width: 600px) {
+    .account-bar-d {
+        height: 53px;
+        display: block;
+    }
+    .account-bar-d:hover {
+        cursor: pointer;
+        padding: 0 0 5px;
+        border-radius: 5px;
+        background-color: #dfdfdf;
+    }
     .user-img {
         width: auto;
         height: 30px;
@@ -247,11 +274,8 @@ h5 {
         display: inline-block;
     }
     .menu-container {
-        
         top: 80px;
-        left: 50%;
-        background-color: #eeeeee;
-        width: 200px;
+        right: 150px;
         border-radius: 7px
     }
     .nav {
@@ -276,8 +300,8 @@ h5 {
         padding: 20px 0;
         margin: 0;
     }
-    .username {
-        top: 31.5px;
+    .account-bar-m {
+        display: none;
     }
     .img-pro {
         display: inline;
