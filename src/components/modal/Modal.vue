@@ -56,7 +56,7 @@ export default {
 }
 @media only screen and (min-width: 768px) {
   .modal-container {
-    width: 400px;
+    width: 550px;
   }
 }
 </style>
