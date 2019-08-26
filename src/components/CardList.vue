@@ -41,7 +41,7 @@
                 <h4>{{item.user.name}} ({{item.count}})</h4>
             </li>
         </div>
-      <PlusModal v-if="plusModal" @close="plusModal = false" :itemId="itemId" @refreshMyItem="$emit('refreshMyItem')"/>
+      <PlusModal v-if="plusModal" @close="plusModal = false" :itemId="itemId" @refresh="getItemData"/>
         
     </div>
 </template>
