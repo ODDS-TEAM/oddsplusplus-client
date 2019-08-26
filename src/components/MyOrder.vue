@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <h1 style="text-align:center;padding:0;">My orders</h1>
+      <h1 style="text-align:center;padding:0;">My Orders</h1>
     </div>
     <ul>
       <li v-for="item in data" v-bind:key="item.value">
