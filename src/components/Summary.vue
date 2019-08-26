@@ -12,7 +12,8 @@
       </div>
       <div class="col-8 summary-detail">
         <table style="height:110px;width: 100%; margin:10px 0; border-bottom: 2px solid #efefef;">
-          <button v-on:click="modal = true">SUM</button>
+          <button class="btn-order btn-sum" v-on:click="modal = true">Result</button>
+          <button class="btn-order" v-on:click="goToAmazon">Order Book</button>
           <tr>
             <h2 class="p-20-t">Qty : {{summary.item.count}}</h2>
           </tr>
@@ -87,13 +88,19 @@ export default {
         .get(process.env.VUE_APP_API + "/reserves/sum/" + this.$route.params.id)
         .then(response => {
           this.summary = response.body;
-          window.console.log(response);
-          window.console.log(this.summary);
         });
     },
     updateOrder: function() {
       this.$http
-        .patch(process.env.VUE_APP_API + "/updateOrder/" + this.$route.params.id + "/" + this.cost + "/" + this.charge)
+        .patch(
+          process.env.VUE_APP_API +
+            "/updateOrder/" +
+            this.$route.params.id +
+            "/" +
+            this.cost +
+            "/" +
+            this.charge
+        )
         .then(response => {
           this.clearModalData();
           this.$emit("refreshMyItem");
@@ -104,6 +111,9 @@ export default {
       this.modal = false;
       this.cost = 0.0;
       this.charge = 0.0;
+    },
+    goToAmazon: function() {
+      window.open(this.summary.item.url, '_blank');
     }
   }
 };
@@ -147,6 +157,34 @@ h3 {
     border-bottom: none;
     border-right: 2px solid #efefef;
   }
+}
+
+.btn-order {
+  border-radius: 5px;
+  border: 1px solid #d9d9d9;
+  padding: 8px 0px;
+  color: #515151;
+  text-transform: uppercase;
+  width: 105px;
+  font-family: inherit;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 0 15px 0 0;
+  float: right;
+  margin-top: 10px;
+}
+
+.btn-order:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.btn-sum {
+  background-color: #1498d5;
+  color: white;
+  width: 70px;
+  margin-right: 20px;
 }
 
 .modal {
