@@ -21,9 +21,9 @@ export default {
             this.user = response.body;
             window.console.log(this.user);
             localStorage.setItem("userId", this.user.id);
-            localStorage.setItem("name", this.user.name);
-            localStorage.setItem("email", this.user.email);
-            localStorage.setItem("imgURL", this.user.imgURL);
+            // localStorage.setItem("name", this.user.name);
+            // localStorage.setItem("email", this.user.email);
+            // localStorage.setItem("imgURL", this.user.imgURL);
         });
     },
     data() {

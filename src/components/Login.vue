@@ -1,12 +1,40 @@
 <template>
   <div class="login-content">
     <label>Login with @odds.team</label>
-    <button>Login</button>
+    <button v-on:click="signIn">Login</button>
   </div>
 </template>
 <script>
 export default {
-  name: "login"
+  name: "login",
+  data() {
+    return {
+      profile: null
+    };
+  },
+  methods: {
+    signIn: function() {
+      this.$gAuth
+        .signIn()
+        .then(GoogleUser => {
+          window.console.log("user", GoogleUser.getId());
+          window.console.log("profile", GoogleUser.getBasicProfile());
+          window.console.log("auth", GoogleUser.getAuthResponse());
+          this.profile = GoogleUser.getBasicProfile();
+          localStorage.setItem("id", this.profile.Eea);
+          localStorage.setItem("name", this.profile.ig);
+          localStorage.setItem("email", this.profile.U3);
+          localStorage.setItem("imgURL", this.profile.Paa);
+          window.console.log(localStorage.getItem("id"));
+          this.isSignIn = this.$gAuth.isAuthorized;
+          this.$router.push("/home");
+        })
+        .catch(error => {
+          window.console.log(error);
+        });
+    },
+    authBackend: function() {}
+  }
 };
 </script>
 <style scoped>
