@@ -43,16 +43,18 @@
                     <tbody>
                         <table style="width: 100%;margin: 20px 0 0px;overflow-x:auto;">
                             <tr>
+                                <th class="img-user"></th>
                                 <th class="p-20-h" style="width:80%;">Name</th>
                                 <th class="p-20-h" style="width:20%; text-align:center">Qty</th>
                                 <th class="p-20-h" style="width:20%;">Costs($)</th>
                                 <th class="p-20-h" style="width:20%;">Charge($)</th>
                             </tr>
                             <tr v-for="order in summary.order" :key="order.id">
-                                <td class="p-20-h p-20-t">
-                                    <p style="text-align:left; margin : 0">
-                                        <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;" /> {{order.user.name}}                                    </p>
+                                <td class="p-20-h p-20-t img-user" style="width:60px !important;">
+                                    <p style="text-align:left; margin : 0;">
+                                        <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;" /> </p>
                                 </td>
+                                <td class="p-20-h p-20-t">{{order.user.name}} </td>
                                 <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
                                 <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.cost}}</td>
                                 <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.shippingCharge}}</td>
@@ -135,6 +137,10 @@ export default {
 </script>
 
 <style scoped>
+.img-user {
+    display: none;
+}
+
 thead {
     display: inline-block;
     width: 100%;
@@ -183,6 +189,9 @@ h3 {
 }
 
 @media only screen and (min-width: 768px) {
+    .img-user {
+        display: block;
+    }
     .p-20-h {
         font-size: 16px;
     }
