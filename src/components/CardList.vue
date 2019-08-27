@@ -5,7 +5,7 @@
         </div>
         <ul>
             <li v-for="item in data" v-bind:key="item.value">
-                <div class="card">
+                <div class="card" v-if="item.status.status == 'pending'">
                     <div class="row">
                         <div class="col-4 col-s-4">
                             <p>
@@ -26,7 +26,7 @@
                                 <span id="card-boot-order-date" style="font-weight: normal;">{{item.orderDate| formatDate}}</span>
                             </h5>
                             <button class="button-add" v-on:click="orderModal=true;itemId = item.id" type="button" id="card-show-list-button">Show Order ({{item.count}})</button>
-                            <button id="card-plus-button" class="button-add btn-plus" v-if="item.status.status == 'pending'" v-on:click="plusModal = true;itemId = item.id">PLUS 1</button>
+                            <button id="card-plus-button" class="button-add btn-plus"  v-on:click="plusModal = true;itemId = item.id">PLUS 1</button>
                         </div>
                     </div>
                 </div>
