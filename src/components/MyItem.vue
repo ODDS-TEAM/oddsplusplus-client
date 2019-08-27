@@ -111,7 +111,7 @@ p {
   width: 90px;
   height: 30px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 @media only screen and (min-width: 768px) {

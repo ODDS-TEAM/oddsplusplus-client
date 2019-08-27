@@ -153,9 +153,9 @@ p {
     color: #515151;
     text-transform: uppercase;
     width: 125px;
-    font-family: inherit;
     margin-right: 5px;
     transition: all 0.3s ease;
+    font-size: 10px;
     font-weight: 500;
     box-shadow: 0 0 15px 0 0;
 }

@@ -207,7 +207,7 @@ h3 {
     color: #515151;
     text-transform: uppercase;
     width: 100% !important;
-    font-family: inherit;
+    font-size: 10px;
     margin-right: 5px;
     transition: all 0.3s ease;
     font-weight: 500;
