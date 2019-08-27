@@ -229,7 +229,7 @@ export default {
         margin: auto auto;
         width: auto;
         height: 240px;
-        max-width: 180px;
+        max-width: 165px;
         border-radius: 10px;
         margin:0;
     }
