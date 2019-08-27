@@ -125,7 +125,7 @@ export default {
                 .then(response => {
                     this.data = response.body;
                     window.console.log(this.data.length);
-
+                    this.loading = [];
 
                     for (var i = 0; i < this.data.length; i++) {
                         this.loading.push(false)
