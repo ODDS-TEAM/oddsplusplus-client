@@ -34,7 +34,7 @@
         </ul>
     
         <OrderModal v-if="orderModal" @close="orderModal = false" :itemId="itemId" />
-        <PlusModal v-if="plusModal" @close="plusModal = false" :itemId="itemId" />
+        <PlusModal v-if="plusModal" @close="plusModal = false" @refresh="getItemData" :itemId="itemId" />
     
     </div>
 </template>
