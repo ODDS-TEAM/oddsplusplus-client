@@ -51,8 +51,7 @@
                             <tr v-for="order in summary.order" :key="order.id">
                                 <td class="p-20-h p-20-t">
                                     <p style="text-align:left; margin : 0">
-                                        <img src="https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg" style="max-width: 20px " /> {{order.user.name}}
-                                    </p>
+                                        <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;" /> {{order.user.name}}                                    </p>
                                 </td>
                                 <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
                                 <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.cost}}</td>

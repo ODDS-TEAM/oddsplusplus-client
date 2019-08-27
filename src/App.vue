@@ -17,7 +17,7 @@ export default {
         NavBar
     },
     mounted: function() {
-        this.$http.get(process.env.VUE_APP_API + "/users/Cheese").then(response => {
+        this.$http.get(process.env.VUE_APP_API + "/users/App").then(response => {
             this.user = response.body;
             window.console.log(this.user);
             localStorage.setItem("userId", this.user.id);
