@@ -186,6 +186,7 @@ h3 {
 
 .img-item {
     max-height: 240px;
+    max-width: 200px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -205,6 +206,10 @@ h3 {
         padding: 20px;
         border-bottom: none;
         border-right: 2px solid #efefef;
+    }
+    .img-item {
+      max-height: 240px;
+      max-width: 190px;
     }
 }
 
