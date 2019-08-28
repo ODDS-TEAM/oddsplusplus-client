@@ -2,6 +2,7 @@
   <div class="login-content">
     <label>Login with @odds.team</label>
     <button v-on:click="signIn">Login</button>
+    <button v-on:click="signInV2">Login V2</button>
   </div>
 </template>
 <script>
@@ -9,7 +10,8 @@ export default {
   name: "login",
   data() {
     return {
-      profile: null
+      profile: null,
+      responses: null
     };
   },
   methods: {
@@ -21,19 +23,36 @@ export default {
           window.console.log("profile", GoogleUser.getBasicProfile());
           window.console.log("auth", GoogleUser.getAuthResponse());
           this.profile = GoogleUser.getBasicProfile();
-          localStorage.setItem("id", this.profile.Eea);
-          localStorage.setItem("name", this.profile.ig);
-          localStorage.setItem("email", this.profile.U3);
-          localStorage.setItem("imgURL", this.profile.Paa);
-          window.console.log(localStorage.getItem("id"));
-          this.isSignIn = this.$gAuth.isAuthorized;
-          this.$router.push("/home");
+          this.checkUser();
         })
         .catch(error => {
           window.console.log(error);
         });
     },
-    authBackend: function() {}
+    checkUser: function() {
+      this.$http
+        .post(process.env.VUE_APP_API + "/userData", {
+          name: this.profile.ig,
+          email: this.profile.U3,
+          imgURL: this.profile.Paa
+        })
+        .then(response => {
+          this.responses = response.body;
+          window.console.log(this.responses);
+          localStorage.setItem("userId", this.responses.id);
+          localStorage.setItem("name", this.responses.name);
+          localStorage.setItem("email", this.responses.email);
+          localStorage.setItem("imgURL", this.responses.imgURL);
+          window.console.log(localStorage.getItem("userId"));
+          this.isSignIn = this.$gAuth.isAuthorized;
+          this.$emit("refreshMyItem");
+          this.$emit("refreshNav");
+          this.$router.push("/home");
+        });
+    },
+    signInV2: function() {
+      window.location.href = "https://api-dev.odds.team/api/opp/v1/login";
+    }
   }
 };
 </script>
@@ -55,7 +74,6 @@ label {
   margin-top: 30px;
 }
 button {
-  position: absolute;
   width: 20%;
   bottom: 10%;
   right: 10%;

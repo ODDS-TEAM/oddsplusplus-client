@@ -53,6 +53,7 @@ export default {
     },
     data() {
         return {
+            renderComponent: true,
             responses: null,
             showModal: false,
             orderList: null,
@@ -75,6 +76,13 @@ export default {
         this.user.imgURL = localStorage.getItem("imgURL");
     },
     methods: {
+        refreshNav() {
+            this.renderComponent = false;
+            this.$nextTick(() => {
+                window.console.log('nav');
+                this.renderComponent = true;
+            });
+        },
         closeDropSHow() {
             if (this.menuDropShow)
                 this.menuDropShow = false;

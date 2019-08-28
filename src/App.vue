@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <NavBar @refreshMyItem="refreshCard" />
+        <NavBar @refreshMyItem="refreshCard" v-if="renderNav" />
     
         <div class="body">
-            <router-view @refreshMyItem="refreshCard" v-if="renderComponent" />
+            <router-view @refreshNav="refreshNav" @refreshMyItem="refreshCard" v-if="renderComponent" />
         </div>
     </div>
 </template>
@@ -17,24 +17,11 @@ export default {
         NavBar
     },
     mounted: function() {
-        this.$http.get(process.env.VUE_APP_API + "/users/App").then(response => {
-            this.user = response.body;
-            window.console.log(this.user);
-            localStorage.setItem("userId", this.user.id);
-            // localStorage.setItem("name", this.user.name);
-            // localStorage.setItem("email", this.user.email);
-            // localStorage.setItem("imgURL", this.user.imgURL);
-        });
     },
     data() {
         return {
             renderComponent: true,
-            user: {
-                id: null,
-                name: null,
-                email: null,
-                imgURL: null,
-            },
+            renderNav:true
         };
     },
     methods: {
@@ -43,6 +30,13 @@ export default {
             this.$nextTick(() => {
                 window.console.log('refresh');
                 this.renderComponent = true;
+            });
+        },
+        refreshNav() {
+            this.renderNav = false;
+            this.$nextTick(() => {
+                window.console.log('refresh');
+                this.renderNav = true;
             });
         }
     }
