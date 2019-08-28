@@ -1,22 +1,25 @@
 *** Settings ***
 Library          Selenium2Library
-Suite Teardown   Close Browser
+Test Teardown   Close Browser
 
 *** Test Cases ***
-Open Browser
-    Open URL
-
 Add Item Success
+    Open Odds Plus Plus
     Click Add Item_Success
     Check Books List    
 
 Add Item Fail Type
+    Open Odds Plus Plus
     Click Add Item_Fail Type
     
 Add Item Fail URL Error
+    Open Odds Plus Plus
     Click Add Item_Fail URL
 
 *** Keywords ***
+Open Odds Plus Plus
+    Open URL
+
 Open URL
     Open Browser            ${URL}       ${Browser}
     Set selenium speed      1
@@ -37,14 +40,13 @@ Check Data Add-Item Success
     sleep       5s 
     Element Text Should Be      ${Path_title}               ${Books1_title} 
     Element Text Should Be      ${Path_author}              ${Books1_author}   
-    Element Text Should Be      ${Path_price}               ${Books1_price}    
-    Element Text Should Be      ${Path_format}              ${Books1_format}     
+    Element Text Should Be      ${Path_price}               ${Books1_price}       
     Input Text                  ${Path_date}                ${Books1_date} 
     
 
 Check Books List
-    Element Text Should Be      ${List_title}               ${Books_List_title}
-    Element Text Should Be      ${List_author}              ${Books1_author}   
+    Element Text Should Be      ${List_title}               ${Books1_title}
+    Element Text Should Be      ${List_author}              ${Books_List_autor}   
     Element Text Should Be      ${List_price}               ${Books1_price}    
     Element Text Should Be      ${List_date}                ${Books1_date} 
 
@@ -53,7 +55,6 @@ Click Add Item_Fail Type
     Input Text                  ${Path_URL}                 ${Books1_Type_Fail} 
     Click Element               ${Button_Fetch}
     Check Books Fail Type 
-    Click Element               ${Button_Cancle}
 
 Check Books Fail Type
     sleep       5s                        
@@ -65,7 +66,6 @@ Click Add Item_Fail URL
     Input Text                   ${Path_URL}               ${Books1_URL_Fail}          
     Click Element                ${Button_Fetch}
     Check Books Fail URL 
-    Click Element                ${Button_Cancle}
 
 Check Books Fail URL 
     sleep       5s                        
@@ -74,7 +74,7 @@ Check Books Fail URL
 
 *** Variables ***
 ${Browser}               Chrome
-${URL}                   http://odds-plusplus.odds.team/
+${URL}                   localhost:8080
 ${Logo}                  xpath://img[contains(@src, "/img/odds_logo.a074357a.png")]
 
 ${Button_Add}            id=navbar-add-button
@@ -101,17 +101,17 @@ ${Books1_author}         By Jory John
 ${Books1_price}          $10.79
 ${Books1_format}         Hardcover
 ${Books1_date}           10/10/2019
-${Books_List_title}      ${Books1_title} (${Books1_format})
+${Books_List_autor}      ${Books1_author} (${Books1_format})
 
 ${Books1_Type_Fail}       https://www.amazon.com/gp/product/B01N1UP614/ref=s9_acsd_ri_bw_c_x_1_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-10&pf_rd_r=13ES6RHAS1A01EFE7H85&pf_rd_t=101&pf_rd_p=b34f3048-7fa4-49b0-99af-8102f019a6c3&pf_rd_i=283155
 ${Status_Error Type}     Error : Format book invalid support for Paperback or Hardcover 
 
 
 ${Books1_URL_Fail}      https://www.youtube.com/watch?v=7e4ADkPbstU  
-${Status_Error URL}     Error : URL is not amazon or invalid --> example : https://www.amazon.com/,https://amazon.com/
+${Status_Error URL}     Error : URL is not amazon or invalid --> example : https://www.amazon.com/ , https://amazon.com/
 
 ${Button_Cancle}         id=modal-cancel
-${Message}               id=status
+${Message}               id=addmodal-alert
      
 
   

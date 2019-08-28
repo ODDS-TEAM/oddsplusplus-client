@@ -1,48 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot rpa="false" generated="20190828 13:51:46.956" generator="Robot 3.1.2 (Python 2.7.14 on darwin)">
-<suite source="/Users/cardet/plus1/frontend-v2/Robot_Framework/robot_order.robot" id="s1" name="Robot Order">
-<test id="s1-t1" name="Check Order">
-<kw name="Open Wep Odds Plus Plus">
+<robot rpa="false" generated="20190828 14:48:00.501" generator="Robot 3.1.2 (Python 2.7.14 on darwin)">
+<suite source="/Users/cardet/plus1/frontend-v2/Robot_Framework/robot_add_item.robot" id="s1" name="Robot Add Item">
+<test id="s1-t1" name="Add Item Success">
+<kw name="Open Odds Plus Plus">
+<kw name="Open URL">
 <kw name="Open Browser" library="Selenium2Library">
 <doc>Opens a new browser instance to the given ``url``.</doc>
 <arguments>
-<arg>localhost:8080</arg>
-<arg>Chrome</arg>
+<arg>${URL}</arg>
+<arg>${Browser}</arg>
 </arguments>
-<msg timestamp="20190828 13:51:47.107" level="INFO">Opening browser 'Chrome' to base url 'localhost:8080'.</msg>
-<status status="PASS" endtime="20190828 13:51:49.782" starttime="20190828 13:51:47.107"></status>
+<msg timestamp="20190828 14:48:00.807" level="INFO">Opening browser 'Chrome' to base url 'localhost:8080'.</msg>
+<status status="PASS" endtime="20190828 14:48:03.398" starttime="20190828 14:48:00.806"></status>
 </kw>
-<status status="PASS" endtime="20190828 13:51:49.782" starttime="20190828 13:51:47.106"></status>
+<kw name="Set Selenium Speed" library="Selenium2Library">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<status status="PASS" endtime="20190828 14:48:03.400" starttime="20190828 14:48:03.399"></status>
+</kw>
+<kw name="Verify_odds++">
+<kw name="Page Should Contain Image" library="Selenium2Library">
+<doc>Verifies image identified by ``locator`` is found from current page.</doc>
+<arguments>
+<arg>${Logo}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:05.428" level="INFO">Current page contains image 'xpath://img[contains(@src, "/img/odds_logo.a074357a.png")]'.</msg>
+<status status="PASS" endtime="20190828 14:48:05.429" starttime="20190828 14:48:03.401"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:05.429" starttime="20190828 14:48:03.400"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:05.429" starttime="20190828 14:48:00.806"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:05.429" starttime="20190828 14:48:00.806"></status>
+</kw>
+<kw name="Click Add Item_Success">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${Button_Add}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:05.430" level="INFO">Clicking element 'id=navbar-add-button'.</msg>
+<status status="PASS" endtime="20190828 14:48:07.479" starttime="20190828 14:48:05.430"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>${Path_URL}</arg>
+<arg>${Books1_URL}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:07.480" level="INFO">Typing text 'https://www.amazon.com/gp/product/0062866001/ref=s9_acsd_ri_bw_c_x_10_w?pf_rd_m=ATVPDKIKX0DER&amp;pf_rd_s=merchandised-search-12&amp;pf_rd_r=NHZQ553RZ42PQE5QZR0Q&amp;pf_rd_t=101&amp;pf_rd_p=b1b6e7c5-f122-45e8-9a8c-d025cdf29298&amp;pf_rd_i=283155' into text field 'id=modal-url-input'.</msg>
+<status status="PASS" endtime="20190828 14:48:11.644" starttime="20190828 14:48:07.480"></status>
 </kw>
 <kw name="Click Element" library="Selenium2Library">
 <doc>Click element identified by ``locator``.</doc>
 <arguments>
-<arg>navbar-account-bar</arg>
+<arg>${Button_Fetch}</arg>
 </arguments>
-<msg timestamp="20190828 13:51:49.784" level="INFO">Clicking element 'navbar-account-bar'.</msg>
-<status status="PASS" endtime="20190828 13:51:49.827" starttime="20190828 13:51:49.783"></status>
+<msg timestamp="20190828 14:48:11.645" level="INFO">Clicking element 'id=modal-fetch-button'.</msg>
+<status status="PASS" endtime="20190828 14:48:14.387" starttime="20190828 14:48:11.645"></status>
 </kw>
-<kw name="Click Element" library="Selenium2Library">
-<doc>Click element identified by ``locator``.</doc>
+<kw name="Check Data Add-Item Success">
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
 <arguments>
-<arg>navbar-list-order</arg>
+<arg>5s</arg>
 </arguments>
-<msg timestamp="20190828 13:51:49.827" level="INFO">Clicking element 'navbar-list-order'.</msg>
-<status status="PASS" endtime="20190828 13:51:49.892" starttime="20190828 13:51:49.827"></status>
+<msg timestamp="20190828 14:48:19.391" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" endtime="20190828 14:48:19.391" starttime="20190828 14:48:14.388"></status>
 </kw>
-<status status="PASS" endtime="20190828 13:51:49.892" critical="yes" starttime="20190828 13:51:47.106"></status>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${Path_title}</arg>
+<arg>${Books1_title}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:19.392" level="INFO">Verifying element 'id=modal-book-title' contains exact text 'The Good Egg'.</msg>
+<status status="PASS" endtime="20190828 14:48:21.421" starttime="20190828 14:48:19.391"></status>
+</kw>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${Path_author}</arg>
+<arg>${Books1_author}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:21.421" level="INFO">Verifying element 'id=modal-book-author' contains exact text 'By Jory John'.</msg>
+<status status="PASS" endtime="20190828 14:48:23.460" starttime="20190828 14:48:21.421"></status>
+</kw>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${Path_price}</arg>
+<arg>${Books1_price}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:23.461" level="INFO">Verifying element 'id=modal-book-price' contains exact text '$10.79'.</msg>
+<status status="PASS" endtime="20190828 14:48:25.491" starttime="20190828 14:48:23.460"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>${Path_date}</arg>
+<arg>${Books1_date}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:25.491" level="INFO">Typing text '10/10/2019' into text field 'id=modal-book-date'.</msg>
+<status status="PASS" endtime="20190828 14:48:28.591" starttime="20190828 14:48:25.491"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:28.592" starttime="20190828 14:48:14.387"></status>
+</kw>
+<kw name="Click Button" library="Selenium2Library">
+<doc>Clicks button identified by ``locator``.</doc>
+<arguments>
+<arg>${button_Save}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:28.592" level="INFO">Clicking button 'id=modal-save-button'.</msg>
+<status status="PASS" endtime="20190828 14:48:33.673" starttime="20190828 14:48:28.592"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2s</arg>
+</arguments>
+<msg timestamp="20190828 14:48:35.674" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" endtime="20190828 14:48:35.675" starttime="20190828 14:48:33.673"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:35.675" starttime="20190828 14:48:05.429"></status>
+</kw>
+<kw name="Check Books List">
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${List_title}</arg>
+<arg>${Books1_title}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:35.677" level="INFO">Verifying element 'id=card-book-title' contains exact text 'The Good Egg'.</msg>
+<status status="PASS" endtime="20190828 14:48:37.711" starttime="20190828 14:48:35.676"></status>
+</kw>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${List_author}</arg>
+<arg>${Books_List_autor}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:37.712" level="INFO">Verifying element 'id=card-book-author' contains exact text 'By Jory John (Hardcover)'.</msg>
+<status status="PASS" endtime="20190828 14:48:39.739" starttime="20190828 14:48:37.712"></status>
+</kw>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${List_price}</arg>
+<arg>${Books1_price}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:39.739" level="INFO">Verifying element 'id=card-book-price' contains exact text '$10.79'.</msg>
+<status status="PASS" endtime="20190828 14:48:41.768" starttime="20190828 14:48:39.739"></status>
+</kw>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${List_date}</arg>
+<arg>${Books1_date}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:41.769" level="INFO">Verifying element 'id=card-boot-order-date' contains exact text '10/10/2019'.</msg>
+<status status="PASS" endtime="20190828 14:48:43.802" starttime="20190828 14:48:41.768"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:43.803" starttime="20190828 14:48:35.675"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20190828 14:48:44.883" starttime="20190828 14:48:43.804"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:44.884" critical="yes" starttime="20190828 14:48:00.805"></status>
 </test>
-<status status="PASS" endtime="20190828 13:51:49.894" starttime="20190828 13:51:46.963"></status>
+<test id="s1-t2" name="Add Item Fail Type">
+<kw name="Open Odds Plus Plus">
+<kw name="Open URL">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${Browser}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:44.887" level="INFO">Opening browser 'Chrome' to base url 'localhost:8080'.</msg>
+<status status="PASS" endtime="20190828 14:48:48.561" starttime="20190828 14:48:44.886"></status>
+</kw>
+<kw name="Set Selenium Speed" library="Selenium2Library">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<status status="PASS" endtime="20190828 14:48:48.562" starttime="20190828 14:48:48.561"></status>
+</kw>
+<kw name="Verify_odds++">
+<kw name="Page Should Contain Image" library="Selenium2Library">
+<doc>Verifies image identified by ``locator`` is found from current page.</doc>
+<arguments>
+<arg>${Logo}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:50.596" level="INFO">Current page contains image 'xpath://img[contains(@src, "/img/odds_logo.a074357a.png")]'.</msg>
+<status status="PASS" endtime="20190828 14:48:50.597" starttime="20190828 14:48:48.563"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:50.597" starttime="20190828 14:48:48.562"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:50.597" starttime="20190828 14:48:44.886"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:48:50.597" starttime="20190828 14:48:44.886"></status>
+</kw>
+<kw name="Click Add Item_Fail Type">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${Button_Add}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:50.599" level="INFO">Clicking element 'id=navbar-add-button'.</msg>
+<status status="PASS" endtime="20190828 14:48:52.648" starttime="20190828 14:48:50.598"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>${Path_URL}</arg>
+<arg>${Books1_Type_Fail}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:52.649" level="INFO">Typing text 'https://www.amazon.com/gp/product/B01N1UP614/ref=s9_acsd_ri_bw_c_x_1_w?pf_rd_m=ATVPDKIKX0DER&amp;pf_rd_s=merchandised-search-10&amp;pf_rd_r=13ES6RHAS1A01EFE7H85&amp;pf_rd_t=101&amp;pf_rd_p=b34f3048-7fa4-49b0-99af-8102f019a6c3&amp;pf_rd_i=283155' into text field 'id=modal-url-input'.</msg>
+<status status="PASS" endtime="20190828 14:48:56.508" starttime="20190828 14:48:52.649"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${Button_Fetch}</arg>
+</arguments>
+<msg timestamp="20190828 14:48:56.509" level="INFO">Clicking element 'id=modal-fetch-button'.</msg>
+<status status="PASS" endtime="20190828 14:48:58.559" starttime="20190828 14:48:56.508"></status>
+</kw>
+<kw name="Check Books Fail Type">
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>5s</arg>
+</arguments>
+<msg timestamp="20190828 14:49:03.562" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" endtime="20190828 14:49:03.562" starttime="20190828 14:48:58.561"></status>
+</kw>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${Message}</arg>
+<arg>${Status_Error Type}</arg>
+</arguments>
+<msg timestamp="20190828 14:49:03.563" level="INFO">Verifying element 'id=addmodal-alert' contains exact text 'Error : Format book invalid support for Paperback or Hardcover'.</msg>
+<status status="PASS" endtime="20190828 14:49:05.597" starttime="20190828 14:49:03.562"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:05.597" starttime="20190828 14:48:58.560"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:05.597" starttime="20190828 14:48:50.598"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20190828 14:49:06.663" starttime="20190828 14:49:05.598"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:06.663" critical="yes" starttime="20190828 14:48:44.885"></status>
+</test>
+<test id="s1-t3" name="Add Item Fail URL Error">
+<kw name="Open Odds Plus Plus">
+<kw name="Open URL">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${Browser}</arg>
+</arguments>
+<msg timestamp="20190828 14:49:06.666" level="INFO">Opening browser 'Chrome' to base url 'localhost:8080'.</msg>
+<status status="PASS" endtime="20190828 14:49:10.300" starttime="20190828 14:49:06.665"></status>
+</kw>
+<kw name="Set Selenium Speed" library="Selenium2Library">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<status status="PASS" endtime="20190828 14:49:10.301" starttime="20190828 14:49:10.300"></status>
+</kw>
+<kw name="Verify_odds++">
+<kw name="Page Should Contain Image" library="Selenium2Library">
+<doc>Verifies image identified by ``locator`` is found from current page.</doc>
+<arguments>
+<arg>${Logo}</arg>
+</arguments>
+<msg timestamp="20190828 14:49:12.330" level="INFO">Current page contains image 'xpath://img[contains(@src, "/img/odds_logo.a074357a.png")]'.</msg>
+<status status="PASS" endtime="20190828 14:49:12.330" starttime="20190828 14:49:10.301"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:12.330" starttime="20190828 14:49:10.301"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:12.330" starttime="20190828 14:49:06.665"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:12.330" starttime="20190828 14:49:06.664"></status>
+</kw>
+<kw name="Click Add Item_Fail URL">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${Button_Add}</arg>
+</arguments>
+<msg timestamp="20190828 14:49:12.332" level="INFO">Clicking element 'id=navbar-add-button'.</msg>
+<status status="PASS" endtime="20190828 14:49:14.384" starttime="20190828 14:49:12.331"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>${Path_URL}</arg>
+<arg>${Books1_URL_Fail}</arg>
+</arguments>
+<msg timestamp="20190828 14:49:14.385" level="INFO">Typing text 'https://www.youtube.com/watch?v=7e4ADkPbstU' into text field 'id=modal-url-input'.</msg>
+<status status="PASS" endtime="20190828 14:49:17.648" starttime="20190828 14:49:14.385"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${Button_Fetch}</arg>
+</arguments>
+<msg timestamp="20190828 14:49:17.649" level="INFO">Clicking element 'id=modal-fetch-button'.</msg>
+<status status="PASS" endtime="20190828 14:49:19.712" starttime="20190828 14:49:17.649"></status>
+</kw>
+<kw name="Check Books Fail URL">
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>5s</arg>
+</arguments>
+<msg timestamp="20190828 14:49:24.714" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" endtime="20190828 14:49:24.715" starttime="20190828 14:49:19.712"></status>
+</kw>
+<kw name="Element Text Should Be" library="Selenium2Library">
+<doc>Verifies that element ``locator`` contains exact text ``expected``.</doc>
+<arguments>
+<arg>${Message}</arg>
+<arg>${Status_Error URL}</arg>
+</arguments>
+<msg timestamp="20190828 14:49:24.716" level="INFO">Verifying element 'id=addmodal-alert' contains exact text 'Error : URL is not amazon or invalid --&gt; example : https://www.amazon.com/ , https://amazon.com/'.</msg>
+<status status="PASS" endtime="20190828 14:49:26.745" starttime="20190828 14:49:24.715"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:26.746" starttime="20190828 14:49:19.712"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:26.746" starttime="20190828 14:49:12.331"></status>
+</kw>
+<kw type="teardown" name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20190828 14:49:27.809" starttime="20190828 14:49:26.746"></status>
+</kw>
+<status status="PASS" endtime="20190828 14:49:27.810" critical="yes" starttime="20190828 14:49:06.664"></status>
+</test>
+<status status="PASS" endtime="20190828 14:49:27.812" starttime="20190828 14:48:00.503"></status>
 </suite>
 <statistics>
 <total>
-<stat fail="0" pass="1">Critical Tests</stat>
-<stat fail="0" pass="1">All Tests</stat>
+<stat fail="0" pass="3">Critical Tests</stat>
+<stat fail="0" pass="3">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat fail="0" id="s1" name="Robot Order" pass="1">Robot Order</stat>
+<stat fail="0" id="s1" name="Robot Add Item" pass="3">Robot Add Item</stat>
 </suite>
 </statistics>
 <errors>

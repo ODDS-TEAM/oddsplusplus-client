@@ -4,7 +4,7 @@
             <input type="text" v-model="urlInput" class="urlInput" placeholder="Please fill amazon book URL" id="modal-url-input" />
             <button class="main-color fetchBtn" v-on:click="scrap" id="modal-fetch-button">Fetch</button>
             <div class="alert-bar" v-if="excepMsg">
-                <h4 style="color: white !important;">Error : {{excepMsg}}</h4>
+                <h4 id="addmodal-alert" style="color: white !important;">Error : {{excepMsg}}</h4>
             </div>
             <div v-if="waiting">
                 <img src="https://cdn.dribbble.com/users/597558/screenshots/1998465/comp-2.gif" style="width:100%;height:auto;" />
