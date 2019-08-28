@@ -25,20 +25,20 @@
                                     </td>
                                     <td>
                                         <p>
-                                            <button class="minus-btn" style="margin-left: 5px;" :disabled="item.count == 1" v-on:click="decrease(index)">-</button>
+                                            <button class="minus-btn" id="roder-minus-button" style="margin-left: 5px;" :disabled="item.count == 1" v-on:click="decrease(index)">-</button>
                                         </p>
                                     </td>
                                     <td>
-                                        <h3 class="amount">{{item.count}}</h3>
+                                        <h3 class="amount" id="order-amount">{{item.count}}</h3>
                                     </td>
                                     <td>
                                         <p>
-                                            <button class="plus-btn" v-on:click="increase(index)">+</button>
+                                            <button class="plus-btn" id="order-plus-button" v-on:click="increase(index)">+</button>
                                         </p>
                                     </td>
                                     <td style="margin-left:5px;">
                                         <p>
-                                            <button class="del-btn" v-on:click="deleteOrder(item.id)">
+                                            <button class="del-btn" id="order-delete-button" v-on:click="deleteOrder(item.id)">
                                                                                 <img class="img-delete" src="./../assets/delete.png" />
                                                                               </button>
                                         </p>
