@@ -12,16 +12,16 @@
                             <h3 class="f-name">{{user.name}}
                             </h3>
                         </td>
-                        <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-logo" /></td>
+                        <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-dropdown" /></td>
                     </tr>
                 </table>
                 <div class="menu" v-if="menuDropShow">
                     <div class="menu-wrapper" @click="menuDropShow =false">
                         <div class="menu-container" @click.stop>
-                            <h4 class="menu-list" @click="routing(0)">Home</h4>
-                            <h4 class="menu-list" @click="routing(1)">Your Items </h4>
-                            <h4 class="menu-list" @click="routing(2)">Your Orders </h4>
-                            <h4 class="menu-list" style="border-bottom:none;margin-bottom:0;">Sign Out</h4>
+                            <h4 class="menu-list" id="navbar-list-home" @click="routing(0)">Home</h4>
+                            <h4 class="menu-list" id="navbar-list-item" @click="routing(1)">Your Items </h4>
+                            <h4 class="menu-list" id="navbar-list-order" @click="routing(2)">Your Orders </h4>
+                            <h4 class="menu-list" id="navbar-list-signout" style="border-bottom:none;margin-bottom:0;">Sign Out</h4>
                         </div>
                     </div>
                 </div>
@@ -30,14 +30,14 @@
             <div class="main-color add-btn" v-on:click="showModal = true" id="navbar-add-button">
                 <p style="padding:0;"><img class="ico-add-item" src="./../assets/add.png" id="navbar-logo" /></p>
             </div>
-            <table class="account-bar-d" @click="menuDropShow =true">
+            <table class="account-bar-d" id="navbar-account-bar" @click="menuDropShow =true">
                 <tr>
                     <td><img class="img-pro" style="margin:3px 5px; " :src="user.imgURL" id="navbar-logo" /></td>
                     <td style="font-size: 15px;margin:0; padding:0;">
                         <h3 class="f-name" style="margin-bottom: 3px;">{{user.name}}
                         </h3>
                     </td>
-                    <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-logo" /></td>
+                    <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-dropdown" /></td>
                 </tr>
             </table>
         </div>

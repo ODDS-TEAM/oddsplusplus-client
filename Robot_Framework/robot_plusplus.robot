@@ -1,7 +1,8 @@
 *** Settings ***
-Library  Selenium2Library
+Library          Selenium2Library
+Suite Teardown   Close Browser
 
-***Test Cases***
+*** Test Cases ***
 Open Browser
     Open URL
 
@@ -14,10 +15,6 @@ Add Item Fail Type
     
 Add Item Fail URL Error
     Click Add Item_Fail URL
-
-Close Browser After Finish
-    Close Browser
-
 
 *** Keywords ***
 Open URL
