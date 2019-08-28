@@ -21,7 +21,7 @@
                             <h4 class="menu-list" id="navbar-list-home" @click="routing(0)">Home</h4>
                             <h4 class="menu-list" id="navbar-list-item" @click="routing(1)">Your Items </h4>
                             <h4 class="menu-list" id="navbar-list-order" @click="routing(2)">Your Orders </h4>
-                            <h4 class="menu-list" id="navbar-list-signout" style="border-bottom:none;margin-bottom:0;">Sign Out</h4>
+                            <h4 class="menu-list" id="navbar-list-signout" style="border-bottom:none;margin-bottom:0;" v-on:click="signOut">Sign Out</h4>
                         </div>
                     </div>
                 </div>
@@ -103,6 +103,11 @@ export default {
             } else {
                 this.$router.push('/home');
             }
+        },
+        signOut() {
+            
+            localStorage.clear();
+            window.location.href = "https://api-dev.odds.team/api/opp/v1/logout";
         }
 
 
