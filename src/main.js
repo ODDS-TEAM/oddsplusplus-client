@@ -4,10 +4,8 @@ import VueResource from 'vue-resource'
 import moment from 'moment'
 import routes from './routes'
 import VueRouter from 'vue-router';
-import VueJwtDecode from 'vue-jwt-decode'
 
 Vue.config.productionTip = false
-Vue.use(VueJwtDecode)
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
