@@ -107,7 +107,7 @@ export default {
         signOut() {
             
             localStorage.clear();
-            window.location.href = "https://api-dev.odds.team/api/opp/v1/logout";
+            window.location.href = "https://api-dev.odds.team/logout";
         }
 
 

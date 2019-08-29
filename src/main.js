@@ -27,20 +27,20 @@ const router = new VueRouter({
   routes
 });
 
-// router.beforeEach((to, from, next) => {
-//   const requiresAuth = to
-//     .matched
-//     .some(record => record.meta.requiresAuth)
-//   // var user =
-//   //   localStorage.getItem('userId') &&
-//   //   localStorage.getItem('email') &&
-//   //   localStorage.getItem('name') &&
-//   //   localStorage.getItem('imgURL');
-//   // if (requiresAuth && !user) {
-//   //   next('/callback')
-//   // }
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to
+    .matched
+    .some(record => record.meta.requiresAuth)
+  var user =
+    localStorage.getItem('userId') &&
+    localStorage.getItem('email') &&
+    localStorage.getItem('name') &&
+    localStorage.getItem('imgURL');
+  if (requiresAuth && !user) {
+    next('/prepare')
+  }
+  next()
+})
 
 Vue.component('modal', require('./components/modal/Modal.vue').default);
 

@@ -6,23 +6,31 @@ import MyItem from './components/MyItem.vue'
 import MyOrder from './components/MyOrder'
 const routes = [
     {
-        path: '/', component: CardList
+        path: '/', component: CardList, meta: { requiresAuth: true }
+
     },
     {
-        path: '/home', component: CardList
-    },
-    { path: '/callback', component: Callback },
-    {
-        path: '/summary/:id', name: 'summary', component: Summary
+        path: '/home', component: CardList, meta: { requiresAuth: true }
+
     },
     {
-        path: '/myitem', component: MyItem
+        path: '/prepare', component: Callback
     },
     {
-        path: '/myorder', component: MyOrder
+        path: '/summary/:id', name: 'summary', component: Summary, meta: { requiresAuth: true }
+
     },
     {
-        path: '*', redirect: '/home'
+        path: '/myitem', component: MyItem, meta: { requiresAuth: true }
+
+    },
+    {
+        path: '/myorder', component: MyOrder, meta: { requiresAuth: true }
+
+    },
+    {
+        path: '*', redirect: '/home', meta: { requiresAuth: true }
+
     },
 ];
 

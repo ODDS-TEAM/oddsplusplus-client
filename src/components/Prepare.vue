@@ -1,33 +1,39 @@
 <template>
-  <h3>Please wait while redirecting...</h3>
+  <h3>{{msg}}</h3>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      responseBody:null
-    }
+      msg: "Please wait while redirecting...",
+      responseBody: null
+    };
   },
   mounted: function() {
     this.$emit("closeNav");
     this.getUserinfo();
   },
   methods: {
-    getUserinfo: function() { 
-      this.$http.get(process.env.VUE_APP_API + "/callback").then(response => {
-        this.responseBody = response.body;
-        window.console.log(response);
-        localStorage.clear();
-        this.$nextTick(() => {
-          localStorage.setItem("userId", this.responseBody.id);
-          localStorage.setItem("name", this.responseBody.name);
-          localStorage.setItem("email", this.responseBody.email);
-          localStorage.setItem("imgURL", this.responseBody.imgURL);
-        });
-        this.$emit("refreshNav");
-        this.$router.push("/home");
-      });
+    getUserinfo: function() {
+      this.$http.get(process.env.VUE_APP_API + "/callback").then(
+        response => {
+          this.responseBody = response.body;
+          window.console.log(response);
+          localStorage.clear();
+          this.$nextTick(() => {
+            localStorage.setItem("userId", this.responseBody.id);
+            localStorage.setItem("name", this.responseBody.name);
+            localStorage.setItem("email", this.responseBody.email);
+            localStorage.setItem("imgURL", this.responseBody.imgURL);
+          });
+          this.$emit("refreshNav");
+          this.$router.push("/home");
+        },() =>{
+          window.location.href = "https://api-dev.odds.team/logout"
+          window.location.href = "https://api-dev.odds.team/"
+        }
+      );
     }
   }
 };
