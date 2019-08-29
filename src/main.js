@@ -31,6 +31,14 @@ const router = new VueRouter({
 //   const requiresAuth = to
 //     .matched
 //     .some(record => record.meta.requiresAuth)
+//   // var user =
+//   //   localStorage.getItem('userId') &&
+//   //   localStorage.getItem('email') &&
+//   //   localStorage.getItem('name') &&
+//   //   localStorage.getItem('imgURL');
+//   // if (requiresAuth && !user) {
+//   //   next('/callback')
+//   // }
 //   next()
 // })
 
