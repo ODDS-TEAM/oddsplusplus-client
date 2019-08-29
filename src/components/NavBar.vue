@@ -101,6 +101,9 @@ export default {
         },
         signOut() {
             localStorage.clear();
+            this.$cookie.delete('SSID');
+            this.$cookie.delete('session');
+
             window.location.href = "https://api-dev.odds.team/logout";
         }
 

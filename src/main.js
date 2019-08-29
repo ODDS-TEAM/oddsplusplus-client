@@ -4,11 +4,12 @@ import VueResource from 'vue-resource'
 import moment from 'moment'
 import routes from './routes'
 import VueRouter from 'vue-router';
-
+import VueCookie from 'vue-cookie'
 Vue.config.productionTip = false
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.use(VueCookie);
 import GAuth from 'vue-google-oauth2'
 const gauthOption = {
   clientId: '971106496644-4nae94isrfp8n4ef1dmkq54ocsqt5f3n.apps.googleusercontent.com',
