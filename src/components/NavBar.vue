@@ -100,10 +100,7 @@ export default {
             this.$router.push(menu[page]);
         },
         signOut() {
-            // localStorage.clear();
-            window.location.href = 'https://www.google.com/accounts/Logout';
             window.location.href = 'https://api-dev.odds.team/logout';
-            this.$router.push('/');
         }
 
 
