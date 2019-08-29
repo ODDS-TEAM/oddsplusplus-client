@@ -3,7 +3,7 @@
     <NavBar @refreshMyItem="refreshCard" v-if="renderNav" />
 
     <div class="body">
-      <router-view @refreshNav="refreshNav" @refreshMyItem="refreshCard" v-if="renderComponent" />
+      <router-view @refreshNav="refreshNav" @closeNav="renderNav = false" @refreshMyItem="refreshCard" v-if="renderComponent" />
     </div>
   </div>
 </template>
