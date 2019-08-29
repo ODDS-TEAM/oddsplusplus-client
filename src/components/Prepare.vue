@@ -10,6 +10,11 @@ export default {
   methods: {
     getUserinfo: function() {
       this.$http.get(process.env.VUE_APP_API + "/callback").then(response => {
+        window.console.log(response);
+        localStorage.setItem("userId", response.id);
+        localStorage.setItem("name", response.name);
+        localStorage.setItem("email", response.email);
+        localStorage.setItem("imgURL", response.imgURL);
         this.$router.push("/home");
         this.$emit("refreshNav");
       });
