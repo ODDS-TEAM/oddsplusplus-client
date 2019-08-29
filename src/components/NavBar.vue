@@ -101,10 +101,9 @@ export default {
         },
         signOut() {
             // localStorage.clear();
-            this.$cookie.delete('SSID');
-            this.$cookie.delete('session');
-            this.$router.push('/home');
-
+            window.location.href = 'https://www.google.com/accounts/Logout';
+            window.location.href = 'https://api-dev.odds.team/logout';
+            this.$router.push('/');
         }
 
 
