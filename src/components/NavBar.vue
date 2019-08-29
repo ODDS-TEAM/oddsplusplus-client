@@ -100,11 +100,11 @@ export default {
             this.$router.push(menu[page]);
         },
         signOut() {
-            localStorage.clear();
+            // localStorage.clear();
             this.$cookie.delete('SSID');
             this.$cookie.delete('session');
+            this.$router.push('/home');
 
-            window.location.href = "https://api-dev.odds.team/logout";
         }
 
 
