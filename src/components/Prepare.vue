@@ -14,7 +14,7 @@ export default {
     this.getUserinfo();
   },
   methods: {
-    getUserinfo: function() {
+    getUserinfo: function() { 
       this.$http.get(process.env.VUE_APP_API + "/callback").then(response => {
         this.responseBody = response.body;
         window.console.log(response);
