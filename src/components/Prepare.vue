@@ -29,9 +29,6 @@ export default {
           });
           this.$emit("refreshNav");
           this.$router.push("/home");
-        },() =>{
-          window.location.href = "https://api-dev.odds.team/logout"
-          window.location.href = "https://api-dev.odds.team/"
         }
       );
     }

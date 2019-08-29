@@ -96,16 +96,10 @@ export default {
         },
         routing(page) {
             this.menuDropShow = false;
-            if (page === 1) {
-                this.$router.push('/myitem');
-            } else if (page === 2) {
-                this.$router.push('/myorder');
-            } else {
-                this.$router.push('/home');
-            }
+            const menu = ['/home','/myitem','/myorder']
+            this.$router.push(menu[page]);
         },
         signOut() {
-            
             localStorage.clear();
             window.location.href = "https://api-dev.odds.team/logout";
         }
