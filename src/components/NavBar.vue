@@ -100,7 +100,9 @@ export default {
             this.$router.push(menu[page]);
         },
         signOut() {
-            window.location.href = 'https://api-dev.odds.team/logout';
+            this.$nextTick(() => {
+                window.location.href = 'https://api-dev.odds.team/logout';
+            });
         }
 
 
