@@ -17,11 +17,11 @@
               <div class="detail">
                 <table style="height:90px;">
                   <tr>
-                    <h3>{{ item.title }}</h3>
+                    <h3 id="item.title"> {{ item.title }}</h3>
                   </tr>
                   <tr>
-                    <h4>By {{ item.author }} ({{item.format}})</h4>
-                    <h3 style="color:red">${{item.price}}</h3>
+                    <h4 id="item.author-format">By {{ item.author }} ({{item.format}})</h4>
+                    <h3 style="color:red" id="item.price" >${{item.price}}</h3>
                   </tr>
                 </table>
                 <table style="height:40px;" class="tb-btn">
@@ -29,7 +29,7 @@
                     <td>
                       <p>
                         <router-link :to="{ name: 'summary', params: { id: item.id }}">
-                          <button class="footer-btn main-color">Summary</button>
+                          <button id = "myitem-summary" class="footer-btn main-color">Summary</button>
                         </router-link>
                       </p>
                     </td>

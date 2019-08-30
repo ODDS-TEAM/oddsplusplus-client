@@ -9,12 +9,12 @@
     
                 <h4>Items Cost</h4>
     
-                <input type="number" v-model="cost" placeholder="Please fill only item total cost" />
+                <input  type="number" id ="result-modal-items-cost"  v-model="cost" placeholder="Please fill only item total cost" />
                 <h4>Shipping Charge</h4>
-                <input type="number" v-model="charge" placeholder="Please fill only shipping total cost" />
+                <input type="number" id ="result-modal-shipping-charge" v-model="charge" placeholder="Please fill only shipping total cost" />
     
-                <button class="plus-btn" v-on:click="updateOrder">confirm</button>
-                <button class="plus-btn cancel-btn" v-on:click="$emit('close')">cancel</button>
+                <button class="plus-btn" id ="result-modal-submit-btn" v-on:click="updateOrder">confirm</button>
+                <button class="plus-btn cancel-btn" id ="result-modal-cancel-btn" v-on:click="$emit('close')">cancel</button>
             </div>
         </div>
     </modal>

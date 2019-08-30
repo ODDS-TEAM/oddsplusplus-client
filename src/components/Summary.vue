@@ -10,10 +10,10 @@
                 <p>
                     <img id="card-boot-image" class="img-item" :src="summary.item.imgUrl" />
                 </p>
-                <h3>{{summary.item.title}} ({{summary.item.format}})</h3>
-                <h4>by {{summary.item.author}}</h4>
-                <h1 style="color: red">$ {{summary.item.price}}</h1>
-                <h5>Order date: {{summary.item.orderDate| formatDate}}</h5>
+                <h3 id="summary-title-format" >{{summary.item.title}} ({{summary.item.format}})</h3>
+                <h4 id="summary-author">by {{summary.item.author}}</h4>
+                <h1 id="summary-price" style="color: red">$ {{summary.item.price}}</h1>
+                <h5 id="summary-order-date">Order date: {{summary.item.orderDate| formatDate}}</h5>
             </div>
             <div v-if="!loading" class="col-8 summary-detail">
                 <table style="height:110px;width: 100%; margin:10px 0; border-bottom: 2px solid #efefef;">
@@ -21,22 +21,22 @@
                         <table style="width:100%;">
                             <tr>
                                 <td style="width:45%;">
-                                    <h2 class="p-20-t">Qty : {{summary.item.count}}</h2>
+                                    <h2 id="summary-total-qty" class="p-20-t">Qty : {{summary.item.count}}</h2>
                                 </td>
                                 <td style="width:27.5%;">
-                                    <button class="btn-order" v-on:click="goToAmazon">Go to Amazon</button>
+                                    <button id="summary-btn-go-to-amazon" class="btn-order" v-on:click="goToAmazon">Go to Amazon</button>
                                 </td>
-                                <td style="width:27.5%;"> <button class="btn-order btn-sum" v-on:click="modal = true">Order Update</button>
+                                <td style="width:27.5%;"> <button id="summary-btn-order-update" class="btn-order btn-sum" v-on:click="modal = true">Order Update</button>
                                 </td>
                             </tr>
                         </table>
     
                     </tr>
                     <tr>
-                        <h3 class="p-20-t">Total price : ${{summary.item.cost}}</h3>
+                        <h3 id="summary-total-price" class="p-20-t">Total price : ${{summary.item.cost}}</h3>
                     </tr>
                     <tr>
-                        <h3 class="p-20-t">Total charge : ${{summary.item.shippingCharge}}</h3>
+                        <h3 id="summary-total-charge" class="p-20-t">Total charge : ${{summary.item.shippingCharge}}</h3>
                     </tr>
                 </table>
                 <thead>
@@ -54,10 +54,10 @@
                                     <p style="text-align:left; margin : 0;">
                                         <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;" /> </p>
                                 </td>
-                                <td class="p-20-h p-20-t">{{order.user.name}} </td>
-                                <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
-                                <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.cost}}</td>
-                                <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.shippingCharge}}</td>
+                                <td class="p-20-h p-20-t" id="summary-Name" >{{order.user.name}} </td>
+                                <td class="p-20-h p-20-t" id="summary-Qty"  style="color: red; text-align:center">{{order.count}}</td>
+                                <td class="p-20-h p-20-t" id="summary-Costs($)" style="color: red; text-align:center">{{order.cost}}</td>
+                                <td class="p-20-h p-20-t" id="summary-Charge($)" style="color: red; text-align:center">{{order.shippingCharge}}</td>
                             </tr>
                         </table>
                     </tbody>

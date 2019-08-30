@@ -15,8 +15,8 @@
                         <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-dropdown" /></td>
                     </tr>
                 </table>
-                <div class="menu" v-if="menuDropShow">
-                    <div class="menu-wrapper" @click="menuDropShow =false">
+                <div class="menu" v-if="menuDropShow" >
+                    <div class="menu-wrapper" @click="menuDropShow =false" >
                         <div class="menu-container" @click.stop>
                             <h4 class="menu-list" id="navbar-list-home" @click="routing(0)">Home</h4>
                             <h4 class="menu-list" id="navbar-list-item" @click="routing(1)">Your Items </h4>

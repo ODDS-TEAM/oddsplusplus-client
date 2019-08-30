@@ -21,19 +21,22 @@
                             <tr>
                                 <td>
                                     <h3 id="modal-book-title">{{results.title}}</h3>
+                                    <h3 id="modal-book-format">{{results.format}}</h3>
                                 </td>
-    
                             </tr>
                             <tr>
                                 <td>
-                                    <h4 id="modal-book-author">By {{results.owner}}</h4>
+                                    <h4 id="modal-book-author">By {{results.owner}} </h4>
                                 </td>
                             </tr>
+                            
+                            
                             <tr>
                                 <td>
                                     <h1 id="modal-book-price" style="color:red;">${{results.price}}</h1>
                                 </td>
                             </tr>
+                            
                             <br>
                             <tr>
                                 <td><a>Order Date </a></td>
