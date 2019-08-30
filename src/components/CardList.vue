@@ -181,6 +181,7 @@ p {
   font-size: 10px;
   font-weight: 500;
   box-shadow: 0 0 15px 0 0;
+  background: white;
 }
 
 .button-add:hover {
