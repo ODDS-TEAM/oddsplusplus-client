@@ -1,17 +1,31 @@
-<template></template>
+<template>
+  <div>
+    <h3>Logout</h3>
+  </div>
+</template>
 
 <script>
-import { emit } from "cluster";
 export default {
   mounted: function() {
     this.$emit("closeNav");
     window.localStorage.clear();
-    this.$nextTick(() => {
-      window.location.href = "https://api-dev.odds.team/logout";
-    });
+    if (process.env.VUE_APP_PROD) {
+      this.$nextTick(() => {
+        this.$router.push("/logout");
+      });
+    }
   }
 };
 </script>
 
-<style>
+<style scoped>
+h3 {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 45%;
+  left: 50%;
+  font-size: 21px;
+}
 </style>
