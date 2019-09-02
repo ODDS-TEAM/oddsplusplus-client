@@ -1,15 +1,9 @@
-*** Settings ***
-Library  Selenium2Library
-Resource  Keywords.robot
-Resource  Variables.robot
-
 
 *** Test Cases ***
 Open Browser
     Open URL
 
 Add Item Success
-    Open Odds Plus Plus
     Click Add Item_Success
     Check Books List    
 

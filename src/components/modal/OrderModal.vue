@@ -11,9 +11,9 @@
                         </div>
                     </td>
                     <td class="p-20-h p-20-t">
-                        <h4 style="font-size:15px;">{{order.user.name}}</h4>
+                        <h4 id="order.user.name" style="font-size:15px;">{{order.user.name}}</h4>
                     </td>
-                    <td class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
+                    <td id="order.count" class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
                 </tr>
             </table>
             <p style="text-align:center;"><img v-if="loading" src="../../assets/loading.gif" style="width:100px;height:100px;margin:0 auto;transform: scale(1.2);"></p>

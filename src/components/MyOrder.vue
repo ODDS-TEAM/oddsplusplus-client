@@ -14,8 +14,8 @@
             </div>
 
             <div class="col-9 detail">
-              <h3 class="item-title">{{ item.item.title }}</h3>
-              <h4>By {{ item.item.author }} ({{item.item.format}})</h4>
+              <h3 id="item-title" class="item-title">{{ item.item.title }}</h3>
+              <h4 id="item-author-format">By {{ item.item.author }} ({{item.item.format}})</h4>
               <table style="height:40px;" class="tb-btn">
                 <tr>
                   <td>

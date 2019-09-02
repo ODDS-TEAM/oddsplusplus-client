@@ -15,13 +15,13 @@
                         <td><img class="arrow" src="./../assets/drop-down-arrow.png" id="navbar-dropdown" /></td>
                     </tr>
                 </table>
-                <div class="menu" v-if="menuDropShow" >
+                <div id="navbar-menu" class="menu" v-if="menuDropShow" >
                     <div class="menu-wrapper" @click="menuDropShow =false" >
                         <div class="menu-container" @click.stop>
-                            <h4 class="menu-list" id="navbar-list-home" @click="routing(0)">Home</h4>
-                            <h4 class="menu-list" id="navbar-list-item" @click="routing(1)">Your Items </h4>
-                            <h4 class="menu-list" id="navbar-list-order" @click="routing(2)">Your Orders </h4>
-                            <h4 class="menu-list" id="navbar-list-signout" style="border-bottom:none;margin-bottom:0;" v-on:click="signOut">Sign Out</h4>
+                            <h4 id="navbar-list-home"  class="menu-list"  @click="routing(0)">Home</h4>
+                            <h4 id="navbar-list-item"  class="menu-list"  @click="routing(1)">Your Items </h4>
+                            <h4 id="navbar-list-order" class="menu-list"  @click="routing(2)">Your Orders </h4>
+                            <h4 id="navbar-list-signout" class="menu-list"  style="border-bottom:none;margin-bottom:0;" v-on:click="signOut">Sign Out</h4>
                         </div>
                     </div>
                 </div>

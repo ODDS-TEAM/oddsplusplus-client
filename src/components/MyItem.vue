@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <h1 style="text-align:center;padding:0;">Your Items</h1>
+      <h1 id="myitem-page-title" style="text-align:center;padding:0;">Your Items</h1>
     </div>
     <ul>
       <li v-for="item in data" v-bind:key="item.value">
@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-2">
               <p>
-                <img id="card-boot-image" class="img-item" :src="item.imgUrl" />
+                <img id="myitem.image" class="img-item" :src="item.imgUrl" />
               </p>
             </div>
 
@@ -17,10 +17,10 @@
               <div class="detail">
                 <table style="height:90px;">
                   <tr>
-                    <h3 id="item.title"> {{ item.title }}</h3>
+                    <h3 id="myitem.title"> {{ item.title }}</h3>
                   </tr>
                   <tr>
-                    <h4 id="item.author-format">By {{ item.author }} ({{item.format}})</h4>
+                    <h4 id="myitem.author-format">By {{ item.author }} ({{item.format}})</h4>
                     <h3 style="color:red" id="item.price" >${{item.price}}</h3>
                   </tr>
                 </table>
@@ -29,13 +29,13 @@
                     <td>
                       <p>
                         <router-link :to="{ name: 'summary', params: { id: item.id }}">
-                          <button id = "myitem-summary" class="footer-btn main-color">Summary</button>
+                          <button id = "myitem-summary-btn" class="footer-btn main-color">Summary</button>
                         </router-link>
                       </p>
                     </td>
                     <td>
                       <p>
-                        <button class="footer-btn" style="background-color: #f55246;">Delete</button>
+                        <button id = "myitem-delete-btn" class="footer-btn" style="background-color: #f55246;">Delete</button>
                       </p>
                     </td>
                   </tr>
