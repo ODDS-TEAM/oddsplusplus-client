@@ -2,7 +2,7 @@
     <div class="login-layout">
       <div class="login-content">
         <div class="content-layout">
-          <label>Login with @odds.team</label>
+          <h2>Login with @odds.team</h2>
           <button v-on:click="signIn" class="btn-signIn">Sign In wiht ODDS team</button>
         <!-- <button v-on:click="signInV2">Login V2</button> -->
         </div>
@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import { async } from 'q';
 export default {
   name: "login",
   data() {
@@ -33,9 +34,10 @@ export default {
           localStorage.setItem("email",this.profile.U3);
           localStorage.setItem("imgURL",this.profile.Paa);
           window.localStorage.setItem("profile",this.profile)
-          this.$emit("refreshMyItem");
-          this.$emit("refreshNav");
-          this.$router.push('/home')
+          // this.$emit("refreshMyItem");
+          // this.$emit("refreshNav");
+          
+          window.location.href= "/home"
           // this.checkUser();
         })
         .catch(error => {

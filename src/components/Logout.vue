@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h3>Logout</h3>
+    <h3>Your Sign Out Successful</h3>
   </div>
 </template>
 
 <script>
 export default {
   mounted: function() {
-    this.$emit("closeNav");
     window.localStorage.clear();
+    setTimeout(()=> {
+          this.$router.push("/")
+    },5000)
     // if (process.env.VUE_APsP_PROD) {
     //   this.$nextTick(() => {
     //     this.$router.push("/logout");
