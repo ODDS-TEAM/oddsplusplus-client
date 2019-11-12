@@ -16,21 +16,21 @@ export default {
   },
   methods: {
     getUserinfo: function() {
-      this.$http.get(process.env.VUE_APP_API + "/callback").then(
-        response => {
-          this.responseBody = response.body;
-          window.console.log(response);
-          localStorage.clear();
-          this.$nextTick(() => {
-            localStorage.setItem("userId", this.responseBody.id);
-            localStorage.setItem("name", this.responseBody.name);
-            localStorage.setItem("email", this.responseBody.email);
-            localStorage.setItem("imgURL", this.responseBody.imgURL);
-          });
+    //   this.$http.get(process.env.VUE_APP_API + "/callback").then(
+    //     response => {
+    //       this.responseBody = response.body;
+    //       window.console.log(response);
+    //       localStorage.clear();
+    //       this.$nextTick(() => {
+    //         localStorage.setItem("userId", this.responseBody.id);
+    //         localStorage.setItem("name", this.responseBody.name);
+    //         localStorage.setItem("email", this.responseBody.email);
+    //         localStorage.setItem("imgURL", this.responseBody.imgURL);
+    //       });
           this.$emit("refreshNav");
           this.$router.push("/home");
-        }
-      );
+    //     }
+    //   );
     }
   }
 };

@@ -21,7 +21,8 @@
                             <h4 id="navbar-list-home"  class="menu-list"  @click="routing(0)">Home</h4>
                             <h4 id="navbar-list-item"  class="menu-list"  @click="routing(1)">Your Items </h4>
                             <h4 id="navbar-list-order" class="menu-list"  @click="routing(2)">Your Orders </h4>
-                            <h4 id="navbar-list-signout" class="menu-list"  style="border-bottom:none;margin-bottom:0;" v-on:click="signOut">Sign Out</h4>
+                            <h4 v-if="!isSignIn" id="navbar-list-signout" class="menu-list"  style="border-bottom:none;margin-bottom:0;" v-on:click="signIn">Sign In</h4>
+                            <h4 v-if="isSignIn" id="navbar-list-signout" class="menu-list"  style="border-bottom:none;margin-bottom:0;" v-on:click="signOut">Sign Out</h4>
                         </div>
                     </div>
                 </div>
@@ -60,20 +61,31 @@ export default {
             results: null,
             user: {
                 id: null,
-                name: null,
+                name: 'Please Sign In',
                 email: null,
                 imgURL: null,
             },
             orderModal: false,
 
-            menuDropShow: false
+            menuDropShow: false,
+            isSignIn:false
+
         };
     },
     mounted: function() {
-        this.user.id = localStorage.getItem("userId");
-        this.user.name = localStorage.getItem("name");
-        this.user.email = localStorage.getItem("email");
-        this.user.imgURL = localStorage.getItem("imgURL");
+        // window.console.log(localStorage.getItem("name"))
+        if (!localStorage.getItem("name")) {
+            this.user.name = "Please Sign In"
+            this.user.imgURL = "https://media.giphy.com/media/3oriOiizS4Pmofj46A/giphy.gif"
+            this.isSignIn = false
+        } else  {
+            this.user.id = localStorage.getItem("userId");
+            this.user.name = localStorage.getItem("name");
+            this.user.email = localStorage.getItem("email");
+            this.user.imgURL = localStorage.getItem("imgURL");
+            this.isSignIn = true
+        }
+      
     },
     methods: {
         refreshNav() {
@@ -100,7 +112,22 @@ export default {
             this.$router.push(menu[page]);
         },
         signOut() {
+            window.localStorage.clear()
+            this.user = {
+                id: null,
+                name: "Please Sign In",
+                email: null,
+                imgURL : "https://media.giphy.com/media/3oriOiizS4Pmofj46A/giphy.gif"
+            },
             this.$router.push('/logout');
+            this.refreshNav()
+            this.isSignIn = false;
+            this.menuDropShow = false;
+            
+        },
+        signIn() {
+            this.$router.push("/login")
+            this.menuDropShow = false;
         }
 
 

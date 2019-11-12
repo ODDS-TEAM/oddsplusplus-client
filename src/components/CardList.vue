@@ -91,10 +91,10 @@ export default {
   },
   methods: {
     getItemData: function() {
-      this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
-        this.data = response.body;
-        window.console.log(this.data);
-      });
+      // this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
+      //   this.data = response.body;
+      //   window.console.log(this.data);
+      // });
     },
 
     getOrderData: function(itemId) {

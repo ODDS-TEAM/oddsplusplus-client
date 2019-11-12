@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 Vue.use(VueCookie);
 import GAuth from 'vue-google-oauth2'
 const gauthOption = {
-  clientId: '971106496644-4nae94isrfp8n4ef1dmkq54ocsqt5f3n.apps.googleusercontent.com',
+  clientId: '822425732761-q99fsf9aue9kkf3d71dn6be83f6l45vq.apps.googleusercontent.com',
   scope: 'profile email',
   prompt: 'select_account'
 }
@@ -38,7 +38,8 @@ router.beforeEach((to, from, next) => {
     localStorage.getItem('name') &&
     localStorage.getItem('imgURL');
   if (requiresAuth && !user) {
-    next('/prepare')
+    // next('/prepare')
+    // window.location.href = "/prepare"
   }
   next()
 })
