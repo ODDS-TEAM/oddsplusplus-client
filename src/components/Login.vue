@@ -23,20 +23,23 @@ export default {
       this.$gAuth
         .signIn()
         .then(GoogleUser => {
+        
           window.console.log("user", GoogleUser.getId());
           window.console.log("profile", GoogleUser.getBasicProfile());
           window.console.log("auth", GoogleUser.getAuthResponse());
           this.profile = GoogleUser.getBasicProfile();
+            if (this.isOddsTeam(this.profile.U3)) {
+                  localStorage.setItem("userId",GoogleUser.getId());
+                  localStorage.setItem("name",this.profile.ig);
+                  localStorage.setItem("email",this.profile.U3);
+                  localStorage.setItem("imgURL",this.profile.Paa);
+                  window.localStorage.setItem("profile",this.profile)
+                  window.location.href= "/home"
+            } else {
+                alert("Sign Fail")
+            }
         // console.log(Object.keys(this.profile))
-          localStorage.setItem("userId",GoogleUser.getId());
-          localStorage.setItem("name",this.profile.ig);
-          localStorage.setItem("email",this.profile.U3);
-          localStorage.setItem("imgURL",this.profile.Paa);
-          window.localStorage.setItem("profile",this.profile)
-          // this.$emit("refreshMyItem");
-          // this.$emit("refreshNav");
-          
-          window.location.href= "/home"
+        
           // this.checkUser();
         })
         .catch(error => {
@@ -66,6 +69,11 @@ export default {
     },
     signInV2: function() {
       window.location.href = "https://api-dev.odds.team/api/opp/v1/login";
+    },
+    isOddsTeam: (email) =>  {
+      const regOddsTeam = new RegExp("(\\w{0,20})(\\b@odds.team\\b)", "g");
+      const isOdds = regOddsTeam.exec(email);
+      return isOdds
     }
   }
 };
