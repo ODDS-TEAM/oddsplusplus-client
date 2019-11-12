@@ -1,9 +1,13 @@
 <template>
-  <div class="login-content">
-    <label>Login with @odds.team</label>
-    <button v-on:click="signIn">Login</button>
-    <button v-on:click="signInV2">Login V2</button>
-  </div>
+    <div class="login-layout">
+      <div class="login-content">
+        <div class="content-layout">
+          <label>Login with @odds.team</label>
+          <button v-on:click="signIn" class="btn-signIn">Sign In wiht ODDS team</button>
+        <!-- <button v-on:click="signInV2">Login V2</button> -->
+        </div>
+      </div>
+    </div>
 </template>
 <script>
 export default {
@@ -23,7 +27,16 @@ export default {
           window.console.log("profile", GoogleUser.getBasicProfile());
           window.console.log("auth", GoogleUser.getAuthResponse());
           this.profile = GoogleUser.getBasicProfile();
-          this.checkUser();
+        // console.log(Object.keys(this.profile))
+          localStorage.setItem("userId",GoogleUser.getId());
+          localStorage.setItem("name",this.profile.ig);
+          localStorage.setItem("email",this.profile.U3);
+          localStorage.setItem("imgURL",this.profile.Paa);
+          window.localStorage.setItem("profile",this.profile)
+          this.$emit("refreshMyItem");
+          this.$emit("refreshNav");
+          this.$router.push('/home')
+          // this.checkUser();
         })
         .catch(error => {
           window.console.log(error);
@@ -58,14 +71,27 @@ export default {
 </script>
 <style scoped>
 .login-content {
+  text-align: center;
   position: absolute;
-  width: 40%;
-  height: 40%;
+  width: 50%;
+  height: auto;
   z-index: 15;
-  top: 30%;
-  left: 30%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+}
+.content-layout {
+  margin-top : 3%;
+  margin-bottom: 4%; 
+}
+.btn-signIn {
+  margin-top: 2%;
+  text-align: center;
+  width: auto;
+}
+.login-layout {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
 }
 label {
   display: block;

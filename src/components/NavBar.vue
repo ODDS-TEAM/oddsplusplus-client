@@ -74,6 +74,8 @@ export default {
         this.user.name = localStorage.getItem("name");
         this.user.email = localStorage.getItem("email");
         this.user.imgURL = localStorage.getItem("imgURL");
+        
+        console.log(JSON.stringify(localStorage.getItem("profile")))
     },
     methods: {
         refreshNav() {
@@ -100,7 +102,10 @@ export default {
             this.$router.push(menu[page]);
         },
         signOut() {
+            console.log("logout")
+            window.localStorage.clear()
             this.$router.push('/logout');
+            
         }
 
 

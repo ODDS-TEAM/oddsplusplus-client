@@ -9,11 +9,11 @@ export default {
   mounted: function() {
     this.$emit("closeNav");
     window.localStorage.clear();
-    if (process.env.VUE_APP_PROD) {
-      this.$nextTick(() => {
-        this.$router.push("/logout");
-      });
-    }
+    // if (process.env.VUE_APsP_PROD) {
+    //   this.$nextTick(() => {
+    //     this.$router.push("/logout");
+    //   });
+    // }
   }
 };
 </script>
