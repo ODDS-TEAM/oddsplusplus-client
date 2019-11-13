@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       profile: null,
-      responses: null
+      responses: null,
+      auth: null
     };
   },
   methods: {
@@ -23,24 +24,29 @@ export default {
       this.$gAuth
         .signIn()
         .then(GoogleUser => {
-        
+      
           window.console.log("user", GoogleUser.getId());
           window.console.log("profile", GoogleUser.getBasicProfile());
           window.console.log("auth", GoogleUser.getAuthResponse());
+          this.auth = GoogleUser.getAuthResponse();
           this.profile = GoogleUser.getBasicProfile();
             if (this.isOddsTeam(this.profile.U3)) {
+    
                   localStorage.setItem("userId",GoogleUser.getId());
                   localStorage.setItem("name",this.profile.ig);
                   localStorage.setItem("email",this.profile.U3);
                   localStorage.setItem("imgURL",this.profile.Paa);
                   window.localStorage.setItem("profile",this.profile)
-                  window.location.href= "/home"
+                  this.checkUser();
+                    
+
+                  //window.location.href= "/home"
             } else {
                 alert("Sign Fail")
             }
         // console.log(Object.keys(this.profile))
         
-          // this.checkUser();
+          
         })
         .catch(error => {
           window.console.log(error);
@@ -51,9 +57,11 @@ export default {
         .post(process.env.VUE_APP_API + "/userData", {
           name: this.profile.ig,
           email: this.profile.U3,
-          imgURL: this.profile.Paa
+          imgURL: this.profile.Paa,
+          token: this.auth.access_token
         })
         .then(response => {
+          window.console.log(response)
           this.responses = response.body;
           window.console.log(this.responses);
           localStorage.setItem("userId", this.responses.id);
