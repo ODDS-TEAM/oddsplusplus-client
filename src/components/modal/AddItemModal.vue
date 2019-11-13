@@ -1,8 +1,8 @@
 <template>
     <modal @close="$emit('close')">
         <div slot="body">
-            <input type="text" v-model="urlInput" class="urlInput" placeholder="Please fill amazon book URL" id="modal-url-input" />
-            <button class="main-color fetchBtn" v-on:click="scrap" id="modal-fetch-button">Fetch</button>
+            <input type="text" v-model="urlInput" class="urlInput" placeholder="Please fill amazon book URL" id="modal-url-input" v-on:keyup.enter="scrap"/>
+            <button class="main-color fetchBtn" v-on:click="scrap"  id="modal-fetch-button">Fetch</button>
             <div class="alert-bar" v-if="excepMsg">
                 <h4 id="addmodal-alert" style="color: white !important;">Error : {{excepMsg}}</h4>
             </div>
@@ -13,27 +13,27 @@
     
                 <div class="row" style="margin-top:5px;border-top:2px solid #efefef;">
                     <div class="col-4 col-s-4">
-                        <p style="text-align:center;padding:0;margin:10px 0 0;"> <img class="imgBook" :src="results.imageUrl" id="modal-book-image" /> </p>
+                        <p style="text-align:center;padding:0;margin:10px 0 0;"> <img class="imgBook" :src="results.img" id="modal-book-image" /> </p>
                     </div>
                     <div class="col-8 col-s-8">
     
                         <table class="table-add-img">
                             <tr>
                                 <td>
-                                    <h3 id="modal-book-title">{{results.title}}</h3>
+                                    <h3 id="modal-book-title">{{results.book_name}}</h3>
                                     <h3 id="modal-book-format">{{results.format}}</h3>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <h4 id="modal-book-author">By {{results.owner}} </h4>
+                                    <h4 id="modal-book-author">By {{results.author}} </h4>
                                 </td>
                             </tr>
                             
                             
                             <tr>
                                 <td>
-                                    <h1 id="modal-book-price" style="color:red;">${{results.price}}</h1>
+                                    <h1 id="modal-book-price" style="color:red;">{{results.price}}</h1>
                                 </td>
                             </tr>
                             
@@ -131,13 +131,12 @@ export default {
             this.excepMsg = null;
             this.waiting = true;
             this.$http
-                .get(process.env.VUE_APP_API + "/responseScrap", {
-                    params: {
-                        url: this.urlInput
-                    }
+                .post('http://localhost:1323' + "/responseScrap", {
+                        book_url: this.urlInput
                 })
                 .then(
                     response => {
+                        console.log(response.body)
                         this.excepMsg = null;
                         this.waiting = false;
                         this.results = response.body;
