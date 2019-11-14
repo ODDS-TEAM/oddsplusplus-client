@@ -17,6 +17,13 @@ export function parseJwt (token) {
 export function Login(gooleToken) {
     return app.post("/login",{ token : gooleToken})
 }
+
+export function Register(userdata) {
+    return app.patch("/register", userdata , {
+        headers: { Authorization: sessionStorage.getItem("token") }
+    })
+}
+
 export function getUser(uid) {
     return app.get("/user/"+uid)
 }

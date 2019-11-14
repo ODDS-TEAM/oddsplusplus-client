@@ -1,23 +1,27 @@
 <template>
-    <div class="login-layout">
-      <div class="login-content">
-        <div class="content-layout">
-          <h2>Login with @odds.team</h2>
-          <button v-on:click="signIn" class="btn-signIn">Sign In wiht ODDS team</button>
+  <div class="login-layout">
+    <div class="login-content">
+      <div class="content-layout">
+        <h2>Login with @odds.team</h2>
+        <button v-on:click="signIn" class="btn-signIn">Sign In wiht ODDS team</button>
         <!-- <button v-on:click="signInV2">Login V2</button> -->
-        </div>
       </div>
     </div>
+  </div>
 </template>
 <script>
-import {Login , parseJwt} from '../service'
+import { Login, parseJwt, Register } from "../service";
 export default {
   name: "login",
   data() {
     return {
       profile: null,
       responses: null,
-      auth: null
+      auth: null,
+      user: {
+        name: null,
+        imgUrl: null
+      }
     };
   },
   methods: {
@@ -25,71 +29,72 @@ export default {
       this.$gAuth
         .signIn()
         .then(GoogleUser => {
-      
           window.console.log("user", GoogleUser.getId());
           window.console.log("profile", GoogleUser.getBasicProfile());
           window.console.log("auth", GoogleUser.getAuthResponse());
           this.auth = GoogleUser.getAuthResponse();
           this.profile = GoogleUser.getBasicProfile();
-            if (this.isOddsTeam(this.profile.U3)) {
+          if (this.isOddsTeam(this.profile.U3)) {
+            localStorage.setItem("userId", GoogleUser.getId());
+            localStorage.setItem("name", this.profile.ig);
+            localStorage.setItem("email", this.profile.U3);
+            localStorage.setItem("imgURL", this.profile.Paa);
+            window.localStorage.setItem("profile", this.profile);
 
-                  localStorage.setItem("userId",GoogleUser.getId());
-                  localStorage.setItem("name",this.profile.ig);
-                  localStorage.setItem("email",this.profile.U3);
-                  localStorage.setItem("imgURL",this.profile.Paa);
-                  window.localStorage.setItem("profile",this.profile)
-                  
-                  Login(GoogleUser.getAuthResponse().id_token).then(res=>{
-                        const token = res.data.token
-                        sessionStorage.setItem('token',"Bearer " + token)
-                        localStorage.setItem("userId",parseJwt(token))
-                    
-                  })
-                  this.checkUser();
-                    
+            Login(GoogleUser.getAuthResponse().id_token).then(res => {
+              window.console.log(res);
+              const token = res.data.token;
+              sessionStorage.setItem("token", "Bearer " + token);
+              localStorage.setItem("userId", parseJwt(token));
+              this.user.name = localStorage.getItem("name");
+              this.user.imgUrl = localStorage.getItem("imgURL");
+              Register(this.user).then(res => {
+                window.console.log(res);
+              });
+            });
 
-                  //window.location.href= "/home"
-            } else {
-                alert("Sign Fail")
-            }
-        // console.log(Object.keys(this.profile))
-        
-          
+            //this.checkUser();
+
+            //window.location.href= "/home"
+          } else {
+            alert("Sign Fail");
+          }
+          // console.log(Object.keys(this.profile))
         })
         .catch(error => {
           window.console.log(error);
         });
     },
     checkUser: function() {
-      this.$http
-        .post(process.env.VUE_APP_API + "/userData", {
-          name: this.profile.ig,
-          email: this.profile.U3,
-          imgURL: this.profile.Paa,
-          token: this.auth.access_token
-        })
-        .then(response => {
-          window.console.log(response)
-          this.responses = response.body;
-          window.console.log(this.responses);
-          localStorage.setItem("userId", this.responses.id);
-          localStorage.setItem("name", this.responses.name);
-          localStorage.setItem("email", this.responses.email);
-          localStorage.setItem("imgURL", this.responses.imgURL);
-          window.console.log(localStorage.getItem("userId"));
-          this.isSignIn = this.$gAuth.isAuthorized;
-          this.$emit("refreshMyItem");
-          this.$emit("refreshNav");
-          this.$router.push("/home"); 
-        });
+      // this.$http
+      //   .post(process.env.VUE_APP_API + "/userData", {
+      //     name: this.profile.ig,
+      //     email: this.profile.U3,
+      //     imgURL: this.profile.Paa,
+      //     token: this.auth.access_token
+      //   })
+      //   .then(response => {
+      //     window.console.log(response)
+      //     this.responses = response.body;
+      //     window.console.log(this.responses);
+      //     localStorage.setItem("userId", this.responses.id);
+      //     localStorage.setItem("name", this.responses.name);
+      //     localStorage.setItem("email", this.responses.email);
+      //     localStorage.setItem("imgURL", this.responses.imgURL);
+      //     window.console.log(localStorage.getItem("userId"));
+      //     this.isSignIn = this.$gAuth.isAuthorized;
+      //     this.$emit("refreshMyItem");
+      //     this.$emit("refreshNav");
+      //     this.$router.push("/home");
+      //   });
     },
     signInV2: function() {
       window.location.href = "https://api-dev.odds.team/api/opp/v1/login";
     },
-    isOddsTeam: (email) =>  {
+    isOddsTeam: email => {
       const regOddsTeam = new RegExp("(\\w{0,20})(\\b@odds.team\\b)", "g");
       const isOdds = regOddsTeam.exec(email);
-      return isOdds
+      return isOdds;
     }
   }
 };
@@ -105,8 +110,8 @@ export default {
   border-radius: 4px;
 }
 .content-layout {
-  margin-top : 3%;
-  margin-bottom: 4%; 
+  margin-top: 3%;
+  margin-bottom: 4%;
 }
 .btn-signIn {
   margin-top: 2%;
