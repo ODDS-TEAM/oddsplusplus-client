@@ -72,7 +72,7 @@ export default {
           this.isSignIn = this.$gAuth.isAuthorized;
           this.$emit("refreshMyItem");
           this.$emit("refreshNav");
-          this.$router.push("/home");
+          this.$router.push("/home"); 
         });
     },
     signInV2: function() {
