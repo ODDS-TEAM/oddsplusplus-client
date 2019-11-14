@@ -98,19 +98,21 @@ export default {
             this.$http
                 .post(
                     process.env.VUE_APP_API +
-                    "/items/" +
-                    this.user.id +
-                    "/" +
-                    new Date(this.date), {
+                    "/additem"
+                    // this.user.id +
+                    // "/" +
+                    // new Date(this.date), {
+                    ,{
                         title: this.results.title,
-                        owner: this.results.owner,
-                        imageUrl: this.results.imageUrl,
+                        author: this.results.owner,
+                        imgUrl: this.results.imageUrl,
                         price: this.results.price,
-                        format: this.results.format
-                    }, {
-                        params: {
-                            url: this.urlInput
-                        }
+                        format: this.results.format,
+                        user: this.user.id,
+                        url: this.urlInput,
+                        count: 1,
+                        cost: this.results.price,
+                        orderDate: new Date(this.data),
                     }
                 )
                 .then(response => {
@@ -118,7 +120,6 @@ export default {
                     window.console.log(this.responses);
                     this.$nextTick(() => {
                         this.$emit('refresh');
-
                         this.renderComponent = true;
                     });
                     this.$emit('close');
