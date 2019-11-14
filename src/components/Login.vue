@@ -20,7 +20,8 @@ export default {
       auth: null,
       user: {
         name: null,
-        imgUrl: null
+        imgUrl: null,
+        email:null
       }
     };
   },
@@ -48,6 +49,7 @@ export default {
               localStorage.setItem("userId", parseJwt(token));
               this.user.name = localStorage.getItem("name");
               this.user.imgUrl = localStorage.getItem("imgURL");
+              this.user.email = localStorage.getItem("email");
               Register(this.user).then(res => {
                 window.console.log(res);
               });
