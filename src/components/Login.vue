@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import {Login} from '../service'
+import {Login , parseJwt} from '../service'
 export default {
   name: "login",
   data() {
@@ -40,7 +40,9 @@ export default {
                   window.localStorage.setItem("profile",this.profile)
                   
                   Login(GoogleUser.getAuthResponse().id_token).then(res=>{
-                        sessionStorage.setItem('token',"Bearer " + res.data.token)
+                        const token = res.data.token
+                        sessionStorage.setItem('token',"Bearer " + token)
+                        localStorage.setItem("userId",parseJwt(token))
                     
                   })
                   this.checkUser();
