@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import {Login} from '../service'
 export default {
   name: "login",
   data() {
@@ -31,12 +32,17 @@ export default {
           this.auth = GoogleUser.getAuthResponse();
           this.profile = GoogleUser.getBasicProfile();
             if (this.isOddsTeam(this.profile.U3)) {
-    
+
                   localStorage.setItem("userId",GoogleUser.getId());
                   localStorage.setItem("name",this.profile.ig);
                   localStorage.setItem("email",this.profile.U3);
                   localStorage.setItem("imgURL",this.profile.Paa);
                   window.localStorage.setItem("profile",this.profile)
+                  
+                  Login(GoogleUser.getAuthResponse().id_token).then(res=>{
+                        sessionStorage.setItem('token',"Bearer " + res.data.token)
+                    
+                  })
                   this.checkUser();
                     
 
@@ -132,3 +138,7 @@ button {
   border-radius: 4px;
 }
 </style>
+
+function newFunction() {
+  '/Users/odds/dev/plus1/frontend-v2/src/service.js';
+}
