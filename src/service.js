@@ -2,7 +2,7 @@ import axios from 'axios'
 const app  = axios.create({
     baseURL : process.env.VUE_APP_API,
     headers : {
-        Authorization: sessionStorage.getItem('token')
+        Authorization: { toString(){return sessionStorage.getItem('token')}}
     }
 })
 export function parseJwt (token) {
@@ -19,9 +19,7 @@ export function Login(gooleToken) {
 }
 
 export function Register(userdata) {
-    return app.patch("/register", userdata , {
-        headers: { Authorization: sessionStorage.getItem("token") }
-    })
+    return app.patch("/register", userdata )
 }
 
 export function getUser(uid) {
