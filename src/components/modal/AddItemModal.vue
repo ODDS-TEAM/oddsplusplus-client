@@ -97,9 +97,9 @@ export default {
         save: function() {
             window.console.log(this.date);
                 AddItem({
-                        title: this.results.title,
-                        author: this.results.owner,
-                        imgUrl: this.results.imageUrl,
+                        title: this.results.book_name,
+                        author: this.results.author,
+                        imgUrl: this.results.img,
                         price: parseFloat(this.results.price),
                         format: this.results.format,
                         user: this.user.id,

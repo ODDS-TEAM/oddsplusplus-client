@@ -4,8 +4,9 @@
       <h1 style="text-align:center;padding:0;">All books</h1>
     </div>
     <ul>
-      <li v-for="item in data" v-bind:key="item.value">
-        <div class="card" v-if="item.status.status == 'pending'">
+      <li v-for="item in this.data" v-bind:key="item.value">
+        <!-- v-if="item.status.status == 'pending'" -->
+        <div class="card" >
           <div class="row">
             <div class="col-4 col-s-4">
               <p>
@@ -22,7 +23,7 @@
                 <span
                   id="card-book-order-name"
                   style="font-weight: normal;"
-                >{{ item.user.name }}</span>
+                >{{ item.user }}</span>
               </h5>
               <h5>
                 Order Date:
@@ -34,14 +35,14 @@
               <div class="btn">
                   <button
                 class="button-add"
-                v-on:click="orderModal=true;itemId = item.id"
+                v-on:click="orderModal=true;itemId = item.itemId"
                 type="button"
                 id="card-show-list-button"
               >Show Order ({{item.count}})</button>
               <button
                 id="card-plus-button"
                 class="button-add btn-plus"
-                v-on:click="plusModal = true;itemId = item.id"
+                v-on:click="plusModal = true;itemId = item.itemId"
               >PLUS 1</button>
               </div>
               
@@ -65,6 +66,7 @@
 <script>
 import OrderModal from "./modal/OrderModal.vue";
 import PlusModal from "./modal/PlusModal.vue";
+import { getBooks } from '../service'
 export default {
   components: {
     PlusModal,
@@ -91,15 +93,15 @@ export default {
   },
   methods: {
     getItemData: function() {
-      this.$http.get(process.env.VUE_APP_API + "/items").then(response => {
-        this.data = response.body;
+      getBooks().then(response => {
+        this.data = response.data;
         window.console.log(this.data);
       });
     },
 
     getOrderData: function(itemId) {
       this.$http
-        .get(process.env.VUE_APP_API + "/reserves/" + itemId)
+        .get(process.env.VUE_APP_API + "/getreserves/" + itemId)
         .then(response => {
           this.orderList = response.body;
           window.console.log(this.orderList);

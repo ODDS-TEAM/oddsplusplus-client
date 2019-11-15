@@ -33,3 +33,7 @@ export function AddItem(item){
 export function getUser(uid) {
     return app.get("/user/"+uid)
 }
+
+export function getBooks () {
+    return app.get("/items")
+}
