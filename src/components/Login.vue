@@ -46,7 +46,7 @@ export default {
               window.console.log(res);
               const token = res.data.token;
               sessionStorage.setItem("token", "Bearer " + token);
-              localStorage.setItem("userId", parseJwt(token));
+              localStorage.setItem("userId", parseJwt(token).id);
               this.user.name = localStorage.getItem("name");
               this.user.imgUrl = localStorage.getItem("imgURL");
               this.user.email = localStorage.getItem("email");

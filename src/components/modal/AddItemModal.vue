@@ -13,20 +13,20 @@
     
                 <div class="row" style="margin-top:5px;border-top:2px solid #efefef;">
                     <div class="col-4 col-s-4">
-                        <p style="text-align:center;padding:0;margin:10px 0 0;"> <img class="imgBook" :src="results.imageUrl" id="modal-book-image" /> </p>
+                        <p style="text-align:center;padding:0;margin:10px 0 0;"> <img class="imgBook" :src="results.img" id="modal-book-image" /> </p>
                     </div>
                     <div class="col-8 col-s-8">
     
                         <table class="table-add-img">
                             <tr>
                                 <td>
-                                    <h3 id="modal-book-title">{{results.title}}</h3>
+                                    <h3 id="modal-book-title">{{results.book_name}}</h3>
                                     <h3 id="modal-book-format">{{results.format}}</h3>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <h4 id="modal-book-author">By {{results.owner}} </h4>
+                                    <h4 id="modal-book-author">By {{results.author}} </h4>
                                 </td>
                             </tr>
                             
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { Scrap, AddItem } from '../../service'
 export default {
     data() {
         return {
@@ -95,27 +96,21 @@ export default {
         },
         save: function() {
             window.console.log(this.date);
-            this.$http
-                .post(
-                    process.env.VUE_APP_API +
-                    "/items/" +
-                    this.user.id +
-                    "/" +
-                    new Date(this.date), {
+                AddItem({
                         title: this.results.title,
-                        owner: this.results.owner,
-                        imageUrl: this.results.imageUrl,
-                        price: this.results.price,
-                        format: this.results.format
-                    }, {
-                        params: {
-                            url: this.urlInput
-                        }
+                        author: this.results.owner,
+                        imgUrl: this.results.imageUrl,
+                        price: parseFloat(this.results.price),
+                        format: this.results.format,
+                        user: this.user.id,
+                        url: this.urlInput,
+                        count: 1,
+                        cost: 0.0,
+                        orderDate: new Date(this.date),
                     }
                 )
                 .then(response => {
-                    this.responses = response.body;
-                    window.console.log(this.responses);
+                    window.console.log(response);
                     this.$nextTick(() => {
                         this.$emit('refresh');
 
@@ -130,17 +125,15 @@ export default {
             this.showResult = false;
             this.excepMsg = null;
             this.waiting = true;
-            this.$http
-                .get(process.env.VUE_APP_API + "/responseScrap", {
-                    params: {
-                        url: this.urlInput
-                    }
-                })
+                Scrap(
+                        {book_url: this.urlInput}
+                )
                 .then(
                     response => {
+                        window.console.log(response)
                         this.excepMsg = null;
                         this.waiting = false;
-                        this.results = response.body;
+                        this.results = response.data;
                         window.console.log(this.results);
                         this.showResult = true;
                     },

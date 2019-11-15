@@ -22,6 +22,14 @@ export function Register(userdata) {
     return app.patch("/register", userdata )
 }
 
+export function Scrap(bookUrl){
+    return app.post("/responseScrap",bookUrl)
+}
+
+export function AddItem(item){
+    return app.post("/additem",item)
+}
+
 export function getUser(uid) {
     return app.get("/user/"+uid)
 }
