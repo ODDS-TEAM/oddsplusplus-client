@@ -37,3 +37,52 @@ export function getUser(uid) {
 export function getBooks () {
     return app.get("/items")
 }
+
+export function Reserve(itemId) {
+    return app.get("/getreservesbyitem/"+ itemId)
+}
+// e.GET("/reserves/users/:userId/:itemId", a.GetOrderCount)
+
+export function GetOrder(userId, itemId) {
+    return app.get("/reserves/users/" + userId + "/" + itemId)
+}
+
+///current
+export function DeleteOrderByUserAndItem(userId, itemId) {
+    return app.delete("/reserves/" + userId + "/" + itemId)
+}
+export function AddReserve(userId, itemId, count) {
+    return app.post("/reserves/" + userId + "/" + itemId + "/" + count) 
+}
+
+export function UpdateOrder(itemId, totalPrice, charge) {
+    return app.patch("/updateOrder/" + itemId + "/" + totalPrice + "/" + charge)
+}
+
+export function GetReserveByItemId(itemId) {
+    return app.get("/getreserve/" + itemId)
+}
+
+export function GetItemUser(userId) {
+    return app.get("/items/users/" + userId)
+}
+
+export function Order(userId, itemId, count) {
+    return app.post("/order/" + userId + "/" + itemId + "/" + count)
+}
+
+export function GetReserveUser(userId) {
+    return app.get("/reserves/users/" + userId)
+}
+
+export function DeleteReserveById(reserveId, userId) {
+    return app.delete("/deletereserves/" + reserveId + "/" + userId)
+}
+
+export function GetSummary(itemId) {
+    return app.get("/reserves/sum/" + itemId)
+}
+
+export function DeleteItemByItemIdAndUserId(userId, itemId) {
+    return app.delete("/items/users/" + userId + "/" + itemId)
+} 

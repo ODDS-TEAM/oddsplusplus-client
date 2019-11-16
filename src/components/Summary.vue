@@ -71,6 +71,7 @@
 
 <script>
 import ResultModal from './modal/ResultModal.vue'
+import { GetSummary, UpdateOrder } from '../service';
 export default {
     components: {
         ResultModal
@@ -100,22 +101,16 @@ export default {
     },
     methods: {
         getItemData: function() {
-            this.$http
-                .get(process.env.VUE_APP_API + "/reserves/sum/" + this.$route.params.id)
+            GetSummary(this.$route.params.id)
                 .then(response => {
-                    this.summary = response.body;
+                    this.summary = response.data;
                     this.loading = false;
                 });
         },
         updateOrder: function() {
-            this.$http
-                .patch(
-                    process.env.VUE_APP_API +
-                    "/updateOrder/" +
-                    this.$route.params.id +
-                    "/" +
-                    this.cost +
-                    "/" +
+            UpdateOrder(
+                    this.$route.params.id ,
+                    this.cost ,
                     this.charge
                 )
                 .then(response => {
