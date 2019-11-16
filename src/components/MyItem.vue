@@ -28,14 +28,14 @@
                   <tr>
                     <td>
                       <p>
-                        <router-link :to="{ name: 'summary', params: { id: item.id }}">
+                        <router-link :to="{ name: 'summary', params: { id: item._id }}">
                           <button id = "myitem-summary-btn" class="footer-btn main-color">Summary</button>
                         </router-link>
                       </p>
                     </td>
                     <td>
                       <p>
-                        <button id = "myitem-delete-btn" class="footer-btn" style="background-color: #f55246;">Delete</button>
+                        <button id = "myitem-delete-btn" class="footer-btn" style="background-color: #f55246;" v-on:click="DeleteItem(item._id)">Delete</button>
                       </p>
                     </td>
                   </tr>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { GetItemUser, DeleteOrderByUserAndItem, Reserve } from '../service';
 export default {
   data() {
     return {
@@ -60,10 +61,21 @@ export default {
   },
   mounted: function() {
     this.userId = localStorage.getItem("userId");
-    this.$http.get(process.env.VUE_APP_API + "/items/users/" + this.userId).then(response => {
-      this.data = response.body;
+    GetItemUser(this.userId).then(response => {
+      this.data = response.data;
       window.console.log(this.data);
     });
+  },
+  methods: {
+    DeleteItem: function (itemId) {
+      DeleteOrderByUserAndItem(this.userId, itemId).then(response => {
+        alert("Deleted Item")
+        window.console.log(response)
+      })
+      // DELETE("/items/users/:itemId/:userId", a.DeleteItem)
+
+
+    }
   }
 };
 </script>

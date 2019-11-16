@@ -4,14 +4,14 @@
             <h3>Order List</h3>
             <div style="  border-bottom: 2px solid #efefef; margin-bottom:10px;"></div>
             <table v-if="!loading" style="width: 100%;margin: 15px 0 10px;overflow-x:auto;">
-                <tr v-for="order in orderList" :key="order.id" style="height:50px">
+                <tr v-for="order in orderList" :key="order._id" style="height:50px">
                     <td style="width: 56px;">
                         <div>
-                            <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;" />
+                            <img :src="order.User.imgUrl" style="width:40px;height:40px;border-radius:5px;" />
                         </div>
                     </td>
                     <td class="p-20-h p-20-t">
-                        <h4 id="order.user.name" style="font-size:15px;">{{order.user.name}}</h4>
+                        <h4 id="order.user.name" style="font-size:15px;">{{order.User.name}}</h4>
                     </td>
                     <td id="order.count" class="p-20-h p-20-t" style="color: red; text-align:center">{{order.count}}</td>
                 </tr>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { Reserve } from '../../service';
 export default {
     props: {
         itemId: {
@@ -47,10 +48,9 @@ export default {
     },
     methods: {
         getOrderData: function(itemId) {
-            this.$http
-                .get(process.env.VUE_APP_API + "/reserves/" + itemId)
+            Reserve(itemId)
                 .then(response => {
-                    this.orderList = response.body;
+                    this.orderList = response.data;
                     window.console.log(this.orderList);
                     this.loading = false;
                 });

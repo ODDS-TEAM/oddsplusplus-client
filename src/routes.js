@@ -1,6 +1,4 @@
-
 import CardList from './components/CardList.vue'
-import Prepare from './components/Prepare.vue'
 import Summary from './components/Summary.vue'
 import MyItem from './components/MyItem.vue'
 import MyOrder from './components/MyOrder'
@@ -14,9 +12,6 @@ const routes = [
     {
         path: '/home', component: CardList, meta: { requiresAuth: true }
 
-    },
-    {
-        path: '/prepare', component: Prepare
     },
     {
         path: '/summary/:id', name: 'summary', component: Summary, meta: { requiresAuth: true }
@@ -39,7 +34,7 @@ const routes = [
     },
     {
         path: '/login', component: Login
-    }
+    },
 ];
 
 export default routes;

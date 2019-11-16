@@ -9,13 +9,13 @@
           <div class="row">
             <div class="col-3">
               <p>
-                <img id="card-boot-image" class="img-item" :src="item.item.imgUrl" />
+                <img id="card-boot-image" class="img-item" :src="item.Item.imgUrl" />
               </p>
             </div>
 
             <div class="col-9 detail">
-              <h3 id="item-title" class="item-title">{{ item.item.title }}</h3>
-              <h4 id="item-author-format">By {{ item.item.author }} ({{item.item.format}})</h4>
+              <h3 id="item-title" class="item-title">{{ item.Item.title }}</h3>
+              <h4 id="item-author-format">By {{ item.Item.author }} ({{item.Item.format}})</h4>
               <table style="height:40px;" class="tb-btn">
                 <tr>
                   <td>
@@ -29,7 +29,7 @@
                       />
                     </div>
                   </td>
-                  <td v-if="item.item.status.status == 'pending'">
+                  <td v-if="item.Item.Status.status == 'Pending'"> 
                     <p>
                       <button
                         class="minus-btn"
@@ -41,28 +41,29 @@
                     </p>
                   </td>
                   <td v-else>
-                    <h3>Qty {{item.count}}</h3>
+                    <h3>Qty: {{item.count}}</h3>
                   </td>
-                  <td v-if="item.item.status.status == 'pending'">
+                  <td v-if="item.Item.Status.status == 'Pending'">
                     <h3 class="amount" id="order-amount">{{item.count}}</h3>
                   </td>
                   <td v-else>
-                    <h3>Cost ${{item.cost}}</h3>
-                  </td>
-                  <td v-if="item.item.status.status == 'pending'">
+                    <h3>Cost: ${{item.cost}}</h3>
+                  <td>
+                  <td v-if="item.Item.Status.status == 'Pending'">
                     <p>
                       <button class="plus-btn" id="order-plus-button" v-on:click="increase(index)">+</button>
                     </p>
                   </td>
                   <td v-else>
-                    <h3>Charge ${{item.shippingCharge}}</h3>
+                    <h3>Charge: ${{item.shippingCharge}}</h3>
                   </td>
                   <td style="margin-left:5px;">
-                    <p v-if="item.item.status.status == 'pending'">
+                    <p v-if="item.Item.Status.status == 'Pending'">
+                      <p>
                       <button
                         class="del-btn"
                         id="order-delete-button"
-                        v-on:click="deleteOrder(item.id)"
+                        v-on:click="deleteOrder(item._id)"
                       >
                         <img class="img-delete" src="./../assets/delete.png" />
                       </button>
@@ -79,6 +80,7 @@
 </template>
 
 <script>
+import { Order, GetReserveUser, DeleteReserveById } from "../service";
 export default {
   data() {
     return {
@@ -102,20 +104,14 @@ export default {
         clearTimeout(this.timeout);
       }
       this.timeout = setTimeout(() => {
-        this.$http
-          .post(
-            process.env.VUE_APP_API +
-              "/orders/" +
-              this.userId +
-              "/" +
-              this.data[index].item.id +
-              "/" +
-              this.data[index].count
-          )
-          .then(() => {
-            this.getOrder();
-            this.loading[index] = false;
-          });
+        Order(
+          this.userId,
+          this.data[index].item,
+          this.data[index].count
+        ).then(() => {
+          this.getOrder();
+          this.loading[index] = false;
+        });
       }, 900);
     },
     increase: function(index) {
@@ -126,43 +122,33 @@ export default {
         clearTimeout(this.timeout);
       }
       this.timeout = setTimeout(() => {
-        this.$http
-          .post(
-            process.env.VUE_APP_API +
-              "/orders/" +
-              this.userId +
-              "/" +
-              this.data[index].item.id +
-              "/" +
-              this.data[index].count
-          )
-          .then(() => {
-            this.getOrder();
-            this.loading[index] = false;
-          });
+        Order(
+          this.userId,
+          this.data[index].item,
+          this.data[index].count
+        ).then(() => {
+          this.getOrder();
+          this.loading[index] = false;
+        });
       }, 900);
     },
     getOrder() {
-      this.$http
-        .get(process.env.VUE_APP_API + "/reserves/users/" + this.userId)
-        .then(response => {
-          this.data = response.body;
-          window.console.log(this.data);
-          window.console.log(this.data.length);
-          this.loading = [];
+      GetReserveUser(this.userId).then(response => {
+        this.data = response.data;
+        window.console.log(this.data);
+        window.console.log(this.data.length);
+        this.loading = [];
 
-          for (var i = 0; i < this.data.length; i++) {
-            this.loading.push(false);
-          }
-          window.console.log(this.loading);
-        });
+        for (var i = 0; i < this.data.length; i++) {
+          this.loading.push(false);
+        }
+        window.console.log(this.data);
+      });
     },
     deleteOrder: function(orderId) {
-      this.$http
-        .delete(process.env.VUE_APP_API + "/reserves/" + orderId)
-        .then(() => {
-          this.getOrder();
-        });
+      DeleteReserveById(orderId, this.userId).then(() => {
+        this.getOrder();
+      });
     }
   }
 };
@@ -301,9 +287,10 @@ p {
     border-radius: 10px 0 0 10px;
   }
   .tb-btn {
-    width: 50%;
+    width: 100%;
     float: right;
-    margin: 25px 10px;
+    padding: 5px;
+    /* margin: 25px 10px; */
   }
   .header {
     margin-top: 100px;
