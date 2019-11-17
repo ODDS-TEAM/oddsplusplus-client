@@ -8,12 +8,12 @@
     
             <div v-if="!loading" class="col-4 prod-detail" style>
                 <p>
-                    <img id="card-boot-image" class="img-item" :src="summary.item.imgUrl" />
+                    <img id="card-boot-image" class="img-item" :src="summary[0].Item[0].imgUrl" />
                 </p>
-                <h3 id="summary-title-format" >{{summary.item.title}} ({{summary.item.format}})</h3>
-                <h4 id="summary-author">by {{summary.item.author}}</h4>
-                <h1 id="summary-price" style="color: red">$ {{summary.item.price}}</h1>
-                <h5 id="summary-order-date">Order date: {{summary.item.orderDate| formatDate}}</h5>
+                <h3 id="summary-title-format" >{{summary[0].Item[0].title}} ({{summary[0].Item[0].format}})</h3>
+                <h4 id="summary-author">by {{summary[0].Item[0].author}}</h4>
+                <h1 id="summary-price" style="color: red">$ {{summary[0].Item[0].price}}</h1>
+                <h5 id="summary-order-date">Order date: {{summary[0].Item[0].orderDate| formatDate}}</h5>
             </div>
             <div v-if="!loading" class="col-8 summary-detail">
                 <table style="height:110px;width: 100%; margin:10px 0; border-bottom: 2px solid #efefef;">
@@ -21,7 +21,7 @@
                         <table style="width:100%;">
                             <tr>
                                 <td style="width:45%;">
-                                    <h2 id="summary-total-qty" class="p-20-t">Qty : {{summary.item.count}}</h2>
+                                    <h2 id="summary-total-qty" class="p-20-t">Qty : {{summary[0].Item[0].count}}</h2>
                                 </td>
                                 <td style="width:27.5%;">
                                     <button id="summary-btn-go-to-amazon" class="btn-order" v-on:click="goToAmazon">Go to Amazon</button>
@@ -33,10 +33,10 @@
     
                     </tr>
                     <tr>
-                        <h3 id="summary-total-price" class="p-20-t">Total price : ${{summary.item.cost}}</h3>
+                        <h3 id="summary-total-price" class="p-20-t">Total price : ${{summary[0].Item[0].cost}}</h3>
                     </tr>
                     <tr>
-                        <h3 id="summary-total-charge" class="p-20-t">Total charge : ${{summary.item.shippingCharge}}</h3>
+                        <h3 id="summary-total-charge" class="p-20-t">Total charge : ${{summary[0].Item[0].shippingCharge}}</h3>
                     </tr>
                 </table>
                 <thead>
@@ -49,16 +49,17 @@
                                 <th class="p-20-h" style="width:20%;">Costs($)</th>
                                 <th class="p-20-h" style="width:20%;">Charge($)</th>
                             </tr>
-                            <tr v-for="order in summary.order" :key="order.id">
+                            <tr v-for="order in summary[0].Reserve" :key="order.id">
                                 <td class="p-20-h p-20-t img-user" style="width:60px !important;">
                                     <p style="text-align:left; margin : 0;">
-                                        <img :src="order.user.imgURL" style="width:40px;height:40px;border-radius:5px;" /> </p>
+                                        <img :src="order.user[0].imgUrl" style="width:40px;height:40px;border-radius:5px;" /> </p>
                                 </td>
-                                <td class="p-20-h p-20-t" id="summary-Name" >{{order.user.name}} </td>
+                                <td class="p-20-h p-20-t" id="summary-Name" >{{order.user[0].name}} </td>
                                 <td class="p-20-h p-20-t" id="summary-Qty"  style="color: red; text-align:center">{{order.count}}</td>
-                                <td class="p-20-h p-20-t" id="summary-Costs($)" style="color: red; text-align:center">{{order.cost}}</td>
+                                <td class="p-20-h p-20-t" id="summary-Costs($)" style="color: red; text-align:center">{{order.cost.toFixed(2)}}</td>
                                 <td class="p-20-h p-20-t" id="summary-Charge($)" style="color: red; text-align:center">{{order.shippingCharge}}</td>
                             </tr>
+                            
                         </table>
                     </tbody>
                 </thead>
@@ -71,7 +72,8 @@
 
 <script>
 import ResultModal from './modal/ResultModal.vue'
-import { GetSummary, UpdateOrder } from '../service';
+import { GetSummary, UpdateOrder, AddSummary } from '../service';
+import { isObject } from 'util';
 export default {
     components: {
         ResultModal
@@ -101,11 +103,24 @@ export default {
     },
     methods: {
         getItemData: function() {
-            GetSummary(this.$route.params.id)
+            GetSummary(this.$route.params.id).then(res => {
+                this.summary = res.data
+                console.log(this.summary)
+                if(this.summary.length == 0) {
+                    console.log("Length = 0")
+                    this.Summary();
+                    // this.getItemData
+                }
+            });
+            this.loading = false;
+        },
+        Summary: function() {
+            AddSummary(this.$route.params.id)
                 .then(response => {
-                    this.summary = response.data;
-                    this.loading = false;
-                });
+                    if (response) {
+                        this.getItemData()
+                    }
+                })
         },
         updateOrder: function() {
             UpdateOrder(
@@ -125,7 +140,7 @@ export default {
             this.charge = 0.0;
         },
         goToAmazon: function() {
-            window.open(this.summary.item.url, "_blank");
+            window.open(this.summary[0].Item[0].url, "_blank");
         }
     }
 };

@@ -79,10 +79,14 @@ export function DeleteReserveById(reserveId, userId) {
     return app.delete("/deletereserves/" + reserveId + "/" + userId)
 }
 
-export function GetSummary(itemId) {
+export function AddSummary(itemId) {
     return app.get("/reserves/sum/" + itemId)
 }
 
 export function DeleteItemByItemIdAndUserId(userId, itemId) {
     return app.delete("/items/users/" + userId + "/" + itemId)
 } 
+
+export function GetSummary (itemId) {
+    return app.get("/getsummary/" + itemId)
+}
